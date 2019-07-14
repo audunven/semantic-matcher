@@ -157,6 +157,9 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 		
 	}
 	
+	/**
+	 * Computes an alignment of semantic relations from measuring the cosine similarity between embedding vectors associated with the ontology concepts being matched.
+	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 		
 		//create the vector map holding word - embedding vectors		
