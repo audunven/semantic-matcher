@@ -31,7 +31,12 @@ import utilities.Sigmoid;
 import utilities.StringUtilities;
 import utilities.WordNet;
 
-
+/**
+ * The Lexical Equivalence Matcher uses WordNet as a lexical resource for computing equivalence relations between ontology concepts.
+ * This class computes confidence scores for each relation using the scores from the ontology profiling.
+ * @author audunvennesland
+ *
+ */
 public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements AlignmentProcess {
 
 	//these attributes are used to calculate the weight associated with the matcher's confidence value
@@ -53,7 +58,16 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 	}
 
 
-	
+	/**
+	 * Returns an alignment from the Lexical Equivalence Matcher (LEM)
+	 * @param ontoFile1 source ontology file
+	 * @param ontoFile2 target ontology file
+	 * @param weight a weight imposed on the confidence computation (default 1.0 -> no weight)
+	 * @return an URIAlignment holding equivalence relations
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 14, 2019
+	 */
 	public static URIAlignment returnLEMAlignment (File ontoFile1, File ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) throws OWLOntologyCreationException, AlignmentException {
 		
 		URIAlignment LEMAlignment = new URIAlignment();
@@ -81,6 +95,9 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 		
 	}
 
+	/**
+	 * Produces an alignment holding semantic relations computed by the wordNetMatch method.
+	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 
 		int idCounter = 0;
@@ -101,6 +118,14 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 
+	/**
+	 * This method uses a combination of WordNet synonym similarity and Jiang-Conrath semantic similarity to infer equivalence relations between ontology concepts.
+	 * @param o1 source ontology concept
+	 * @param o2 target ontology concept 
+	 * @return a score signifying the lexical similarity between the two input ontology concepts
+	 * @throws OntowrapException
+	   Jul 14, 2019
+	 */
 	public double wordNetMatch(Object o1, Object o2) throws OntowrapException {
 
 		String source = ontology1().getEntityName(o1);
@@ -210,14 +235,12 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 			//if the compound head of the source equals the target, we have most likely a subsumption relation, so we give that a score of zero
 			if (sourceCompoundHead.equalsIgnoreCase(target)) {
 
-				//System.out.println(sourceCompoundHead + " equals " + target + " so we give the relation " + source + " " + target + " a score of 0");
 				finalScore = 0;
 			}
 
 			//if any of the compound modifiers of the source equals the target, we have most likely a meronymic relation, so we give that a score of zero as well.
 			else if (sourceModifierTokens.contains(target)) {
 
-				//System.out.println("sourceModifierToken contains " + target + " so we give the relation " + source + " " + target + " a score of 0");
 				finalScore = 0;
 			}
 
@@ -265,13 +288,11 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 
 			//if the compound head of the target equals the source, we have most likely a subsumption relation, so we give that a score of zero
 			if (targetCompoundHead.equalsIgnoreCase(source)) {
-				//System.out.println(targetCompoundHead + " equals " + source + " so we give the relation " + source + " " + target + " a score of 0");
 				finalScore = 0;
 			}
 
 			//if any of the compound modifiers of the target equals the source, we have most likely a meronymic relation, so we give that a score of zero as well.
 			else if (targetModifierTokens.contains(source)) {
-				//System.out.println("targetModifierTokens contains " + source + " so we give the relation " + source + " " + target + " a score of 0");
 				finalScore = 0;
 			}
 
