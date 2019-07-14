@@ -57,8 +57,14 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 	int slope;
 	double rangeMin;
 	double rangeMax;
+	
 	OWLOntology sourceOntology;
 	OWLOntology targetOntology;
+	
+	/**
+	 * The key used for retrieving property values from the Neo4J DB
+	 */
+	final static String KEY = "classname";
 
 	/**
 	 * This label represents the graph/ontology to process
@@ -72,8 +78,10 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 	static GraphDatabaseService db;
 
 	ISub iSubMatcher = new ISub();
-
-	final static String key = "classname";
+	
+	/**
+	 * This threshold is used for the ISUB similarity.
+	 */
 	private static final double THRESHOLD = 0.9;
 
 
@@ -93,13 +101,13 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
 
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-301.rdf");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-303.rdf");
-		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301303/301-303-EQ_SUB.rdf";
-
-		//				File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-		//				File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-		//				String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+		
+//		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-301.rdf");
+//		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-303.rdf");
+//		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301303/301-303-EQ_SUB.rdf";
 
 		//create a new instance of the neo4j database in each run
 		String ontologyParameter1 = null;
@@ -186,7 +194,16 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 	}
 
-
+	/**
+	 * Returns an alignment object holding equivalence relations computed by the Graph Equivalence Matcher.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param weight a weight on the confidence value (default 1.0)
+	 * @return An URIAlignment with equivalence relations computed by structural proximity. 
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 14, 2019
+	 */
 	public static URIAlignment returnGEMAlignment (File ontoFile1, File ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) throws OWLOntologyCreationException, AlignmentException {
 
 		URIAlignment GEMAlignment = new URIAlignment();
@@ -246,7 +263,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 
 	/**
-	 * The align() method is imported from the Alignment API and is modified to use the wordNetMatch method declared in this class
+	 * Computes an alignment of semantic relations from the computeStrucProx() method
 	 */
 	public void align( Alignment alignment, Properties param ) throws AlignmentException {
 
@@ -286,7 +303,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 	 */
 	public double computeStructProx(Object o1, Object o2) throws OWLOntologyCreationException, OntowrapException, IOException {
 
-		//registerShutdownHook(db);		
+		registerShutdownHook(db);		
 
 		String s1 = ontology1().getEntityName(o1);
 		String s2 = ontology2().getEntityName(o2);
@@ -354,6 +371,11 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		return structProx;
 	}
 
+	/**
+	 * Shuts down the Neo4J database when the program is ending
+	 * @param db
+	   Jul 14, 2019
+	 */
 	private static void registerShutdownHook(final GraphDatabaseService db)
 	{
 		Runtime.getRuntime().addShutdownHook( new Thread()
@@ -381,7 +403,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		Node testNode = null;
 
 		try ( Transaction tx = db.beginTx() ) {
-			testNode = db.findNode(label, key, value);
+			testNode = db.findNode(label, KEY, value);
 			tx.success();
 		}
 		return testNode;	

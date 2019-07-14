@@ -1,10 +1,7 @@
 package equivalencematching;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -31,38 +28,41 @@ import org.neo4j.graphdb.traversal.Traverser;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
-import org.semanticweb.owl.align.AlignmentVisitor;
-import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonyEquivalence;
-import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
-import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
 import graph.Graph;
 //import Graph;
 //import GraphOperations_delete.RelTypes;
 import utilities.ISub;
-import utilities.Sigmoid;
 import utilities.StringUtilities;
 
 @SuppressWarnings("deprecation")
 public class GraphEquivalenceMatcher extends ObjectAlignment implements AlignmentProcess {
 
+	/**
+	 * This threshold is used for the ISUB similarity.
+	 */
 	final static double THRESHOLD = 0.9;
+	
+	/**
+	 * The key used for retrieving property values from the Neo4J DB
+	 */
+	final static String KEY = "classname";
 
 	/**
 	 * This label represents the graph/ontology to process
 	 */
 	static Label labelOnto1;
+	
 	/**
 	 * This label represents the graph/ontology to process
 	 */
@@ -72,31 +72,16 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 
 	ISub iSubMatcher = new ISub();
 
-	final static String key = "classname";
-
-	//these attributes are used to calculate the weight associated with the matcher's confidence value
-	double profileScore;
-	int slope;
-	double rangeMin;
-	double rangeMax;
+	double weight;
 
 
-	public GraphEquivalenceMatcher(String ontology1Name, String ontology2Name, GraphDatabaseService database, double profileScore) {
+	public GraphEquivalenceMatcher(String ontology1Name, String ontology2Name, GraphDatabaseService database, double weight) {
 		labelOnto1 = DynamicLabel.label(ontology1Name);
 		labelOnto2 = DynamicLabel.label(ontology2Name);
 		db = database;
-		this.profileScore = profileScore;
+		this.weight = weight;
 	}
 
-	public GraphEquivalenceMatcher(String ontology1Name, String ontology2Name, GraphDatabaseService database, double profileScore, int slope, double rangeMin, double rangeMax) {
-		labelOnto1 = DynamicLabel.label(ontology1Name);
-		labelOnto2 = DynamicLabel.label(ontology2Name);
-		db = database;
-		this.profileScore = profileScore;
-		this.slope = slope;
-		this.rangeMin = rangeMin;
-		this.rangeMax = rangeMax;
-	}
 
 	public GraphEquivalenceMatcher() {
 
@@ -104,9 +89,13 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 
 	//test method
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
+		
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
 
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-301.rdf");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-303.rdf");
+//		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-301.rdf");
+//		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-303.rdf");
 
 		//create a new instance of the neo4j database in each run
 		String ontologyParameter1 = null;
@@ -158,6 +147,16 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 
 	}
 
+	/**
+	 * Returns an alignment object holding equivalence relations computed by the Graph Equivalence Matcher.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param weight a weight on the confidence value (default 1.0)
+	 * @return An URIAlignment with equivalence relations computed by structural proximity. 
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 14, 2019
+	 */
 	public static URIAlignment returnGEMAlignment (File ontoFile1, File ontoFile2, double weight) throws OWLOntologyCreationException, AlignmentException {
 
 		URIAlignment GEMAlignment = new URIAlignment();
@@ -198,11 +197,12 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 
 
 	/**
-	 * The align() method is imported from the Alignment API and is modified to use the wordNetMatch method declared in this class
+	 * Computes an alignment of semantic relations from the computeStrucProx() method
 	 */
 	public void align( Alignment alignment, Properties param ) throws AlignmentException {
 
 		int idCounter = 0;
+		
 		try {
 
 			for ( Object cl2: ontology2().getClasses() ){
@@ -211,11 +211,8 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 					idCounter++;
 
 					//basic weighting using profile score
-					addAlignCell("GraphMatcher" + idCounter + "_" + profileScore + "_", cl1,cl2, "=", computeStructProx(cl1,cl2) * profileScore);  
-					
-					//using sigmoid function to compute confidence
-//					addAlignCell("GraphMatcher" + idCounter, cl1,cl2, "=", 
-//							Sigmoid.weightedSigmoid(slope, computeStructProx(cl1,cl2), Sigmoid.transformProfileWeight(profileScore, rangeMin, rangeMax))); 
+					addAlignCell("GraphMatcher" + idCounter + "_" + weight + "_", cl1,cl2, "=", computeStructProx(cl1,cl2) * weight);  
+
 				}
 
 			}
@@ -309,6 +306,11 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 		return structProx;
 	}
 
+	/**
+	 * Shuts down the Neo4J database when the program is ending
+	 * @param db
+	   Jul 14, 2019
+	 */
 	private static void registerShutdownHook(final GraphDatabaseService db)
 	{
 		Runtime.getRuntime().addShutdownHook( new Thread()
@@ -336,7 +338,7 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 		Node testNode = null;
 
 		try ( Transaction tx = db.beginTx() ) {
-			testNode = db.findNode(label, key, value);
+			testNode = db.findNode(label, KEY, value);
 			tx.success();
 		}
 		return testNode;	
@@ -431,7 +433,6 @@ public class GraphEquivalenceMatcher extends ObjectAlignment implements Alignmen
 		return td.traverse(classNode);
 	}
 
-	//TO-DO: Why is this an ArrayList and not a Node being returned?
 	/**
 	 * Returns an ArrayList holding the parent node of the node provided as parameter
 	 * @param classNode a node for which the closest parent is to be returned
