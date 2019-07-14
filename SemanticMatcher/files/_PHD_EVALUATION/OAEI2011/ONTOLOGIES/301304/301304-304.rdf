@@ -1,0 +1,1069 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:dctype="http://purl.org/dc/dcmitype/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:wot="http://xmlns.com/wot/0.1/"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:units="http://visus.mit.edu/fontomri/0.01/units.owl#"
+    xmlns:bibtex="http://purl.org/net/nknouf/ns/bibtex#"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns="http://oaei.ontologymatching.org/2009/benchmarks/304/onto.rdf#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xml:base="http://oaei.ontologymatching.org/2009/benchmarks/304/onto.rdf">
+  <owl:Ontology rdf:about="">
+    <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nick Knouf &lt;nknouf@mit.edu&gt;</dc:creator>
+    <dc:title rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >bibtex.owl: an ontology for bibTeX entries</dc:title>
+    <dc:identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI"
+    >http://visus.mit.edu/bibtex/0.01/bibtex.owl</dc:identifier>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >bibtex ontology</rdfs:label>
+    <dc:subject rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >fMRI, ontology, fMRI analysis, foo, bar</dc:subject>
+    <dc:date rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2004-01-10</dc:date>
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >0.01</owl:versionInfo>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Possible ontology to describe bibTeX entries.</rdfs:comment>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Transformation of bibTeX into an OWL ontology</dc:description>
+    <dc:contributor rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Antoine Zimmermann &lt;antoine.zimmermann@inrialpes.fr&gt;</dc:contributor>
+  </owl:Ontology>
+  <rdfs:Class rdf:ID="PersonList"/>
+  <owl:Class rdf:ID="Deliverable">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Informal"/>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Conference</rdfs:label>
+    <rdfs:comment xml:lang="en">TROUVER UNE DESCRIPTION POUR CA.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Misc">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Informal"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Use this type when nothing else fits.</rdfs:comment>
+    <rdfs:label xml:lang="en">Misc</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Unpublished">
+    <rdfs:label xml:lang="en">Unpublished</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Informal"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="author"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="note"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A document having an author and title, but not formally published.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="DateWithMonth">
+    <rdfs:comment xml:lang="en">Date of a day, month or year.</rdfs:comment>
+    <rdfs:label xml:lang="en">Date</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Date"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="month"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="day"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="TechReport">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="date"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DateWithMonth"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#author"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="number"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">TechReport</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Informal"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A report published by a school or other institution, usually numbered within a series.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="institution"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Composite">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="numberOrVolume"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="publisher"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DateWithMonth"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Book</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="series"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Entry"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A work that may be composed of several parts or chapter. May be a monography, a collection or a proceedings.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Chapter"/>
+  <owl:Class rdf:about="#Date">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="year"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#month"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Date</rdfs:label>
+    <rdfs:comment xml:lang="en">Date of a day, month or year.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="InProceedings">
+    <rdfs:comment xml:lang="en">An article in a conference proceedings.</rdfs:comment>
+    <rdfs:label xml:lang="en">InProceedings</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Part"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#author"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="inProceedings"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Published">
+    <rdfs:label xml:lang="en">Published</rdfs:label>
+    <rdfs:comment xml:lang="en">.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Entry"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="School">
+    <rdfs:comment xml:lang="en">A school or university.</rdfs:comment>
+    <rdfs:label xml:lang="en">School</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Title">
+    <rdfs:label xml:lang="en">Title</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Text"/>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">A title.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#Entry">
+    <rdfs:label xml:lang="en">Entry</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#author"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">Base class for all entries</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="BookPart">
+    <rdfs:comment xml:lang="en">May be a chapter (or section or whatever), a range of pages or a part of a book having its own title.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Part"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Published"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="chapter"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >2</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="pagesOrChapter"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">BookPart</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Article">
+    <rdfs:comment xml:lang="en">An article from a journal or magazine.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Part"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="volume"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#author"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Article</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#number"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Published"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="inJournal"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#DateWithMonth"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+  <owl:Class rdf:ID="Monography">
+    <rdfs:label xml:lang="en">Monography</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Composite"/>
+    <rdfs:comment xml:lang="en">A book that is a single entity, as opposed to a collection.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Academic">
+    <rdfs:comment xml:lang="en">A Master's or PhD thesis.</rdfs:comment>
+    <rdfs:label xml:lang="en">Academic</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Entry"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#author"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="school"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Person">
+    <rdfs:label xml:lang="en">Person</rdfs:label>
+    <rdfs:comment xml:lang="en">A person.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="PageRange">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="startPage"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:ID="endPage"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">PageRange</rdfs:label>
+    <rdfs:comment xml:lang="en">A range of pages.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="MotionPicture">
+    <rdfs:subClassOf rdf:resource="#Entry"/>
+    <rdfs:comment xml:lang="en">A film/movie/motion picture.</rdfs:comment>
+    <rdfs:label xml:lang="en">MotionPicture</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Informal">
+    <rdfs:comment xml:lang="en">A document that that was informally published or not published.</rdfs:comment>
+    <rdfs:label xml:lang="en">Informal</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Entry"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Thesis">
+    <rdfs:label xml:lang="en">Thesis</rdfs:label>
+    <rdfs:comment xml:lang="en">A thesis (either Master or PhD).</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Academic"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#DateWithMonth"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#date"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Collection">
+    <rdfs:comment xml:lang="en">A book that is collection of texts or articles.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Composite"/>
+    <rdfs:label xml:lang="en">Collection</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="LectureNotes">
+    <rdfs:subClassOf rdf:resource="#Informal"/>
+    <rdfs:subClassOf rdf:resource="#Academic"/>
+    <rdfs:label xml:lang="en">LectureNotes</rdfs:label>
+    <rdfs:comment xml:lang="en">Lecture notes.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#Text">
+    <rdfs:comment xml:lang="en">A simple text with possibly other information such as language, etc.</rdfs:comment>
+    <rdfs:comment xml:lang="en">Domain for affiliation, type, edition, chapter, howpublished, number, copyright, contents, isbn, issn, langugage, lccn, price, size, location, url.</rdfs:comment>
+    <rdfs:label xml:lang="en">Text</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Booklet">
+    <rdfs:label xml:lang="en">Booklet</rdfs:label>
+    <rdfs:comment xml:lang="en">A work that is printed and bound, but without a named publisher or sponsoring institution.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Informal"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Journal">
+    <rdfs:comment xml:lang="en">A journal.</rdfs:comment>
+    <rdfs:label xml:lang="en">Journal</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Proceedings">
+    <rdfs:subClassOf rdf:resource="#Composite"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#publisher"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="editor"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="organization"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment xml:lang="en">The proceedings of a conference.</rdfs:comment>
+    <rdfs:comment xml:lang="en">A proceedings may be implicitly defined with an inproceedings.</rdfs:comment>
+    <rdfs:label xml:lang="en">Proceedings</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Part">
+    <rdfs:comment xml:lang="en">A part of something (either Book or Proceedings).</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Entry"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="pages"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="isPartOf"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="en">Part</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Organization">
+    <rdfs:comment xml:lang="en">An organization.</rdfs:comment>
+    <rdfs:label xml:lang="en">Organization</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Manual">
+    <rdfs:comment xml:lang="en">Technical documentation.</rdfs:comment>
+    <rdfs:label xml:lang="en">Manual</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Informal"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#organization"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="edition"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#title"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Publisher">
+    <rdfs:comment xml:lang="en">A publisher.</rdfs:comment>
+    <rdfs:label xml:lang="en">Publisher</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Institution">
+    <rdfs:comment xml:lang="en">An institution.</rdfs:comment>
+    <rdfs:label xml:lang="en">Institution</rdfs:label>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="abstract">
+    <rdfs:label xml:lang="en">abstract</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:comment xml:lang="en">An abstract of the work.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isPartOf">
+    <rdfs:label xml:lang="en">is part of</rdfs:label>
+    <rdfs:domain rdf:resource="#Part"/>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is an object property that refers to another entry an external objects.</dc:description>
+    <rdfs:comment xml:lang="en">The document that contains a text or article.</rdfs:comment>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="affiliation">
+    <rdfs:label xml:lang="en">affiliation</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:comment xml:lang="en">The authors affiliation.</rdfs:comment>
+    <rdfs:range rdf:resource="#Text"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#editor">
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Again, the same issues that arose with the "author" property apply here.</dc:description>
+    <rdfs:domain rdf:resource="#Composite"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="humanCreator"/>
+    </rdfs:subPropertyOf>
+    <rdfs:label xml:lang="en">editor</rdfs:label>
+    <rdfs:range rdf:resource="#PersonList"/>
+    <rdfs:comment xml:lang="en">Name(s) of editor(s), typed as indicated in the LaTeX book. If there is also an author field, then the editor field gives the editor of the book or collection in which the reference appears.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="price">
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">price</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:comment xml:lang="en">The price of the document.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#series">
+    <rdfs:comment xml:lang="en">The name of a series or set of books. When citing an entire book, the the title field gives its title and an optional series field gives the name of a series or multi-volume set in which the book is published.</rdfs:comment>
+    <rdfs:range rdf:resource="#Title"/>
+    <rdfs:label xml:lang="en">series</rdfs:label>
+    <rdfs:domain rdf:resource="#Composite"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#publisher">
+    <rdfs:range rdf:resource="#Publisher"/>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is a case where an ObjectProperty might be a better choice, where the range is some set of publisher names defined in another ontology.  That would allow all of the metadata for the publisher to be incorporated as needed.</dc:description>
+    <rdfs:domain rdf:resource="#Composite"/>
+    <rdfs:label xml:lang="en">publisher</rdfs:label>
+    <rdfs:comment xml:lang="en">The publisher's name.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="annote">
+    <rdfs:label xml:lang="en">annote</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:comment xml:lang="en">An annotation. It is not used by the standard bibliography styles, but may be used by others that produce an annotated bibliography.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="location">
+    <rdfs:comment xml:lang="en">A location associated with the entry, such as the city in which a conference took place.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">location</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="inMonography">
+    <rdfs:label xml:lang="en">inMonography</rdfs:label>
+    <rdfs:range rdf:resource="#Monography"/>
+    <rdfs:comment xml:lang="en">A reference to the book that contains the entry. The entry must be an InBook end the book a Monography.</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="#isPartOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="mrNumber">
+    <rdfs:comment xml:lang="en">The Mathematical Reviews number.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">MR number</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#first">
+    <rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#date">
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:label xml:lang="en">date</rdfs:label>
+    <rdfs:range rdf:resource="#Date"/>
+    <rdfs:comment xml:lang="en">The date when the work was published or, for an unpublished work, in which it was written.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#edition">
+    <rdfs:label xml:lang="en">edition</rdfs:label>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:comment xml:lang="en">The edition of a book--for example, "Second". This should be an ordinal, and should have the first letter capitalized, as shown here; the standard styles convert to lower case when necessary.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Manual"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#note">
+    <rdfs:label xml:lang="en">note</rdfs:label>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:comment xml:lang="en">Any additional information that can help the reader. The first word should be capitalized.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#inProceedings">
+    <rdfs:label xml:lang="en">in proceedings</rdfs:label>
+    <rdfs:comment xml:lang="en">A reference to the proceedings in which the entry appears. The entry must be an InProceedings.</rdfs:comment>
+    <rdfs:domain rdf:resource="#InProceedings"/>
+    <rdfs:range rdf:resource="#Proceedings"/>
+    <rdfs:subPropertyOf rdf:resource="#isPartOf"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="type">
+    <rdfs:comment xml:lang="en">The type of a technical report--for example, "Research Note".</rdfs:comment>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Chapter"/>
+          <owl:Class rdf:about="#TechReport"/>
+          <owl:Class rdf:about="#Thesis"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">type</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#rest">
+    <rdfs:domain rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#organization">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Proceedings"/>
+          <owl:Class rdf:about="#Manual"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This could be an object property that refers to an external set of organization instances.</dc:description>
+    <rdfs:label xml:lang="en">organization</rdfs:label>
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:comment xml:lang="en">The organization that sponsors a conference or that publishes a manual.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#author">
+    <rdfs:label xml:lang="en">author</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is tricky due to the fact that order is not (generally) preserved in RDF documents.  The problem arises when you want to have an author list where the order is _extremely_ important.  How shall we do that?  Perhaps we want to define "hasPrimaryAuthor", "hasSecondaryAuthor", "hasTertiaryAuthor", and "hasRemainingAuthors", or something of that sort.  This will be have to given more thought.</dc:description>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#humanCreator"/>
+    </rdfs:subPropertyOf>
+    <rdfs:comment xml:lang="en">The name(s) of the author(s), in the format described in the LaTeX book.</rdfs:comment>
+    <rdfs:range rdf:resource="#PersonList"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="howPublished">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Misc"/>
+          <owl:Class rdf:about="#Booklet"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">published</rdfs:label>
+    <rdfs:comment xml:lang="en">How something strange has been published. The first word should be capitalized.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#pagesOrChapter">
+    <rdfs:label xml:lang="en">page and/or chapter data</rdfs:label>
+    <rdfs:comment xml:lang="en">A generic property to hold page and/or chapter data.</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Part"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="lccn">
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:comment xml:lang="en">The Library of Congress Call Number.</rdfs:comment>
+    <rdfs:label xml:lang="en">LCCN</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="url">
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:label xml:lang="en">URL</rdfs:label>
+    <rdfs:comment xml:lang="en">The WWW Universal Resource Locator that points to the item being referenced. This often is used for technical reports to point to the ftp or web site where the postscript source of the report is located.</rdfs:comment>
+    <rdfs:range rdf:resource="#Text"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#chapter">
+    <rdfs:comment xml:lang="en">A chapter (or section or whatever) number.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Chapter"/>
+    <rdfs:label xml:lang="en">chapter</rdfs:label>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:subPropertyOf rdf:resource="#pagesOrChapter"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#school">
+    <rdfs:label xml:lang="en">school</rdfs:label>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >As with "publisher", this could be an ObjectProperty that refers to an external set of school instances.</dc:description>
+    <rdfs:comment xml:lang="en">The name of the school where a thesis was written.</rdfs:comment>
+    <rdfs:range rdf:resource="#School"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Thesis"/>
+          <owl:Class rdf:about="#LectureNotes"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="issn">
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:comment xml:lang="en">The International Standard Serial Number. Used to identify a journal.</rdfs:comment>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">ISSN</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#inJournal">
+    <rdfs:comment xml:lang="en">A journal name. Abbreviations are provided for many journals; see the Local Guide</rdfs:comment>
+    <rdfs:range rdf:resource="#Journal"/>
+    <rdfs:domain rdf:resource="#Article"/>
+    <rdfs:label xml:lang="en">in journal</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="#isPartOf"/>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This could optionally be an object property, whereby the range would refer to an external set of journal instances, thus providing standardized abbreviations for different bibliographic styles.</dc:description>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="size">
+    <rdfs:comment xml:lang="en">The physical dimensions of a work.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:label xml:lang="en">size</rdfs:label>
+    <rdfs:range rdf:resource="#Text"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="keywords">
+    <rdfs:label xml:lang="en">keywords</rdfs:label>
+    <rdfs:comment xml:lang="en">Key words used for searching or possibly for annotation.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="inCollection">
+    <rdfs:label xml:lang="en">in collection</rdfs:label>
+    <rdfs:comment xml:lang="en">A reference to the book that contains the entry. The entry must be an Inbook or Incollection.</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="#isPartOf"/>
+    <rdfs:range rdf:resource="#Collection"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#institution">
+    <rdfs:label xml:lang="en">institution</rdfs:label>
+    <rdfs:domain rdf:resource="#TechReport"/>
+    <dc:description rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This could be an object property that refers to an external set of institution instances.</dc:description>
+    <rdfs:range rdf:resource="#Institution"/>
+    <rdfs:comment xml:lang="en">The sponsoring institution of a technical report.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="language">
+    <rdfs:comment xml:lang="en">The language the document is in.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">language</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#pages">
+    <rdfs:subPropertyOf rdf:resource="#pagesOrChapter"/>
+    <rdfs:range rdf:resource="#PageRange"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Part"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:comment xml:lang="en">A range of page, with an upper and lower limit.</rdfs:comment>
+    <rdfs:label xml:lang="en">pages</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="contents">
+    <rdfs:label xml:lang="en">ontents</rdfs:label>
+    <rdfs:comment xml:lang="en">A Table of Contents.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="directors">
+    <rdfs:comment xml:lang="en">The list of persons who directed the motion picture.</rdfs:comment>
+    <rdfs:domain rdf:resource="#MotionPicture"/>
+    <rdfs:range rdf:resource="#PersonList"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#humanCreator"/>
+    </rdfs:subPropertyOf>
+    <rdfs:label xml:lang="en">directors</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#title">
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Title"/>
+    <rdfs:comment xml:lang="en">The work's title, typed as explained in the LaTeX book.</rdfs:comment>
+    <rdfs:label xml:lang="en">title</rdfs:label>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isbn">
+    <rdfs:label xml:lang="en">ISBN</rdfs:label>
+    <rdfs:comment xml:lang="en">The International Standard Book Number.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#Text"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="copyright">
+    <rdfs:range rdf:resource="#Text"/>
+    <rdfs:label xml:lang="en">copyright</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:comment xml:lang="en">Copyright information.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#humanCreator">
+    <rdfs:comment xml:lang="en">A generic human creator category, necessary in order to contain both author and editor.</rdfs:comment>
+    <rdfs:label xml:lang="en">human creator</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+    <rdfs:range rdf:resource="#PersonList"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="#number">
+    <rdfs:comment xml:lang="en">The number of a journal, magazine, technical report, or of a work in a series. An issue of a journal or magazine is usually identified by its volume and number; the organization that issues a technical report usually gives it a number; and sometimes books are given numbers in a named series.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">number</rdfs:label>
+    <rdfs:subPropertyOf>
+      <owl:DatatypeProperty rdf:about="#numberOrVolume"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Article"/>
+          <owl:Class rdf:about="#Composite"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#year">
+    <rdfs:domain rdf:resource="#Date"/>
+    <rdfs:label xml:lang="en">year</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="key">
+    <rdfs:comment xml:lang="en">The key for a particular bibTeX entry. Note that the rdf:ID for each Entry instance could be the bibTeX key as well, possibly making this property redundant.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label xml:lang="en">key</rdfs:label>
+    <rdfs:domain rdf:resource="#Entry"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="short">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">A shorten version of the title.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Title"/>
+    <rdfs:label xml:lang="en">short</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#numberOrVolume">
+    <rdfs:comment xml:lang="en">The number of a journal, magazine, technical report, or of a work in a series. An issue of a journal or magazine is usually identified by its volume and number; the organization that issues a technical report usually gives it a number; and sometimes books are given numbers in a named series.</rdfs:comment>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Article"/>
+          <owl:Class rdf:about="#Composite"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:label xml:lang="en">volume or number</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="lang">
+    <rdfs:domain rdf:resource="#Text"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment xml:lang="en">The language in which the words are written.</rdfs:comment>
+    <rdfs:label xml:lang="en">lang</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#startPage">
+    <rdfs:label xml:lang="en">start page</rdfs:label>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:domain rdf:resource="#PageRange"/>
+    <rdfs:comment xml:lang="en">The beginning of a range of pages.</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#day">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:label xml:lang="en">day</rdfs:label>
+    <rdfs:domain rdf:resource="#DateWithMonth"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#volume">
+    <rdfs:label xml:lang="en">volume</rdfs:label>
+    <rdfs:subPropertyOf rdf:resource="#numberOrVolume"/>
+    <rdfs:comment xml:lang="en">The volume of a journal or multivolume book.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Article"/>
+          <owl:Class rdf:about="#Composite"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#month">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:domain rdf:resource="#Date"/>
+    <rdfs:label xml:lang="en">month</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#endPage">
+    <rdfs:label xml:lang="en">end page</rdfs:label>
+    <rdfs:domain rdf:resource="#PageRange"/>
+    <rdfs:comment xml:lang="en">The end of a range of pages.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.5, Build 608)  http://protege.stanford.edu -->
