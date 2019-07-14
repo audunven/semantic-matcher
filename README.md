@@ -22,10 +22,9 @@ The matching algorithms are separated into Equivalence Matchers and Subsumption 
 * Domain Mismatch Detection
 
 ## Alignment Combination Methods
-* Profile Weight
+* Profile Weight (with and without matcher selection)
 * Average Aggregation
 * Majority Vote
-* HADAPT 
 
 ## Evaluation Code
 * Misc code for evaluating the 3 datasets with respect to precision, recall and F-measure.
