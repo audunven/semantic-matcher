@@ -1,0 +1,825 @@
+<?xml version='1.0' encoding='utf-8' standalone='no'?>
+<rdf:RDF xmlns='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+         xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+         xmlns:xsd='http://www.w3.org/2001/XMLSchema#'
+         xmlns:alext='http://exmo.inrialpes.fr/align/ext/1.0/'
+         xmlns:align='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'>
+<Alignment>
+  <xml>yes</xml>
+  <level>0</level>
+  <type>**</type>
+  <relationClass>fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation</relationClass>
+  <onto1>
+    <Ontology rdf:about="http://id.loc.gov/ontologies/bibframe#">
+      <location>http://id.loc.gov/ontologies/bibframe#</location>
+    </Ontology>
+  </onto1>
+  <onto2>
+    <Ontology rdf:about="http://schema.org">
+      <location>http://schema.org</location>
+    </Ontology>
+  </onto2>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DayOfWeek'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalEnumeration'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#OfferItemCondition'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ActionStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#PaymentMethod'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BusinessFunction'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#WarrantyScope'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DeliveryMethod'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#OrderStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MusicReleaseFormatType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ReservationStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BookFormatType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#GamePlayMode'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#Specialty'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MusicAlbumProductionType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#EventStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MapCategoryType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BoardingPolicyType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#RsvpResponseType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ContactPointOption'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BusinessEntityType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#QualitativeValue'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MusicAlbumReleaseType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ItemAvailability'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#PaymentStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ItemListOrderType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#GameServerStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#IntendedAudience'/>
+      <entity2 rdf:resource='http://schema.org#PeopleAudience'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#IntendedAudience'/>
+      <entity2 rdf:resource='http://schema.org#EducationalAudience'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#IntendedAudience'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#IntendedAudience'/>
+      <entity2 rdf:resource='http://schema.org#MedicalAudience'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#IntendedAudience'/>
+      <entity2 rdf:resource='http://schema.org#BusinessAudience'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#BookFormat'/>
+      <entity2 rdf:resource='http://schema.org#Enumeration'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#CreativeWork'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#Corporation'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#EducationalOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#SportsOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#LocalBusiness'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#GovernmentOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#Airline'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#PerformingGroup'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#NGO'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#PerformanceRole'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#OrganizationRole'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Audio'/>
+      <entity2 rdf:resource='http://schema.org#MediaObject'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Dataset'/>
+      <entity2 rdf:resource='http://schema.org#CreativeWork'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Dataset'/>
+      <entity2 rdf:resource='http://schema.org#DataFeed'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#AdministrativeArea'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Residence'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#LandmarksOrHistoricalBuildings'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#TouristAttraction'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Landform'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#LocalBusiness'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#CivicStructure'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicFormat'/>
+      <entity2 rdf:resource='http://schema.org#Enumeration'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ExhibitionEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#SaleEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ComedyEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#Festival'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ChildrensEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#PublicationEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#TheaterEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#LiteraryEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#FoodEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#DeliveryEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#EducationEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#SocialEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#MusicEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#UserInteraction'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#BusinessEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#DanceEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ScreeningEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#SportsEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#VisualArtsEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#AudioObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <!--The reasoner used for retrieving subclasses of owl classes seems to have a problem with classes 
+  using other namespaces than the primary uri.-->
+<!--  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://www.w3.org/ns/dcat#Distribution'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>-->
+    <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#Distribution'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#MusicVideoObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#ImageObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#CreativeWork'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#DataDownload'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#VideoObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <!--The reasoner used for retrieving subclasses of owl classes seems to have a problem with classes 
+  using other namespaces than the primary uri.-->
+<!--  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://purl.org/dc/dcmitype/Image'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>-->
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://schema.org#ImageObject'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <!--The reasoner used for retrieving subclasses of owl classes seems to have a problem with classes 
+  using other namespaces than the primary uri.-->
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Dataset'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <!--The reasoner used for retrieving subclasses of owl classes seems to have a problem with classes 
+  using other namespaces than the primary uri.-->
+<!--  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://purl.org/dc/dcmitype/Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>-->
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Media'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Identifier'/>
+      <entity2 rdf:resource='http://schema.org#Barcode'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <!--The reasoner used for retrieving subclasses of owl classes seems to have a problem with classes 
+  using other namespaces than the primary uri.-->
+<!--  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://purl.org/dc/dcmitype/Image'/>
+      <relation>&lt;</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>-->  
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Agent'/>
+      <entity2 rdf:resource='http://schema.org#Organization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Agent'/>
+      <entity2 rdf:resource='http://schema.org#Person'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  <!--The reasoner used for retrieving subclasses of owl classes seems to have a problem with classes 
+  using other namespaces than the primary uri.--> 
+<!--  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Agent'/>
+      <entity2 rdf:resource='http://xmlns.com/foaf/0.1/Person'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>-->
+  
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#EnumerationAndChronology'/>
+      <entity2 rdf:resource='http://schema.org#Enumeration'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  
+  <map>
+    <Cell>
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Text'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>1.0</measure>
+    </Cell>
+  </map>
+  
+  
+</Alignment>
+</rdf:RDF>

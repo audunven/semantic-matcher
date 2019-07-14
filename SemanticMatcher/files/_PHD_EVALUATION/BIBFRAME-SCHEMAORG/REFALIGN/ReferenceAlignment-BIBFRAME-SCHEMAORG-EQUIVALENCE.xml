@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+   <Worksheet ss:Name="Ark1">
+      <Table x:FullColumns="1" x:FullRows="1">
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Correspondence</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">Relation</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">Measure</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Barcode - Barcode</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Person - Person</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Organization - Organization</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">MusicFormat - MusicReleaseFormatType</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">0.9</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Place - Place</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Enumeration - Enumeration</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Language - Language</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Role - Role</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Review - Review</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Audio - AudioObject</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">0.8875</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">BookFormat - BookFormatType</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">0.95</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">IntendedAudience - Audience</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">0.8333333333333333</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Event - Event</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Media - MediaObject</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">0.8875</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Dataset - Dataset</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Text - Text</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+      </Table>
+   </Worksheet>
+</Workbook>

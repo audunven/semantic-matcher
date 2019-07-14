@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+   <Worksheet ss:Name="Ark1">
+      <Table x:FullColumns="1" x:FullRows="1">
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Correspondence</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">Relation</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">Measure</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">BallBearing - AirframeEquipment</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">ElectricalPowerSystem - AuxiliaryPowerUnit</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportServiceVehicle - Vehicle</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">DecomposableSystem - RadioNavigationAid</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">DecomposableSystem - Aircraft</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">FRDfix - PointReference</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">WeatherCondition - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">WeatherCondition - SeaCondition</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">WeatherCondition - AviationCondition</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NASfacility - Aerodrome</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SurfaceWindCondition - WeatherPhenomenon</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">STAR - Procedure</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">DeicingPad - GeoTemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">CrewMember - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">CrewMember - PilotInCommand</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Terminal - VerticalStructure</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Aircraft - Vehicle</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SectorCapacity - Capacity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SectorFlow - OccupancyTrafficMonitoringValue</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">VisibilityCondition - Object</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">RunwayVisibleRangeMeasurement - GeoTemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftSubsystem - Engine</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftEngine - AircraftEquipment</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AviationServiceProvider - AircraftOperator</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftFlow - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">RelativeFix - SignificantPoint</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">RelativeFix - Object</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportSpec - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AbsoluteFix - SignificantPoint</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Flight - WhatIfFlight</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Flight - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">FixFlow - OccupancyTrafficMonitoringValue</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">OperationalRunway - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Sequence - TaxiRoute</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SequencedItem - Taxiway</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SequencedItem - Aircraft</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SequencedItem - AircraftState</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationElement - Aerodrome</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationElement - SignificantPoint</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationFix - GeoTemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationFix - PointReference</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirspaceInfrastructureComponent - AirspaceLayer</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Airport - GeoTemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirCarrier - Organisation</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Taxiway - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftCapacity - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - TACAN</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - SimplifiedDirectionalFacility</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - MarkerBeacon</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - MicrowaveLandingSystem</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - InstrumentLandingSystem</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - VOR</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - DME</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - NDB</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - DirectionFinder</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - GeoTemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">PhysicalRunway - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Taxipath - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftType - Object</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">MetCondition - Wind</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">MetCondition - HorizontalVisibility</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">MetCondition - WeatherCondition</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">FlightSpec - ObjectWithSchedule</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirspaceLayer - Object</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">FixCapacity - Capacity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">IntervalData - RunwayVisualRange</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">InternationalAirport - Aerodrome</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportInfrastructureComponent - Terminal</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportInfrastructureComponent - RunwayDirection</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportInfrastructureComponent - Taxiway</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportInfrastructureComponent - Runway</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportInfrastructureComponent - DeicingArea</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">METARreportingStation - Aerodrome</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SID - Procedure</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">USairport - Aerodrome</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftFlowCapacity - OccupancyTrafficMonitoringValue</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftFlowCapacity - Capacity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Gate - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftModel - Object</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftTrackPoint - TemporalEnabledEntity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&lt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportInfrastructureComponent - Gate</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SIDSTAR - StandardInstrumentArrival</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SIDSTAR - StandardInstrumentDeparture</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">&gt;</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+      </Table>
+   </Worksheet>
+</Workbook>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
+   <Worksheet ss:Name="Ark1">
+      <Table x:FullColumns="1" x:FullRows="1">
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Correspondence</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">Relation</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">Measure</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirspaceLayer - AirspaceLayer</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">0.6</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Aircraft - Aircraft</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftType - AircraftType</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">PhysicalRunway - Runway</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">TimeInterval - TimeRangeType</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">VisibilityCondition - HorizontalVisibility</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirCarrier - AircraftOperator</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftEngine - Engine</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Gate - Gate</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">CrewMember - CrewMember</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Terminal - Terminal</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Taxiway - Taxiway</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Airport - Aerodrome</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SurfaceWindCondition - Wind</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">WeatherCondition - WeatherCondition</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftModel - AircraftMakeModelSeries</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">EngineType - CodeAircraftEngineType</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationAid - RadioNavigationAid</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">DeicingPad - DeicingArea</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">OperationalRunway - RunwayDirection</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">RunwayVisibleRangeMeasurement - RunwayVisualRange</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Taxipath - TaxiRoute</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">Flight - Flight</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">SID - StandardInstrumentDeparture</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">STAR - StandardInstrumentArrival</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AirportSpec - AerodromeSet</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">FlightSpec - FlightConditionCombination</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftCapacity - Capacity</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftFlow - OccupancyTrafficMonitoringValue</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">AircraftTrackPoint - AircraftState</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">RelativeFix - PointReference</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+         <Row>
+            <Cell>
+               <Data ss:Type="String">NavigationFix - SignificantPoint</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">=</Data>
+            </Cell>
+            <Cell>
+               <Data ss:Type="String">1.0</Data>
+            </Cell>
+         </Row>
+      </Table>
+   </Worksheet>
+</Workbook>
