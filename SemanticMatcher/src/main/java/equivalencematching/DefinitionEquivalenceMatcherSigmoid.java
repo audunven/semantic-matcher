@@ -30,6 +30,10 @@ import utilities.OntologyOperations;
 import utilities.Sigmoid;
 import wordembedding.VectorExtractor;
 
+/**
+ * The Definitions Equivalence Matcher identifies equivalent concepts from the cosine similarity between embedding vectors associated with their labels and definitions.
+ * In this class weights are imposed from the ontology profiling scores.
+ */
 public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment implements AlignmentProcess {
 	
 	//these attributes are used to calculate the weight associated with the matcher's confidence value
@@ -60,20 +64,20 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 	//test method
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
 		
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
+		
+//		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+//		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+//		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
+//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+		
 //		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-301.rdf");
 //		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-304.rdf");
 //		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301304/301-304-EQUIVALENCE.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
-		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-
-//		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-//		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-//		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-//		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_trained_ontology_tokens.txt";
+//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
@@ -84,7 +88,7 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 		double testRangeMin = 0.5;
 		double testRangeMax = 0.7;
 
-		AlignmentProcess a = new DefinitionEquivalenceMatcher(sourceOntology, targetOntology, vectorFile, testProfileScore, testSlope, testRangeMin, testRangeMax);
+		AlignmentProcess a = new DefinitionEquivalenceMatcherSigmoid(sourceOntology, targetOntology, vectorFile, testProfileScore, testSlope, testRangeMin, testRangeMax);
 		a.init(sourceOntology.getOntologyID().getOntologyIRI().toURI(), targetOntology.getOntologyID().getOntologyIRI().toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
@@ -94,16 +98,6 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 		definitionEquivalenceMatcherAlignment = (BasicAlignment) (a.clone());
 
 		definitionEquivalenceMatcherAlignment.normalise();
-
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonyEquivalence.getHarmonyAlignment(definitionEquivalenceMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
-
-		System.out.println("Printing Harmony Alignment: ");
-		for (Cell c : harmonyAlignment) {
-			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
-		}
 
 		System.out.println("\nThe alignment contains " + definitionEquivalenceMatcherAlignment.nbCells() + " relations");
 
@@ -133,6 +127,20 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 
 	}
 	
+	/**
+	 * Returns an URIAlignment holding equivalence relations computed by the Definition Equivalence Matcher. 
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param vectorFile a vector file with embeddings
+	 * @param profileScore the score from the ontology profiling process
+	 * @param slope the sigmoid slope parameter
+	 * @param rangeMax the max value of the confidence transformation
+	 * @param rangeMin the min value of the confidence transformation
+	 * @return
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 14, 2019
+	 */
 	public static URIAlignment returnDEMAlignment (File ontoFile1, File ontoFile2, String vectorFile, double profileScore, int slope, double rangeMax, double rangeMin) throws OWLOntologyCreationException, AlignmentException {
 		
 		URIAlignment DEMAlignment = new URIAlignment();
@@ -160,6 +168,9 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 		
 	}
 	
+	/**
+	 * Computes an alignment of semantic relations from measuring the cosine similarity between embedding vectors associated with the ontology concepts being matched.
+	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 		
 		//create the vector map holding word - embedding vectors		

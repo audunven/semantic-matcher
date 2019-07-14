@@ -30,13 +30,15 @@ import utilities.OntologyOperations;
 import utilities.Sigmoid;
 import wordembedding.VectorExtractor;
 
+/**
+ * The Definitions Equivalence Matcher identifies equivalent concepts from the cosine similarity between embedding vectors associated with their labels and definitions.
+ * In this class there is no weighting (i.e. the weight is set to 1.0)
+ * @author audunvennesland
+ *
+ */
 public class DefinitionEquivalenceMatcher extends ObjectAlignment implements AlignmentProcess {
 	
-	//these attributes are used to calculate the weight associated with the matcher's confidence value
-	double profileScore;
-	int slope;
-	double rangeMin;
-	double rangeMax;
+	double weight;
 	String vectorFile;
 	
 	static OWLOntology sourceOntology;
@@ -47,19 +49,8 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 
 
 	//constructor for no weight and basic profile weight scenarios
-	public DefinitionEquivalenceMatcher(OWLOntology onto1, OWLOntology onto2, String vectorFile, double profileScore) {
-		this.profileScore = profileScore;
-		sourceOntology = onto1;
-		targetOntology = onto2;
-		this.vectorFile = vectorFile;
-	}
-	
-	//constructor for sigmoid weighting scenario
-	public DefinitionEquivalenceMatcher(OWLOntology onto1, OWLOntology onto2, String vectorFile, double profileScore, int slope, double rangeMin, double rangeMax) {
-		this.profileScore = profileScore;
-		this.slope = slope;
-		this.rangeMin = rangeMin;
-		this.rangeMax = rangeMax;
+	public DefinitionEquivalenceMatcher(OWLOntology onto1, OWLOntology onto2, String vectorFile, double weight) {
+		this.weight = weight;
 		sourceOntology = onto1;
 		targetOntology = onto2;
 		this.vectorFile = vectorFile;
@@ -69,39 +60,27 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 	//test method
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
 		
-//		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-301.rdf");
-//		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-304.rdf");
-//		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301304/301-304-EQUIVALENCE.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
+		
 //		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
 //		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
 //		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-
-//		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-//		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-//		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-//		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_trained_ontology_tokens.txt";
+//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 		
-		File ontoFile1 = new File("./files/KEOD18/datasets_refined/d3/ontologies/iwxxm_metar.owl");
-		File ontoFile2 =  new File("./files/KEOD18/datasets_refined/d3/ontologies/airm-mono.owl");
-		String referenceAlignment = "./files/KEOD18/datasets_refined/d3/refalign/ref-align_iwxxm-metar-airm-mono-Equivalence.rdf";
-		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_trained_ontology_tokens.txt";
+//		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-301.rdf");
+//		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-304.rdf");
+//		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301304/301-304-EQUIVALENCE.rdf";
+//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
 		OWLOntology targetOntology = manager.loadOntologyFromOntologyDocument(ontoFile2);
 
-		double testProfileScore = 0.84;
-		int testSlope = 12;
-		double testRangeMin = 0.5;
-		double testRangeMax = 0.7;
-
-//		AlignmentProcess a = new DefinitionEquivalenceMatcher(sourceOntology, targetOntology, vectorFile, testProfileScore, testSlope, testRangeMin, testRangeMax);
 		AlignmentProcess a = new DefinitionEquivalenceMatcher(sourceOntology, targetOntology, vectorFile, 1.0);
 		a.init(ontoFile1.toURI(), ontoFile2.toURI());
-		//a.init(sourceOntology.getOntologyID().getOntologyIRI().toURI(), targetOntology.getOntologyID().getOntologyIRI().toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
 		a.align((Alignment)null, params);	
@@ -110,16 +89,6 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 		definitionEquivalenceMatcherAlignment = (BasicAlignment) (a.clone());
 
 		definitionEquivalenceMatcherAlignment.normalise();
-
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonyEquivalence.getHarmonyAlignment(definitionEquivalenceMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
-
-		System.out.println("Printing Harmony Alignment: ");
-		for (Cell c : harmonyAlignment) {
-			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
-		}
 
 		System.out.println("\nThe alignment contains " + definitionEquivalenceMatcherAlignment.nbCells() + " relations");
 
@@ -149,6 +118,18 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 
 	}
 	
+	/**
+	 * Returns an URIAlignment holding equivalence relations computed by the Definition Equivalence Matcher. 
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param vectorFile a vector file with embeddings
+	 * @param profileScore the score from the ontology profiling process
+	 * @param weight a weight on the confidence value (default 1.0)
+	 * @return
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 14, 2019
+	 */
 	public static URIAlignment returnDEMAlignment (File ontoFile1, File ontoFile2, String vectorFile, double weight) throws OWLOntologyCreationException, AlignmentException {
 		
 		URIAlignment DEMAlignment = new URIAlignment();
@@ -247,16 +228,16 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 
 							cosineSim = utilities.Cosine.cosineSimilarity(sourceVectors, targetVectors);
 							
-							addAlignCell("DefinitionEquivalenceMatcher" + idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", cosineSim * profileScore);
+							addAlignCell("DefinitionEquivalenceMatcher" + idCounter + "_" + weight + "_", sourceObject, targetObject, "=", cosineSim * weight);
 							
 						} else {
-							addAlignCell("DefinitionEquivalenceMatcher" + idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", 0);
+							addAlignCell("DefinitionEquivalenceMatcher" + idCounter + "_" + weight + "_", sourceObject, targetObject, "=", 0);
 
 						}
 
 
 					} else {
-						addAlignCell("DefinitionEquivalenceMatcher" + idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", 0);
+						addAlignCell("DefinitionEquivalenceMatcher" + idCounter + "_" + weight + "_", sourceObject, targetObject, "=", 0);
 						
 					}
 
