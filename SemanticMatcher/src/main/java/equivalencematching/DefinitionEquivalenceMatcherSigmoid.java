@@ -128,7 +128,7 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 	}
 	
 	/**
-	 * Returns an URIAlignment holding equivalence relations computed by the Definition Equivalence Matcher. 
+	 * Returns an alignment holding equivalence relations computed by the Definition Equivalence Matcher. 
 	 * @param ontoFile1 source ontology
 	 * @param ontoFile2 target ontology
 	 * @param vectorFile a vector file with embeddings
@@ -136,7 +136,7 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 	 * @param slope the sigmoid slope parameter
 	 * @param rangeMax the max value of the confidence transformation
 	 * @param rangeMin the min value of the confidence transformation
-	 * @return
+	 * @return an URIAlignment holding a set of relations (cells)
 	 * @throws OWLOntologyCreationException
 	 * @throws AlignmentException
 	   Jul 14, 2019

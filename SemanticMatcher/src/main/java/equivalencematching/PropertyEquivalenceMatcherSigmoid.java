@@ -43,7 +43,14 @@ import utilities.SimilarityMetrics;
 import utilities.StringUtilities;
 import utilities.WordNet;
 
-
+/**
+ * The Property Matcher measures the similarity of the properties associated with the concepts to be matched. 
+ * Both object properties and data properties where the concepts to be matched represent the domain or range class are 
+ collected into single sets C_x_prop and C_y_prop and compared with Jaccard. 
+ * This class computes confidence scores for each relation using the scores from the ontology profiling.
+ * @author audunvennesland
+ *
+ */
 public class PropertyEquivalenceMatcherSigmoid extends ObjectAlignment implements AlignmentProcess {
 
 
@@ -76,7 +83,20 @@ public class PropertyEquivalenceMatcherSigmoid extends ObjectAlignment implement
 		this.rangeMax = rangeMax;
 	}
 
-
+	/**
+	 * 	/**
+	 * Returns an alignment holding relations computed by the Property Equivalence Matcher (PEM).
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param profileScore the score obtained for this matcher in the ontology profiling
+	 * @param slope the sigmoid slope parameter
+	 * @param rangeMax the max value of the confidence transformation
+	 * @param rangeMin the min value of the confidence transformation
+	 * @return an URIAlignment holding a set of relations (cells)
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 15, 2019
+	 */
 	public static URIAlignment returnPEMAlignment (File ontoFile1, File ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) throws OWLOntologyCreationException, AlignmentException {
 
 		URIAlignment PEMAlignment = new URIAlignment();
@@ -104,7 +124,10 @@ public class PropertyEquivalenceMatcherSigmoid extends ObjectAlignment implement
 
 	}
 
-
+	/**
+	 * Creates an alignment that on the basis of class and property similarity obtains a similarity score assigned to each relation in the alignment.
+	 * A combination of Jaccard set similarity and the ISUB string similarity measure is used to compute the similarity score.
+	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 
 		//construct a map holding a class as key and all props and synonyms of them as value
@@ -154,6 +177,14 @@ public class PropertyEquivalenceMatcherSigmoid extends ObjectAlignment implement
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 
+	/**
+	 * Creates a map that holds each class as key along with a set of properties (including their synonyms) as value.
+	 * @param onto an input ontology
+	 * @return a Map<String, Set<String>> holding classes and corresponding properties.
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	   Jul 15, 2019
+	 */
 	private static Map<String, Set<String>> createClassAndPropMap(OWLOntology onto) throws ClassNotFoundException, IOException {
 		Map<String, Set<String>> classAndPropMap = new HashMap<String, Set<String>>();
 
@@ -216,6 +247,18 @@ public class PropertyEquivalenceMatcherSigmoid extends ObjectAlignment implement
 	}
 
 
+	/**
+	 * In order to match properties the Property Matcher tries to identify the core concept of each property, inspired by the works of Michelle Cheatham et al. 
+	 * The core concept is either the first verb in the label that is greater than 4 characters or, if no such verb exists, the first noun in the label, 
+	 * together with any adjectives that qualify that noun. 
+	 * A Part-of-Speech (POS) tagger is used for differentiating verbs, nouns and adjectives in a property name. 
+	 * Currently, the POS tagger from the Stanford CoreNLP API is used.
+	 * @param propName the property name from which the core concept is retrieved.
+	 * @return the core concept of the property
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	   Jul 15, 2019
+	 */
 	public static String getPropertyCoreConcept(String text) throws IOException, ClassNotFoundException {
 
 

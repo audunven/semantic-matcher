@@ -18,7 +18,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonyEquivalence;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
@@ -28,17 +27,13 @@ import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import wordembedding.VectorExtractor;
 
 /**
- * Matches concepts from two ontologies based on their global vectors (average of label vectors and comment vectors).
+ * The WordEmbeddingMatcher matches concepts from two ontologies based on their associated embedding vectors.
  * @author audunvennesland
  *
  */
 public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentProcess {
 
-	//these attributes are used to calculate the weight associated with the matcher's confidence value
-	double profileScore;
-	int slope;
-	double rangeMin;
-	double rangeMax;
+	double weight;
 	
 	static OWLOntology sourceOntology;
 	static OWLOntology targetOntology;
@@ -47,25 +42,21 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 
 	String vectorFile;
 
-	public WordEmbeddingMatcher(OWLOntology onto1, OWLOntology onto2, String vectorFile, double profileScore) {
-		this.profileScore = profileScore;
+	public WordEmbeddingMatcher(OWLOntology onto1, OWLOntology onto2, String vectorFile, double weight) {
+		this.weight = weight;
 		sourceOntology = onto1;
 		targetOntology = onto2;
 		this.vectorFile = vectorFile;
 	}
 	
-	public WordEmbeddingMatcher(OWLOntology onto1, OWLOntology onto2, String vectorFile, double profileScore, int slope, double rangeMin, double rangeMax) {
-		this.profileScore = profileScore;
-		this.slope = slope;
-		this.rangeMin = rangeMin;
-		this.rangeMax = rangeMax;
-		sourceOntology = onto1;
-		targetOntology = onto2;
-		this.vectorFile = vectorFile;
-	}
 	
 	//test method
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
+		
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+		File ontoFile2 =  new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
 		
 //		File ontoFile1 = new File("./files/SATest1.owl");
 //		File ontoFile2 = new File("./files/SATest2.owl");
@@ -77,17 +68,9 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 //		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
 //		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
 
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-		File ontoFile2 =  new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
-		
-
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
 		OWLOntology targetOntology = manager.loadOntologyFromOntologyDocument(ontoFile2);
-
-		//AlignmentProcess a = new WordEmbeddingMatcher(sourceOntology, targetOntology, vectorFile, testProfileScore, testSlope, testRangeMin, testRangeMax);
 		
 		AlignmentProcess a = new WordEmbeddingMatcher(sourceOntology, targetOntology, vectorFile, 1.0);
 		a.init(ontoFile1.toURI(), ontoFile2.toURI());
@@ -105,12 +88,6 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 		System.out.println("Evaluation with no cut threshold:");
 		Evaluator.evaluateSingleAlignment(WordEmbeddingMatcherAlignment, referenceAlignment);
 		
-//		for (Cell c : WordEmbeddingMatcherAlignment) {
-//			if (c.getObject1AsURI().getFragment().equals("DeicingAreaMarking"))
-//			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getStrength());
-//		}
-
-
 		System.out.println("Evaluation with threshold 0.1:");
 		WordEmbeddingMatcherAlignment.cut(0.1);
 		Evaluator.evaluateSingleAlignment(WordEmbeddingMatcherAlignment, referenceAlignment);
@@ -136,6 +113,53 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 	}
 	
 	
+	
+	/**
+	 * Returns an alignment holding relations computed by the Word Embedding Matcher (WEM).
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param vectorFile a file holding terms and corresponding embedding vectors.
+	 * @param weight a weight imposed on the confidence value (default 1.0)
+	 * @return an URIAlignment holding a set of relations (cells)
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 15, 2019
+	 */
+	public static URIAlignment returnWEMAlignment (File ontoFile1, File ontoFile2, String vectorFile, double weight) throws OWLOntologyCreationException, AlignmentException {
+		
+		URIAlignment WEMAlignment = new URIAlignment();
+		
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
+		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
+		
+		AlignmentProcess a = new WordEmbeddingMatcher(onto1, onto2, vectorFile, weight);
+		a.init(ontoFile1.toURI(), ontoFile2.toURI());
+		Properties params = new Properties();
+		params.setProperty("", "");
+		a.align((Alignment)null, params);	
+		BasicAlignment wordEmbeddingMatcherAlignment = new BasicAlignment();
+
+		wordEmbeddingMatcherAlignment = (BasicAlignment) (a.clone());
+
+		wordEmbeddingMatcherAlignment.normalise();
+		
+		WEMAlignment = wordEmbeddingMatcherAlignment.toURIAlignment();
+		
+		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		
+		return WEMAlignment;
+		
+	}
+	
+	/**
+	 * Creates a map holding a class as key along with an array of vectors as value.
+	 * @param onto an OWL ontology
+	 * @param vectorFile a file holding terms and corresponding embedding vectors.
+	 * @return a Map<String, double[]) representing classes and corresponding embedding vectors.
+	 * @throws IOException
+	   Jul 15, 2019
+	 */
 	public static Map<String, double[]> createVectorMap (OWLOntology onto, String vectorFile) throws IOException {
 		
 		Map<String, double[]> vectors = new HashMap<String, double[]>();
@@ -163,34 +187,11 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 		
 		
 	}
-	
-	public static URIAlignment returnWEMAlignment (File ontoFile1, File ontoFile2, String vectorFile, double weight) throws OWLOntologyCreationException, AlignmentException {
-		
-		URIAlignment WEMAlignment = new URIAlignment();
-		
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-		
-		AlignmentProcess a = new WordEmbeddingMatcher(onto1, onto2, vectorFile, weight);
-		a.init(ontoFile1.toURI(), ontoFile2.toURI());
-		Properties params = new Properties();
-		params.setProperty("", "");
-		a.align((Alignment)null, params);	
-		BasicAlignment wordEmbeddingMatcherAlignment = new BasicAlignment();
 
-		wordEmbeddingMatcherAlignment = (BasicAlignment) (a.clone());
-
-		wordEmbeddingMatcherAlignment.normalise();
-		
-		WEMAlignment = wordEmbeddingMatcherAlignment.toURIAlignment();
-		
-		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-		
-		return WEMAlignment;
-		
-	}
-
+	/**
+	 * Creates an alignment holding a set of relations.
+	 * The confidence assigned to each relation is computed by the cosine similarity from embedding vectors associated with each concept name.
+	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 
 		try {
@@ -210,10 +211,7 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 
 		double cosineSim = 0;
 		int idCounter = 0;
-		
-		
 
-		
 		try {
 			// Match classes
 			for ( Object sourceObject: ontology1().getClasses() ){
@@ -236,18 +234,18 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 							
 							
 							//calculate using the basic profile score sim
-							addAlignCell("WordEmbeddingMatcher" +idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", cosineSim * profileScore);
+							addAlignCell("WordEmbeddingMatcher" +idCounter + "_" + weight + "_", sourceObject, targetObject, "=", cosineSim * weight);
 
 						} else {
 							
-							addAlignCell("WordEmbeddingMatcher" +idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", 0);
+							addAlignCell("WordEmbeddingMatcher" +idCounter + "_" + weight + "_", sourceObject, targetObject, "=", 0);
 
 						}
 
 
 					} else {
 						
-						addAlignCell("WordEmbeddingMatcher" +idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", 0);
+						addAlignCell("WordEmbeddingMatcher" +idCounter + "_" + weight + "_", sourceObject, targetObject, "=", 0);
 						
 					}
 

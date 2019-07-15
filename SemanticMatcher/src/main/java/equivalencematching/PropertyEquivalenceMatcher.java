@@ -42,7 +42,13 @@ import utilities.SimilarityMetrics;
 import utilities.StringUtilities;
 import utilities.WordNet;
 
-
+/**
+ * The Property Matcher measures the similarity of the properties associated with the concepts to be matched. 
+ * Both object properties and data properties where the concepts to be matched represent the domain or range class are 
+ * collected into single sets C_x_prop and C_y_prop and compared with Jaccard. 
+ * @author audunvennesland
+ *
+ */
 public class PropertyEquivalenceMatcher extends ObjectAlignment implements AlignmentProcess {
 
 
@@ -51,13 +57,8 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 
 	//the Stanford POS tagger used for computing the core concept of properties
 	static MaxentTagger maxentTagger = new MaxentTagger("./files/taggers/english-left3words-distsim.tagger");
-
-
-	//these attributes are used to calculate the weight associated with the matcher's confidence value
-	double profileScore;
-	int slope;
-	double rangeMin;
-	double rangeMax;
+	
+	double weight;
 
 
 	//The ISUB confidence used in the combined Jaccard/ISub similarity measure
@@ -67,42 +68,31 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 	static Map<String, Set<String>> classAndPropMapOnto2 = new HashMap<String, Set<String>>();
 
 
-	public PropertyEquivalenceMatcher(OWLOntology ontoFile1, OWLOntology ontoFile2, double profileScore) {
+	public PropertyEquivalenceMatcher(OWLOntology ontoFile1, OWLOntology ontoFile2, double weight) {
 		onto1 = ontoFile1;
 		onto2 = ontoFile2;
-		this.profileScore = profileScore;
+		this.weight = weight;
 	}
 
-	public PropertyEquivalenceMatcher(OWLOntology ontoFile1, OWLOntology ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) {
-		onto1 = ontoFile1;
-		onto2 = ontoFile2;
-		this.profileScore = profileScore;
-		this.slope = slope;
-		this.rangeMin = rangeMin;
-		this.rangeMax = rangeMax;
-	}
 
 	//test method
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
+		
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
 
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301302/301302-301.rdf");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301302/301302-302.rdf");
-		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301302/301-302-EQUIVALENCE.rdf";
-
-		//				File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-		//				File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-		//				String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+//		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301302/301302-301.rdf");
+//		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301302/301302-302.rdf");
+//		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301302/301-302-EQUIVALENCE.rdf";
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
 		OWLOntology targetOntology = manager.loadOntologyFromOntologyDocument(ontoFile2);
 
-		double testProfileScore = 0.84;
-		int testSlope = 12;
-		double testRangeMin = 0.5;
-		double testRangeMax = 0.7;
+		double weight = 1.0;
 
-		AlignmentProcess a = new PropertyEquivalenceMatcher(sourceOntology, targetOntology, testProfileScore, testSlope, testRangeMin, testRangeMax);
+		AlignmentProcess a = new PropertyEquivalenceMatcher(sourceOntology, targetOntology, weight);
 		a.init(ontoFile1.toURI(), ontoFile2.toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
@@ -112,16 +102,6 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 		propertyMatcherAlignment = (BasicAlignment) (a.clone());
 
 		propertyMatcherAlignment.normalise();
-
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonyEquivalence.getHarmonyAlignment(propertyMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
-
-		System.out.println("Printing Harmony Alignment: ");
-		for (Cell c : harmonyAlignment) {
-			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
-		}
 
 		System.out.println("\nThe alignment contains " + propertyMatcherAlignment.nbCells() + " relations");
 
@@ -151,6 +131,16 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 
 	}
 
+	/**
+	 * Returns an alignment holding relations computed by the Property Equivalence Matcher (PEM).
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param weight a weight imposed on the confidence value (default 1.0)
+	 * @return an URIAlignment holding relations (cells)
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 15, 2019
+	 */
 	public static URIAlignment returnPEMAlignment (File ontoFile1, File ontoFile2, double weight) throws OWLOntologyCreationException, AlignmentException {
 
 		URIAlignment PEMAlignment = new URIAlignment();
@@ -179,6 +169,10 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 	}
 
 
+	/**
+	 * Creates an alignment that on the basis of class and property similarity obtains a similarity score assigned to each relation in the alignment.
+	 * A combination of Jaccard set similarity and the ISUB string similarity measure is used to compute the similarity score.
+	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 
 		//construct a map holding a class as key and all props and synonyms of them as value
@@ -217,14 +211,11 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 					
 					if (sim > 0 && sim <= 1) {
 						
-						addAlignCell("PropertyMatcher" + idCounter + "_" + profileScore + "_", sourceObject,targetObject, "=", sim * profileScore);  
-						
-						//using sigmoid function to compute confidence
-//						addAlignCell("PropertyMatcher" + idCounter, sourceObject,targetObject, "=", 
-//								Sigmoid.weightedSigmoid(slope, sim, Sigmoid.transformProfileWeight(profileScore, rangeMin, rangeMax)));  
+						addAlignCell("PropertyMatcher" + idCounter + "_" + weight + "_", sourceObject,targetObject, "=", sim * weight);  
+ 
 					} else {
 						
-						addAlignCell("PropertyMatcher" + idCounter + "_" + profileScore + "_", sourceObject, targetObject, "=", 0);
+						addAlignCell("PropertyMatcher" + idCounter + "_" + weight + "_", sourceObject, targetObject, "=", 0);
 						
 					}
 				}
@@ -233,6 +224,14 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 
+	/**
+	 * Creates a map that holds each class as key along with a set of properties (including their synonyms) as value.
+	 * @param onto an input ontology
+	 * @return a Map<String, Set<String>> holding classes and corresponding properties.
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	   Jul 15, 2019
+	 */
 	private static Map<String, Set<String>> createClassAndPropMap(OWLOntology onto) throws ClassNotFoundException, IOException {
 		Map<String, Set<String>> classAndPropMap = new HashMap<String, Set<String>>();
 
@@ -294,15 +293,26 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 		return classAndPropMap;
 	}
 
+	/**
+	 * In order to match properties the Property Matcher tries to identify the core concept of each property, inspired by the works of Michelle Cheatham et al. 
+	 * The core concept is either the first verb in the label that is greater than 4 characters or, if no such verb exists, the first noun in the label, 
+	 * together with any adjectives that qualify that noun. 
+	 * A Part-of-Speech (POS) tagger is used for differentiating verbs, nouns and adjectives in a property name. 
+	 * Currently, the POS tagger from the Stanford CoreNLP API is used.
+	 * @param propName the property name from which the core concept is retrieved.
+	 * @return the core concept of the property
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	   Jul 15, 2019
+	 */
+	public static String getPropertyCoreConcept(String propName) throws IOException, ClassNotFoundException {
 
-	public static String getPropertyCoreConcept(String text) throws IOException, ClassNotFoundException {
 
-
-		if (StringUtilities.isCompoundWord(text)) {
-			text = StringUtilities.splitCompounds(text);
+		if (StringUtilities.isCompoundWord(propName)) {
+			propName = StringUtilities.splitCompounds(propName);
 		}
 
-		String tag = maxentTagger.tagString(text);
+		String tag = maxentTagger.tagString(propName);
 
 		String[] eachTag = tag.split("\\s+");
 
