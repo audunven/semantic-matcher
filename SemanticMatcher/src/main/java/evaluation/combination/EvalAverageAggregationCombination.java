@@ -24,7 +24,6 @@ import alignmentcombination.NaiveDescendingExtraction;
 import evaluation.general.EvaluationScore;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
-import org.semanticweb.owl.align.Cell;
 import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
@@ -33,33 +32,40 @@ import net.didion.jwnl.JWNLException;
 import utilities.AlignmentOperations;
 import utilities.StringUtilities;
 
+/**
+ * Evaluates the alignment combination method Average Aggregation in the ATM and Cross-domain datasets.
+ * The input alignments created by the individual matchers reside in predefined folders and the output from the main method is
+ * a set of alignment files (RDF/XML) at different confidence thresholds (0.0-1.0) and evaluation scores printed to Excel files.
+ * @author audunvennesland
+ *
+ */
 public class EvalAverageAggregationCombination {
 
 	//ATMONTO-AIRM || BIBFRAME-SCHEMAORG
 	final static String DATASET = "BIBFRAME-SCHEMAORG";
 
-	static File SOURCE_ONTO = null;
-	static File TARGET_ONTO = null;
-	static String REFERENCE_ALIGNMENT_EQ = null;
-	static String REFERENCE_ALIGNMENT_SUB = null;
-	static String REFERENCE_ALIGNMENT_EQ_AND_SUB = null;
+	static File source_onto = null;
+	static File target_onto = null;
+	static String reference_alignment_eq = null;
+	static String reference_alignment_sub = null;
+	static String reference_alignment_eq_AND_SUB = null;
 	static Date date = Calendar.getInstance().getTime();
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, OWLOntologyCreationException, JWNLException, IOException {
 
 		if (DATASET.equalsIgnoreCase("ATMONTO-AIRM")) {
-			SOURCE_ONTO = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-			TARGET_ONTO = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-			REFERENCE_ALIGNMENT_EQ = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-			REFERENCE_ALIGNMENT_SUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
-			REFERENCE_ALIGNMENT_EQ_AND_SUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
+			source_onto = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+			target_onto = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+			reference_alignment_eq = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+			reference_alignment_sub = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
+			reference_alignment_eq_AND_SUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
 
 		} else if (DATASET.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
-			SOURCE_ONTO = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
-			TARGET_ONTO = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
-			REFERENCE_ALIGNMENT_EQ = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-			REFERENCE_ALIGNMENT_SUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
-			REFERENCE_ALIGNMENT_EQ_AND_SUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
+			source_onto = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+			target_onto = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+			reference_alignment_eq = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
+			reference_alignment_sub = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
+			reference_alignment_eq_AND_SUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
 		}
 
 
@@ -69,10 +75,10 @@ public class EvalAverageAggregationCombination {
 
 		//put all EQ alignments in the EQ_folder into an ArrayList after enforcing 1-1 relations and removing mismatches
 		AlignmentParser aparser = new AlignmentParser(0);
-		URIAlignment refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_EQ_AND_SUB)));
+		URIAlignment refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq_AND_SUB)));
 
-		URIAlignment refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_EQ)));
-		URIAlignment refalign_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_SUB)));
+		URIAlignment refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq)));
+		URIAlignment refalign_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_sub)));
 
 		File folder = new File(EQ_folder);
 		File[] filesInDir = folder.listFiles();
@@ -93,7 +99,7 @@ public class EvalAverageAggregationCombination {
 			ndaAlignment = NaiveDescendingExtraction.extractOneToOneRelations(thisAlignment);
 
 			//remove mismatches
-			noMismatchAlignment = MismatchDetection.removeMismatches(ndaAlignment, SOURCE_ONTO, TARGET_ONTO);
+			noMismatchAlignment = MismatchDetection.removeMismatches(ndaAlignment, source_onto, target_onto);
 
 			eqAlignments.add(noMismatchAlignment);
 

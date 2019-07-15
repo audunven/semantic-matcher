@@ -2,7 +2,6 @@ package evaluation.combination;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,18 +35,25 @@ import net.didion.jwnl.JWNLException;
 import utilities.AlignmentOperations;
 import utilities.StringUtilities;
 
+/**
+ * Evaluates the alignment combination method Cut Threshold in the ATM and Cross-domain datasets.
+ * The input alignments created by the individual matchers reside in predefined folders and the output from the main method is
+ * a set of alignment files (RDF/XML) at different confidence thresholds (0.0-1.0) and evaluation scores printed to Excel files.
+ * @author audunvennesland
+ *
+ */
 public class EvalCutThresholdCombination {
 
 	//ATMONTO-AIRM || BIBFRAME-SCHEMAORG
 	final static String DATASET = "BIBFRAME-SCHEMAORG";
 
-	static File SOURCE_ONTO = null;
-	static File TARGET_ONTO = null;
-	static String REFERENCE_ALIGNMENT_EQ = null;
-	static String REFERENCE_ALIGNMENT_SUB = null;
-	static String REFERENCE_ALIGNMENT_EQ_AND_SUB = null;
-	static String EQ_FOLDER = null;
-	static String SUB_FOLDER = null;
+	static File source_onto = null;
+	static File target_onto = null;
+	static String reference_alignment_eq = null;
+	static String reference_alignment_sub = null;
+	static String reference_alignment_eq_and_sub = null;
+	static String eq_folder = null;
+	static String sub_folder = null;
 	static Date date = Calendar.getInstance().getTime();
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, OWLOntologyCreationException, JWNLException, IOException {
@@ -55,40 +61,40 @@ public class EvalCutThresholdCombination {
 
 		if (DATASET.equalsIgnoreCase("ATMONTO-AIRM")) {
 
-			SOURCE_ONTO = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-			TARGET_ONTO = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-			REFERENCE_ALIGNMENT_EQ = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-			REFERENCE_ALIGNMENT_SUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
-			REFERENCE_ALIGNMENT_EQ_AND_SUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
+			source_onto = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+			target_onto = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+			reference_alignment_eq = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+			reference_alignment_sub = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
+			reference_alignment_eq_and_sub = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
 
 		} else if (DATASET.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
 
-			SOURCE_ONTO = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
-			TARGET_ONTO = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
-			REFERENCE_ALIGNMENT_EQ = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-			REFERENCE_ALIGNMENT_SUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
-			REFERENCE_ALIGNMENT_EQ_AND_SUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
+			source_onto = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+			target_onto = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+			reference_alignment_eq = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
+			reference_alignment_sub = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
+			reference_alignment_eq_and_sub = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
 
 		}
 		
-		EQ_FOLDER = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/CUT_THRESHOLD/MERGED_NOWEIGHT/EQ";
-		SUB_FOLDER = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/CUT_THRESHOLD/MERGED_NOWEIGHT/SUB";
+		eq_folder = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/CUT_THRESHOLD/MERGED_NOWEIGHT/EQ";
+		sub_folder = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/CUT_THRESHOLD/MERGED_NOWEIGHT/SUB";
 
 
 		AlignmentParser aparser = new AlignmentParser(0);
 
-		URIAlignment refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_EQ_AND_SUB)));
-		URIAlignment refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_EQ)));
-		URIAlignment refalign_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_SUB)));
+		URIAlignment refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq_and_sub)));
+		URIAlignment refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq)));
+		URIAlignment refalign_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_sub)));
 
 		//combine EQ alignments into a single alignment
-		URIAlignment eq_alignments = combineAlignments(EQ_FOLDER);
+		URIAlignment eq_alignments = combineAlignments(eq_folder);
 
 		//enforce 1-1 eq relations using naive descending extraction
 		URIAlignment nda_eq_alignment = NaiveDescendingExtraction.extractOneToOneRelations(eq_alignments);
 
 		//filter out potential mismatches
-		URIAlignment noMismatchEQAlignment = MismatchDetection.removeMismatches(nda_eq_alignment, SOURCE_ONTO, TARGET_ONTO);
+		URIAlignment noMismatchEQAlignment = MismatchDetection.removeMismatches(nda_eq_alignment, source_onto, target_onto);
 
 		double[] confidence = {0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
 		double precision = 0;
@@ -97,7 +103,7 @@ public class EvalCutThresholdCombination {
 		PRecEvaluator eval = null;
 		Properties p = new Properties();
 		
-		URIAlignment sub_alignment = combineAlignments(SUB_FOLDER);
+		URIAlignment sub_alignment = combineAlignments(sub_folder);
 
 
 		//merge the "merged" EQ alignment and SUB alignment 
@@ -198,7 +204,7 @@ public class EvalCutThresholdCombination {
 	/**
 	 * Combines (by union) all individual alignments in a folder into a combined alignment
 	 * @param inputAlignments
-	 * @return
+	 * @return an URIAlignment holding unionised relations from all individual alignments in a folder.
 	 * @throws AlignmentException
 	 * @throws URISyntaxException
 	   May 3, 2019

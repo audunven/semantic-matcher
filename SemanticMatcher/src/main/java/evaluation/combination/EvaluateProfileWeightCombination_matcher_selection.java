@@ -46,6 +46,16 @@ import subsumptionmatching.LexicalSubsumptionMatcherSigmoid;
 import utilities.AlignmentOperations;
 import utilities.StringUtilities;
 
+/**
+ * Evaluates the alignment combination method Profile Weight in the ATM and Cross-domain datasets.
+ * The Profile Weight imposes a confidence weight to each relation that is based on the scores obtained in the ontology profiling process. 
+ * This class experiments with matcher selection, that is, if a score from the ontology profiling is below a defined threshold, the associated matcher is excluded from
+ * the matcher ensemble. For now this is done manually by simply commenting out those matchers in the dataset that have too low ontology profile scores.
+ * The input alignments are created by the individual matchers and the output from the main method is
+ * a set of alignment files (RDF/XML) at different confidence thresholds (0.0-1.0) and evaluation scores printed to Excel files.
+ * @author audunvennesland
+ *
+ */
 public class EvaluateProfileWeightCombination_matcher_selection {
 
 	//ATMONTO-AIRM || BIBFRAME-SCHEMAORG
@@ -116,7 +126,7 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 		Evaluator.evaluateSingleAlignment("Evaluation Profile Weight EQ", combinedEQAlignmentWithoutMismatches, referenceAlignmentEQ);
 
 		//compute SUB alignments
-		ArrayList<URIAlignment> subAlignments = computeSUBAlignments(ontoFile1, ontoFile2, ontologyProfilingScores, vectorFile);
+		ArrayList<URIAlignment> subAlignments = computeSUBAlignments(ontoFile1, ontoFile2, ontologyProfilingScores);
 
 		//combine SUB alignments into a final SUB alignment
 		URIAlignment combinedSUBAlignment = combineSUBAlignments(subAlignments);
@@ -240,6 +250,18 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 
 	}
 
+	/**
+	 * This method makes a call to the individual equivalence matchers which produce their alignments.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology 
+	 * @param ontologyProfilingScores a map holding scores from the ontology profiling process
+	 * @param vectorFile a file holding terms and corresponding embedding vectors
+	 * @return an ArrayList of URIAlignments produced by the individual equivalence matchers.
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	 * @throws URISyntaxException
+	   Jul 15, 2019
+	 */
 	private static ArrayList<URIAlignment> computeEQAlignments(File ontoFile1, File ontoFile2, Map<String, Double> ontologyProfilingScores, String vectorFile) throws OWLOntologyCreationException, AlignmentException, URISyntaxException {
 
 		ArrayList<URIAlignment> eqAlignments = new ArrayList<URIAlignment>();
@@ -271,22 +293,34 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 
 	}
 
+	/**
+	 * Combines individual equivalence alignments into a single alignment
+	 * @param inputAlignments individual alignments produced by an emsemble of matchers
+	 * @return a URIAlignment holding equivalence relations produced by an ensemble of matchers
+	 * @throws AlignmentException
+	 * @throws IOException
+	 * @throws URISyntaxException
+	   Jul 15, 2019
+	 */
 	private static URIAlignment combineEQAlignments (ArrayList<URIAlignment> inputAlignments) throws AlignmentException, IOException, URISyntaxException {
 
 		URIAlignment combinedEQAlignment = ProfileWeight.computeProfileWeightingEquivalence(inputAlignments);
-
-		System.err.println("\nThe combined EQ alignment contains " + combinedEQAlignment.nbCells() + " relations");
-		System.err.println("These relations are: ");
-
-		for (Cell c : combinedEQAlignment) {
-			System.out.println(c.getObject1AsURI().getFragment() + " " + c.getObject2AsURI().getFragment() + " " + c.getRelation().getRelation() + " " + c.getStrength());
-		}
 
 		return combinedEQAlignment;
 
 	}
 
-	private static ArrayList<URIAlignment> computeSUBAlignments(File ontoFile1, File ontoFile2, Map<String, Double> ontologyProfilingScores, String vectorFile) throws OWLOntologyCreationException, AlignmentException {
+	/**
+	 * This method makes a call to the individual subsumption matchers which produce their alignments.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param ontologyProfilingScores a map holding scores from the ontology profiling process
+	 * @return an ArrayList of URIAlignments produced by the individual subsumption matchers.
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 15, 2019
+	 */
+	private static ArrayList<URIAlignment> computeSUBAlignments(File ontoFile1, File ontoFile2, Map<String, Double> ontologyProfilingScores) throws OWLOntologyCreationException, AlignmentException {
 
 		ArrayList<URIAlignment> subAlignments = new ArrayList<URIAlignment>();
 
@@ -310,22 +344,36 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 
 	}
 
+	/**
+	 * Combines individual subsumption alignments into a single alignment
+	 * @param inputAlignments individual alignments produced by an emsemble of matchers
+	 * @return a URIAlignment holding subsumption relations produced by an ensemble of matchers
+	 * @throws AlignmentException
+	 * @throws IOException
+	 * @throws URISyntaxException
+	   Jul 15, 2019
+	 */
 	private static URIAlignment combineSUBAlignments (ArrayList<URIAlignment> inputAlignments) throws AlignmentException, IOException, URISyntaxException {
 
 		URIAlignment combinedSUBAlignment = ProfileWeightSubsumption.computeProfileWeightingSubsumption(inputAlignments);
-
-		System.err.println("\nThe combined SUB alignment contains " + combinedSUBAlignment.nbCells() + " relations");
-		System.err.println("These relations are: ");
-
-		for (Cell c : combinedSUBAlignment) {
-			System.out.println(c.getObject1AsURI().getFragment() + " " + c.getObject2AsURI().getFragment() + " " + c.getRelation().getRelation() + " " + c.getStrength());
-		}
 
 
 		return combinedSUBAlignment;
 
 	}
 
+	/**
+	 * Filters out relations representing mismatches on the basis of a set of mismatch detection strategies.
+	 * @param combinedEQAlignment the input alignment from which mismatches are filtered out.
+	 * @param mismatchStorePath a folder where the filtered alignments from the included mismatch detection strategies are stored.
+	 * @return an URIAlignment without mismatch relations.
+	 * @throws AlignmentException
+	 * @throws OWLOntologyCreationException
+	 * @throws JWNLException
+	 * @throws URISyntaxException
+	 * @throws IOException
+	   Jul 15, 2019
+	 */
 	private static URIAlignment removeMismatches (URIAlignment combinedEQAlignment, String mismatchStorePath) throws AlignmentException, OWLOntologyCreationException, JWNLException, URISyntaxException, IOException {
 
 		//store the merged alignment
@@ -400,6 +448,14 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 		return domainMismatchDetection;
 	}
 
+	/**
+	 * Merges an alignment holding equivalence relations with an alignment holding subsumption relations.
+	 * @param eqAlignment the input equivalence alignment
+	 * @param subAlignment the input subsumption alignment
+	 * @return a merged URIAlignment holding both equivalence and subsumption relations.
+	 * @throws AlignmentException
+	   Jul 15, 2019
+	 */
 	private static URIAlignment mergeEQAndSubAlignments (URIAlignment eqAlignment, URIAlignment subAlignment) throws AlignmentException {
 
 		URIAlignment mergedEQAndSubAlignment = AlignmentOperations.combineEQAndSUBAlignments(eqAlignment, subAlignment);
