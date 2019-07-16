@@ -32,16 +32,23 @@ import net.didion.jwnl.JWNLException;
 import utilities.AlignmentOperations;
 import utilities.StringUtilities;
 
+/**
+ * Evaluates the alignment combination method Average Aggregation in the OAEI 2011 dataset.
+ * The input alignments created by the individual matchers reside in predefined folders and the output from the main method is
+ * a set of alignment files (RDF/XML) at different confidence thresholds (0.0-1.0) and evaluation scores printed to Excel files.
+ * @author audunvennesland
+ *
+ */
 public class EvalAverageAggregationCombinationOAEI {
 	
 
 	final static String DATASET = "OAEI2011";
 	
-	static File SOURCE_ONTO = null;
-	static File TARGET_ONTO = null;
-	static String REFERENCE_ALIGNMENT_EQ = null;
-	static String REFERENCE_ALIGNMENT_SUB = null;
-	static String REFERENCE_ALIGNMENT_EQ_AND_SUB = null;
+	static File source_onto = null;
+	static File target_onto = null;
+	static String reference_alignment_eq = null;
+	static String reference_alignment_sub = null;
+	static String reference_alignment_eq_and_sub = null;
 	static Date date = Calendar.getInstance().getTime();
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, OWLOntologyCreationException, JWNLException, IOException {
@@ -57,10 +64,6 @@ public class EvalAverageAggregationCombinationOAEI {
 		URIAlignment refalign_EQ_AND_SUB = null;
 		URIAlignment refalign_EQ = null;
 		URIAlignment refalign_SUB = null;
-		URIAlignment eq_alignments = null;
-		URIAlignment nda_eq_alignment = null;
-		URIAlignment noMismatchEQAlignment = null;
-		URIAlignment sub_alignment = null;
 		URIAlignment mergedEQAndSubAlignment = null;
 		URIAlignment nonConflictedMergedAlignment = null;
 		URIAlignment eqOnly = null;
@@ -73,16 +76,16 @@ public class EvalAverageAggregationCombinationOAEI {
 
 			sourceOntologyFile = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + ontos[i] + "/" + ontos[i] + "-" + ontos[i].substring(0, 3) + ".rdf");
 			targetOntologyFile = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + ontos[i] + "/" + ontos[i] + "-" + ontos[i].substring(3, ontos[i].length()) + ".rdf");
-			REFERENCE_ALIGNMENT_EQ_AND_SUB ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQ_SUB.rdf";
-			REFERENCE_ALIGNMENT_EQ ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQUIVALENCE.rdf";
-			REFERENCE_ALIGNMENT_SUB ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-SUBSUMPTION.rdf";
+			reference_alignment_eq_and_sub ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQ_SUB.rdf";
+			reference_alignment_eq ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQUIVALENCE.rdf";
+			reference_alignment_sub ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-SUBSUMPTION.rdf";
 			
 			EQ_folder = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/EQ";
 			SUB_folder = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/SUB";
 			aparser = new AlignmentParser(0);
-			refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_EQ_AND_SUB)));
-			refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_EQ)));
-			refalign_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(REFERENCE_ALIGNMENT_SUB)));
+			refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq_and_sub)));
+			refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq)));
+			refalign_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_sub)));
 			
 			//put all EQ alignments in the EQ_folder into an ArrayList after enforcing 1-1 relations and removing mismatches
 			folder = new File(EQ_folder);
