@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -51,7 +50,6 @@ import org.semanticweb.owl.align.AlignmentException;
 
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
-import fr.inrialpes.exmo.align.impl.eval.DiffEvaluator;
 import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import utilities.StringUtilities;
@@ -59,47 +57,11 @@ import utilities.StringUtilities;
 
 
 /**
+ * A set of utility methods for evaluating alignments against a reference alignment. 
  * @author audunvennesland
- * 9. apr. 2017 
+ *
  */
 public class Evaluator {
-
-	/**
-	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN)
-	 * @param inputAlignmentFileName
-	 * @param referenceAlignmentFileName
-	 * @throws AlignmentException
-	 * @throws URISyntaxException
-	 */
-	public static void evaluateSingleAlignment (String inputAlignmentFileName, String referenceAlignmentFileName) throws AlignmentException, URISyntaxException {
-
-		AlignmentParser refAlignParser = new AlignmentParser(0);
-		AlignmentParser evalAlignParser = new AlignmentParser(1);
-
-		Alignment referenceAlignment = refAlignParser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignmentFileName)));
-		BasicAlignment inputAlignment = (BasicAlignment) evalAlignParser.parse(new URI(StringUtilities.convertToFileURL(inputAlignmentFileName)));
-
-		Properties p = new Properties();
-		PRecEvaluator eval = new PRecEvaluator(referenceAlignment, inputAlignment);
-
-		eval.eval(p);
-
-		System.out.println("------------------------------");
-		System.out.println("Evaluator scores for " + inputAlignmentFileName);
-		System.out.println("------------------------------");
-		System.out.println("F-measure: " + eval.getResults().getProperty("fmeasure").toString());
-		System.out.println("Precision: " + eval.getResults().getProperty("precision").toString());
-		System.out.println("Recall: " + eval.getResults().getProperty("recall").toString());
-
-		System.out.println("True positives (TP): " + eval.getResults().getProperty("true positive").toString());
-
-		int fp = eval.getFound() - eval.getCorrect();
-		System.out.println("False positives (FP): " + fp);
-		int fn = eval.getExpected() - eval.getCorrect();
-		System.out.println("False negatives (FN): " + fn);
-		System.out.println("\n");
-
-	}
 	
 
 	/**
@@ -137,51 +99,16 @@ public class Evaluator {
 
 	}
 	
-	public static void evaluateSingleAlignmentDiff (URIAlignment inputAlignment, String referenceAlignmentFileName) throws AlignmentException, URISyntaxException, IOException {
-		
-		AlignmentParser refAlignParser = new AlignmentParser(0);
-
-		Alignment referenceAlignment = refAlignParser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignmentFileName)));
-
-		Properties p = new Properties();
-		
-		PRecEvaluator eval = new PRecEvaluator(referenceAlignment, inputAlignment);
-		eval.eval(p);
-
-		System.out.println("------------------------------");
-		System.out.println("Evaluator scores for " + inputAlignment.getType());
-		System.out.println("------------------------------");
-		System.out.println("F-measure: " + eval.getResults().getProperty("fmeasure").toString());
-		System.out.println("Precision: " + eval.getResults().getProperty("precision").toString());
-		
-		
-		DiffEvaluator evalDiff = new DiffEvaluator(referenceAlignment, inputAlignment);
-		//eval.eval(p);
-		evalDiff.diff();
-		
-		System.out.println("Number of true positives: " + evalDiff.getTruePositive().size() + ", Number of false positives: " + evalDiff.getFalsePositive().size() + ", Number of false negatives: " + evalDiff.getFalseNegative().size());
-		
-		
-		File outputFile = new File("./files/test.txt");
-		
-		PrintWriter writer = new PrintWriter(
-				new BufferedWriter(
-						new FileWriter(outputFile)), true); 
-		
-		
-		eval.write(writer);
-		
-		
-	}
-	
-	
 	/**
-	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN)
-	 * @param inputAlignmentFileName
-	 * @param referenceAlignmentFileName
+	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN) to both console and file.
+	 * @param alignmentName a given name that will be printed in the evaluation summary
+	 * @param inputAlignment the alignment to evaluate
+	 * @param referenceAlignmentFileName the reference alignment the input alignment is evaluated against.
+	 * @param output a path to a file where the evaluation summary is printed
 	 * @throws AlignmentException
 	 * @throws URISyntaxException
-	 * @throws IOException 
+	 * @throws IOException
+	   Jul 16, 2019
 	 */
 	public static void evaluateSingleAlignment (String alignmentName, Alignment inputAlignment, String referenceAlignmentFileName, String output) throws AlignmentException, URISyntaxException, IOException {
 
@@ -235,12 +162,15 @@ public class Evaluator {
 	}
 	
 	/**
-	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN) to both console and file
-	 * @param inputAlignmentFileName
-	 * @param referenceAlignmentFileName
+	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN) to both console and file.
+	 * @param alignmentName a given name that will be printed in the evaluation summary
+	 * @param inputAlignment the URIAlignment to evaluate
+	 * @param referenceAlignmentFileName the reference alignment the input alignment is evaluated against.
+	 * @param output a path to a file where the evaluation summary is printed
 	 * @throws AlignmentException
 	 * @throws URISyntaxException
-	 * @throws IOException 
+	 * @throws IOException
+	   Jul 16, 2019
 	 */
 	public static void evaluateSingleAlignment (String alignmentName, URIAlignment inputAlignment, String referenceAlignmentFileName, String output) throws AlignmentException, URISyntaxException, IOException {
 
@@ -331,7 +261,7 @@ public class Evaluator {
 	}
 	
 	/**
-	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN)
+	 * Evaluates a single (basic) alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN) to console.
 	 * @param inputAlignmentFileName
 	 * @param referenceAlignmentFileName
 	 * @throws AlignmentException
@@ -340,10 +270,8 @@ public class Evaluator {
 	public static void evaluateSingleAlignment (BasicAlignment inputAlignment, String referenceAlignmentFileName) throws AlignmentException, URISyntaxException {
 
 		AlignmentParser refAlignParser = new AlignmentParser(0);
-		AlignmentParser evalAlignParser = new AlignmentParser(1);
 
 		Alignment referenceAlignment = refAlignParser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignmentFileName)));
-		//BasicAlignment inputAlignment = (BasicAlignment) evalAlignParser.parse(new URI(StringUtilities.convertToFileURL(inputAlignmentFileName)));
 
 		Properties p = new Properties();
 		PRecEvaluator eval = new PRecEvaluator(referenceAlignment, inputAlignment);
@@ -561,14 +489,13 @@ public class Evaluator {
 
 	
 	/**
-	 * Evaluates a single matcher at various thresholds
-	 * @param alignmentsFolder the folder holding all alignments produced by the matcher
-	 * @param referenceAlignment the reference alignment to which the matcher results are measured against
-	 * @param outputPath an output path for the produced Excel
-	 * @param datasetName
+	 * Evaluates a single matcher at different thresholds and prints the evaluation summary and a chart to Excel.
+	 * @param evaluationMap a map holding the confidence threshold as key and an evaluation score object (including precision, recall and f-measure) as value.
+	 * @param output the excel file presenting the evaluation summary along with a representative chart.
 	 * @throws AlignmentException
 	 * @throws URISyntaxException
-	 * @throws IOException 
+	 * @throws IOException
+	   Jul 16, 2019
 	 */
 	public static void evaluateSingleMatcherThresholds (Map<String, EvaluationScore> evaluationMap, String output) throws AlignmentException, URISyntaxException, IOException {
 		
@@ -696,60 +623,6 @@ public class Evaluator {
 		wb.write(fileOut);
 		fileOut.close();
 		
-
-	}
-
-
-	public static void main(String[] args) throws AlignmentException, URISyntaxException, IOException {
-		
-		/* TRYING DIFF EVALUATOR */
-		File singleAlignment = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ALIGNMENTS/PROFILEWEIGHT/MERGED_SIGMOID/PROFILEWEIGHT_MERGED_SIGMOIDATMONTO-AIRM.rdf");
-		AlignmentParser parser = new AlignmentParser();
-		URIAlignment alignmentFile = (URIAlignment) parser.parse(singleAlignment.toURI().toString());
-		String refalign = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
-		evaluateSingleAlignmentDiff(alignmentFile, refalign);
-
-//		/* RUN COMPLETE EVALUATION */
-//		String alignmentFolder = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/MISMATCHDETECTION/ALIGNMENTS";
-//		String refalign = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-//		String outputEvaluationFile = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/MISMATCHDETECTION/EVALUATION-INITIALALIGNMENTS.xslx";
-//		String datasetName = "ATM-MISMATCH-EQUIVALENCE";
-//		
-//		runCompleteEvaluation(alignmentFolder, refalign, outputEvaluationFile, datasetName);
-
-
-		/* EVALUATE SINGLE ALIGNMENT */
-//					File singleAlignment = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/HARMONY_WEIGHTED/SUBSUMPTION/ComputedHarmonyAlignment_WEIGHTED.rdf");
-//					AlignmentParser parser = new AlignmentParser();
-//					URIAlignment alignmentFile = (URIAlignment) parser.parse(singleAlignment.toURI().toString());
-//					
-//					String refalign = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
-//					String output = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/HARMONY_WEIGHTED/SUBSUMPTION/eval_HARMONY_WEIGHTED.txt";
-//					evaluateSingleAlignment(alignmentFile, refalign, output);
-					//String outputEvaluationFile = "./files/_PHD_EVALUATION/ATMONTO-AIRM/EVALUATION/ATMONTO-AIRM_STROMA";
-					//String datasetName = "ATMONTO-AIRM";
-
-		/* EVALUATE A FOLDER OF ALIGNMENT FILES AND PRODUCE EXCEL */
-		//			String onto1 = "303";
-		//			String onto2 = "304";
-		//			String type = "SUB";
-		//			String alignmentFolder = "./files/_PHD_EVALUATION/OAEI2011/ALL_ALIGNMENTS/"+onto1+onto2+"/"+type;
-		//			String refalign = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/"+onto1+onto2+"/"+onto1+"-"+onto2+"-"+type+".rdf";
-		//			String outputEvaluationFile = "./files/_PHD_EVALUATION/OAEI2011/ALL_ALIGNMENTS/"+onto1+onto2+"/EVALUATION/OAEI2011_"+onto1+onto2+"_ALL_"+type+"_06.xslx";
-		//			String datasetName = "OAEI2011-"+onto1+onto2+type;
-		
-	
-		
-		/*String alignmentFolder = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/COMPETITION/EVALUATION_COMPETITION/SUBSUMPTION_EQUIVALENCE";
-		String refalign = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
-		String outputEvaluationFile = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/COMPETITION/EVALUATION_COMPETITION/SUBSUMPTION/BIBFRAME-SCHEMAORG-EVALUATION-SUBSUMPTION_EQUIVALENCE.xslx";
-		String datasetName = "BIBFRAME-SCHEMAORG-SUBSUMPTION_EQUIVALENCE";
-		runCompleteEvaluation(alignmentFolder, refalign, outputEvaluationFile, datasetName);*/
-		
-//		evaluateAlignmentFolder(alignmentFolder,refalign);
-		
-//		evaluateSingleAlignment(singleAlignment, refalign);
-
 
 	}
 

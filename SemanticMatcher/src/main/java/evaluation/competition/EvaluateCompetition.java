@@ -17,23 +17,26 @@ import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import utilities.StringUtilities;
 
+/**
+ * Evaluates the alignments produced by BLOOMS (Wikipedia and WordNet version), STROMA and S-Match against the reference alignments in the ATM, Cross-domain and OAEI 2011 datasets.
+ * @author audunvennesland
+ *
+ */
 public class EvaluateCompetition {
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, IOException {		
 		
+		//ATMONTO-AIRM || BIBFRAME-SCHEMAORG
 		String dataset = "BIBFRAME-SCHEMAORG";
 		
 		/* IF OAEI 2011 */
 //		String onto1 = "303";
 //		String onto2 = "304";
-//		
 //		String referenceAlignment = "./files/_PHD_EVALUATION/"+dataset+"/REFALIGN/"+onto1+onto2+"/"+onto1+"-"+onto2+"-EQ_SUB.rdf";
 //		String alignmentFolder = "./files/_PHD_EVALUATION/"+dataset+"/ALIGNMENTS/"+onto1+onto2+"/EVALUATION_COMPETITION/SUBSUMPTION_EQUIVALENCE";
 		
-		//_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf
 		String referenceAlignment = "./files/_PHD_EVALUATION/"+dataset+"/REFALIGN/ReferenceAlignment-"+dataset+"-EQ-SUB.rdf";
 		
-		//_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/COMPETITION/EVALUATION_COMPETITION/SUBSUMPTION_EQUIVALENCE
 		String alignmentFolder = "./files/_PHD_EVALUATION/"+dataset+"/ALIGNMENTS/COMPETITION/EVALUATION_COMPETITION/SUBSUMPTION_EQUIVALENCE";
 		
 		File folder = new File(alignmentFolder);

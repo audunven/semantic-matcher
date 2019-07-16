@@ -50,16 +50,22 @@ import subsumptionmatching.DefinitionSubsumptionMatcher;
 import subsumptionmatching.LexicalSubsumptionMatcher;
 import utilities.StringUtilities;
 
+/**
+ * Runs a complete evaluation of either equivalence or subsumption matchers using either no weight parameters or the scores from the ontology profiling in a simple
+ * weighting scheme (initial confidence multiplied by the profile score).
+ * @author audunvennesland
+ *
+ */
 public class EvalAllMatchersBasicWeight {
 
 	//ATMONTO-AIRM || BIBFRAME-SCHEMAORG || OAEI2011
-	final static String dataset = "OAEI2011";
+	final static String DATASET = "OAEI2011";
 
 	//EQUIVALENCE || SUBSUMPTION
-	final static String relationType = "SUBSUMPTION";
+	final static String RELATIONTYPE = "SUBSUMPTION";
 
 	//WEIGHT || NOWEIGHT
-	final static String weight = "NOWEIGHT";
+	final static String WEIGHT = "NOWEIGHT";
 	static boolean weighted;
 
 	//IF OAEI ONLY
@@ -82,35 +88,35 @@ public class EvalAllMatchersBasicWeight {
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException, JWNLException {
 
-		if (dataset.equalsIgnoreCase("ATMONTO-AIRM")) {
-			ontoFile1 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/ATMOntoCoreMerged.owl");
-			ontoFile2 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/airm-mono.owl");
+		if (DATASET.equalsIgnoreCase("ATMONTO-AIRM")) {
+			ontoFile1 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/ATMOntoCoreMerged.owl");
+			ontoFile2 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/airm-mono.owl");
 			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
-			referenceAlignment = "./files/_PHD_EVALUATION/"+dataset+"/REFALIGN/ReferenceAlignment-"+dataset+"-" + relationType + ".rdf";
+			referenceAlignment = "./files/_PHD_EVALUATION/"+DATASET+"/REFALIGN/ReferenceAlignment-"+DATASET+"-" + RELATIONTYPE + ".rdf";
 
-			storePath = "./files/_PHD_EVALUATION/"+dataset+"/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ relationType + "_" +weight;
+			storePath = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ RELATIONTYPE + "_" +WEIGHT;
 			evalPath = storePath + "/EXCEL";
 
 
-		} else if (dataset.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
+		} else if (DATASET.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
 
-			ontoFile1 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/bibframe.rdf");
-			ontoFile2 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/schema-org.owl");
+			ontoFile1 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/bibframe.rdf");
+			ontoFile2 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/schema-org.owl");
 			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
-			referenceAlignment = "./files/_PHD_EVALUATION/"+dataset+"/REFALIGN/ReferenceAlignment-"+dataset+"-" + relationType + ".rdf";
+			referenceAlignment = "./files/_PHD_EVALUATION/"+DATASET+"/REFALIGN/ReferenceAlignment-"+DATASET+"-" + RELATIONTYPE + ".rdf";
 
-			storePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ relationType + "_" +weight;
+			storePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ RELATIONTYPE + "_" +WEIGHT;
 			evalPath = storePath + "/EXCEL";
 
 			
-		} else if (dataset.equalsIgnoreCase("OAEI2011")) {
+		} else if (DATASET.equalsIgnoreCase("OAEI2011")) {
 
 			ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + onto1+onto2 + "/" + onto1+onto2 + "-" + onto1 + ".rdf");
 			ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + onto1+onto2 + "/" + onto1+onto2 + "-" + onto2 + ".rdf");
-			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-			referenceAlignment ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + onto1+onto2 + "/" + onto1 + "-" + onto2 + "-" +relationType+".rdf";
+			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+			referenceAlignment ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + onto1+onto2 + "/" + onto1 + "-" + onto2 + "-" +RELATIONTYPE+".rdf";
 
-			storePath = "./files/_PHD_EVALUATION/OAEI2011/ALIGNMENTS/" + onto1+onto2+ "/INDIVIDUAL_ALIGNMENTS/"+ relationType + "_" +weight;
+			storePath = "./files/_PHD_EVALUATION/OAEI2011/ALIGNMENTS/" + onto1+onto2+ "/INDIVIDUAL_ALIGNMENTS/"+ RELATIONTYPE + "_" +WEIGHT;
 			evalPath = storePath + "/EXCEL";
 
 		}
@@ -126,7 +132,7 @@ public class EvalAllMatchersBasicWeight {
 
 
 
-		if (relationType.equals("EQUIVALENCE") && weight.equals("WEIGHT")) {
+		if (RELATIONTYPE.equals("EQUIVALENCE") && WEIGHT.equals("WEIGHT")) {
 
 			weighted = true;
 
@@ -144,19 +150,19 @@ public class EvalAllMatchersBasicWeight {
 			runWordEmbeddingEquivalenceMatcher(ontologyProfilingScores.get("cc"), weighted);
 
 			System.out.println("\nRunning Property Matcher (PM)");
-			runPropertyMatcher(ontologyProfilingScores.get("pf"), weighted);
+			runPropertyEquivalenceMatcher(ontologyProfilingScores.get("pf"), weighted);
 
 			System.out.println("\nRunning Graph Matcher (GM)");
-			runGraphMatcher(ontologyProfilingScores.get("sp"), weighted);
+			runGraphEquivalenceMatcher(ontologyProfilingScores.get("sp"), weighted);
 
 			System.out.println("\nRunning Lexical Matcher (LM)");
-			runLexicalMatcher(ontologyProfilingScores.get("lcw"), weighted);
+			runLexicalEquivalenceMatcher(ontologyProfilingScores.get("lcw"), weighted);
 
 			System.out.println("\nRunning Definitions Equivalence Matcher (DEM)");
 			runDefinitionEquivalenceMatcher(ontologyProfilingScores.get("cc"), weighted);
 		}
 
-		else if (relationType.equals("SUBSUMPTION") && weight.equalsIgnoreCase("WEIGHT")) {
+		else if (RELATIONTYPE.equals("SUBSUMPTION") && WEIGHT.equalsIgnoreCase("WEIGHT")) {
 
 			weighted = true;
 
@@ -183,7 +189,7 @@ public class EvalAllMatchersBasicWeight {
 			runDefinitionsSubsumptionMatcher(ontologyProfilingScores.get("dc"), weighted);						
 		}
 
-		if (relationType.equals("EQUIVALENCE") && weight.equalsIgnoreCase("NOWEIGHT")) {
+		if (RELATIONTYPE.equals("EQUIVALENCE") && WEIGHT.equalsIgnoreCase("NOWEIGHT")) {
 
 			weighted = false;
 
@@ -194,16 +200,16 @@ public class EvalAllMatchersBasicWeight {
 			runDefinitionEquivalenceMatcher(1.0, weighted);	
 
 			System.out.println("\nRunning Property Matcher (PM)");
-			runPropertyMatcher(1.0, weighted);
+			runPropertyEquivalenceMatcher(1.0, weighted);
 
 			System.out.println("\nRunning Graph Matcher (GM)");
-			runGraphMatcher(1.0, weighted);
+			runGraphEquivalenceMatcher(1.0, weighted);
 
 			System.out.println("\nRunning Lexical Matcher (LM)");
-			runLexicalMatcher(1.0, weighted);
+			runLexicalEquivalenceMatcher(1.0, weighted);
 			
 
-		}  else if (relationType.equals("SUBSUMPTION") && weight.equalsIgnoreCase("NOWEIGHT")) {
+		}  else if (RELATIONTYPE.equals("SUBSUMPTION") && WEIGHT.equalsIgnoreCase("NOWEIGHT")) {
 
 			weighted = false;
 
@@ -222,7 +228,16 @@ public class EvalAllMatchersBasicWeight {
 			
 	}
 	
-
+		/**
+		 * Runs the WordEmbeddingMatcher (WEM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runWordEmbeddingEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			
 			System.out.println("\nRunning the WEM matcher");
@@ -407,6 +422,16 @@ public class EvalAllMatchersBasicWeight {
 		}
 
 
+		/**
+		 * Runs the DefinitionEquivalenceMatcher (DEM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runDefinitionEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 						
 			System.out.println("\nRunning the DEM matcher");
@@ -582,7 +607,17 @@ public class EvalAllMatchersBasicWeight {
 
 		}
 
-		private static void runPropertyMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
+		/**
+		 * Runs the PropertyEquivalenceMatcher (PEM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
+		private static void runPropertyEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the PEM matcher");
 
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -755,7 +790,17 @@ public class EvalAllMatchersBasicWeight {
 		}
 
 
-		private static void runGraphMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
+		/**
+		 * Runs the GraphEquivalenceMatcher (GEM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
+		private static void runGraphEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			
 			System.out.println("\nRunning the GEM matcher");
 
@@ -961,8 +1006,17 @@ public class EvalAllMatchersBasicWeight {
 		}
 
 
-
-		private static void runLexicalMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException {
+		/**
+		 * Runs the LexicalEquivalenceMatcher (LEM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
+		private static void runLexicalEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException {
 			System.out.println("\nRunning the LEM matcher");
 
 			AlignmentParser aparser = new AlignmentParser(0);
@@ -1132,6 +1186,16 @@ public class EvalAllMatchersBasicWeight {
 		}
 
 
+		/**
+		 * Runs the CompoundMatcher (CM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runCompoundMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException {
 			System.out.println("\nRunning the CM matcher");
 
@@ -1251,6 +1315,16 @@ public class EvalAllMatchersBasicWeight {
 
 		}
 
+		/**
+		 * Runs the ContextSubsumptionMatcher (CSM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runContextSubsumptionMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the CSM matcher");
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -1374,6 +1448,16 @@ public class EvalAllMatchersBasicWeight {
 		}
 
 
+		/**
+		 * Runs the LexicalSubsumptionMatcher (LSM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runLexicalSubsumptionMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the LSM matcher");
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -1496,6 +1580,16 @@ public class EvalAllMatchersBasicWeight {
 
 		}
 
+		/**
+		 * Runs the DefinitionSubsumptionMatcher (DSM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param weight the weight (if running a weighted approach) imposed on the initial confidence values given by the matcher.
+		 * @param weighted whether or not a weight should be applied.
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runDefinitionsSubsumptionMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the DSM matcher");
 			

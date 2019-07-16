@@ -27,12 +27,11 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import alignmentcombination.NaiveDescendingExtraction;
-import equivalencematching.DefinitionEquivalenceMatcher;
-import equivalencematching.GraphEquivalenceMatcher;
-import equivalencematching.LexicalEquivalenceMatcher;
+import equivalencematching.DefinitionEquivalenceMatcherSigmoid;
+import equivalencematching.GraphEquivalenceMatcherSigmoid;
 import equivalencematching.LexicalEquivalenceMatcherSigmoid;
-import equivalencematching.PropertyEquivalenceMatcher;
-import equivalencematching.WordEmbeddingMatcher;
+import equivalencematching.PropertyEquivalenceMatcherSigmoid;
+import equivalencematching.WordEmbeddingMatcherSigmoid;
 import evaluation.general.EvaluationScore;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
@@ -47,21 +46,26 @@ import net.didion.jwnl.JWNLException;
 import ontologyprofiling.OntologyProfiler;
 import subsumptionmatching.CompoundMatcher;
 import subsumptionmatching.ContextSubsumptionMatcher;
-import subsumptionmatching.DefinitionSubsumptionMatcher;
 import subsumptionmatching.DefinitionSubsumptionMatcherSigmoid;
 import subsumptionmatching.LexicalSubsumptionMatcher;
 import utilities.StringUtilities;
 
+/**
+ * Runs a complete evaluation of either equivalence or subsumption matchers using the scores from the ontology profiling as weights on the initial confidence values produced by the matchers.
+ * A sigmoid function is used to calculate the final confidence values.
+ * @author audunvennesland
+ *
+ */
 public class EvalAllMatchersSigmoid {
 
 	//ATMONTO-AIRM || BIBFRAME-SCHEMAORG || OAEI2011
-	final static String dataset = "ATMONTO-AIRM";
+	final static String DATASET = "ATMONTO-AIRM";
 
 	//EQUIVALENCE || SUBSUMPTION
-	final static String relationType = "SUBSUMPTION";
+	final static String RELATIONTYPE = "SUBSUMPTION";
 
 	//WEIGHT || NOWEIGHT || SIGMOID
-	final static String weightType = "SIGMOID";
+	final static String WEIGHTTYPE = "SIGMOID";
 	static boolean weighted;
 	
 	//PARAMETERS FOR THE SIGMOID WEIGHT CALCULATION
@@ -77,7 +81,7 @@ public class EvalAllMatchersSigmoid {
 	static File ontoFile2 = null;
 	static String wiki_vectorFile_normal = null;
 
-	final static String prefix = "file:";
+	//final static String PREFIX = "file:";
 
 	static String storePath = null;
 	static String evalPath = null;
@@ -89,33 +93,33 @@ public class EvalAllMatchersSigmoid {
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException, JWNLException {
 
-		if (dataset.equalsIgnoreCase("ATMONTO-AIRM")) {
-			ontoFile1 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/ATMOntoCoreMerged.owl");
-			ontoFile2 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/airm-mono.owl");
+		if (DATASET.equalsIgnoreCase("ATMONTO-AIRM")) {
+			ontoFile1 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/ATMOntoCoreMerged.owl");
+			ontoFile2 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/airm-mono.owl");
 			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
-			referenceAlignment = "./files/_PHD_EVALUATION/"+dataset+"/REFALIGN/ReferenceAlignment-"+dataset+"-" + relationType + ".rdf";
+			referenceAlignment = "./files/_PHD_EVALUATION/"+DATASET+"/REFALIGN/ReferenceAlignment-"+DATASET+"-" + RELATIONTYPE + ".rdf";
 
-			storePath = "./files/_PHD_EVALUATION/"+dataset+"/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ relationType + "_" +weightType;
+			storePath = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ RELATIONTYPE + "_" +RELATIONTYPE;
 			evalPath = storePath + "/EXCEL";
 
-		} else if (dataset.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
+		} else if (DATASET.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
 
-			ontoFile1 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/bibframe.rdf");
-			ontoFile2 = new File("./files/_PHD_EVALUATION/"+dataset+"/ONTOLOGIES/schema-org.owl");
+			ontoFile1 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/bibframe.rdf");
+			ontoFile2 = new File("./files/_PHD_EVALUATION/"+DATASET+"/ONTOLOGIES/schema-org.owl");
 			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
-			referenceAlignment = "./files/_PHD_EVALUATION/"+dataset+"/REFALIGN/ReferenceAlignment-"+dataset+"-" + relationType + ".rdf";
+			referenceAlignment = "./files/_PHD_EVALUATION/"+DATASET+"/REFALIGN/ReferenceAlignment-"+DATASET+"-" + RELATIONTYPE + ".rdf";
 
-			storePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ relationType + "_" +weightType;
+			storePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/"+ RELATIONTYPE + "_" +WEIGHTTYPE;
 			evalPath = storePath + "/EXCEL";
 					
-		} else if (dataset.equalsIgnoreCase("OAEI2011")) {
+		} else if (DATASET.equalsIgnoreCase("OAEI2011")) {
 
 			ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + onto1+onto2 + "/" + onto1+onto2 + "-" + onto1 + ".rdf");
 			ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + onto1+onto2 + "/" + onto1+onto2 + "-" + onto2 + ".rdf");
 			wiki_vectorFile_normal = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-			referenceAlignment ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + onto1+onto2 + "/" + onto1 + "-" + onto2 + "-" +relationType+".rdf";
+			referenceAlignment ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + onto1+onto2 + "/" + onto1 + "-" + onto2 + "-" +RELATIONTYPE+".rdf";
 
-			storePath = "./files/_PHD_EVALUATION/OAEI2011/ALIGNMENTS/" + onto1+onto2+ "/INDIVIDUAL_ALIGNMENTS/"+ relationType + "_" +weightType;
+			storePath = "./files/_PHD_EVALUATION/OAEI2011/ALIGNMENTS/" + onto1+onto2+ "/INDIVIDUAL_ALIGNMENTS/"+ RELATIONTYPE + "_" +WEIGHTTYPE;
 			evalPath = storePath + "/EXCEL";
 		}
 
@@ -129,7 +133,7 @@ public class EvalAllMatchersSigmoid {
 				file.delete();
 		
 
-		if (relationType.equals("EQUIVALENCE") && weightType.equals("SIGMOID")) {
+		if (RELATIONTYPE.equals("EQUIVALENCE") && WEIGHTTYPE.equals("SIGMOID")) {
 
 			weighted = true;
 
@@ -147,19 +151,19 @@ public class EvalAllMatchersSigmoid {
 			runWordEmbeddingEquivalenceMatcher(ontologyProfilingScores.get("cc"), weighted, slope, rangeMin, rangeMax);
 
 			System.out.println("\nRunning Property Matcher (PM)");
-			runPropertyMatcher(ontologyProfilingScores.get("pf"), weighted, slope, rangeMin, rangeMax);
+			runPropertyEquivalenceMatcher(ontologyProfilingScores.get("pf"), weighted, slope, rangeMin, rangeMax);
 
 			System.out.println("\nRunning Graph Matcher (GM)");
-			runGraphMatcher(ontologyProfilingScores.get("sp"), weighted, slope, rangeMin, rangeMax);
+			runGraphEquivalenceMatcher(ontologyProfilingScores.get("sp"), weighted, slope, rangeMin, rangeMax);
 
 			System.out.println("\nRunning Lexical Matcher (LM)");
-			runLexicalMatcher(ontologyProfilingScores.get("lcw"), weighted, slope, rangeMin, rangeMax);
+			runLexicalEquivalenceMatcher(ontologyProfilingScores.get("lcw"), weighted, slope, rangeMin, rangeMax);
 
 			System.out.println("\nRunning Definitions Equivalence Matcher (DEM)");
 			runDefinitionEquivalenceMatcher(ontologyProfilingScores.get("cc"), weighted, slope, rangeMin, rangeMax);
 		}
 
-		else if (relationType.equals("SUBSUMPTION") && weightType.equalsIgnoreCase("SIGMOID")) {
+		else if (RELATIONTYPE.equals("SUBSUMPTION") && WEIGHTTYPE.equalsIgnoreCase("SIGMOID")) {
 
 			weighted = true;
 
@@ -186,7 +190,7 @@ public class EvalAllMatchersSigmoid {
 			runDefinitionsSubsumptionMatcher(ontologyProfilingScores.get("dc"), weighted, slope, rangeMin, rangeMax);						
 		}
 
-		if (relationType.equals("EQUIVALENCE") && weightType.equalsIgnoreCase("NOWEIGHT")) {
+		if (RELATIONTYPE.equals("EQUIVALENCE") && WEIGHTTYPE.equalsIgnoreCase("NOWEIGHT")) {
 
 			weighted = false;
 
@@ -197,16 +201,16 @@ public class EvalAllMatchersSigmoid {
 			runDefinitionEquivalenceMatcher(1.0, weighted, slope, rangeMin, rangeMax);	
 
 			System.out.println("\nRunning Property Matcher (PM)");
-			runPropertyMatcher(1.0, weighted, slope, rangeMin, rangeMax);
+			runPropertyEquivalenceMatcher(1.0, weighted, slope, rangeMin, rangeMax);
 
 			System.out.println("\nRunning Graph Matcher (GM)");
-			runGraphMatcher(1.0, weighted, slope, rangeMin, rangeMax);
+			runGraphEquivalenceMatcher(1.0, weighted, slope, rangeMin, rangeMax);
 
 			System.out.println("\nRunning Lexical Matcher (LM)");
-			runLexicalMatcher(1.0, weighted, slope, rangeMin, rangeMax);
+			runLexicalEquivalenceMatcher(1.0, weighted, slope, rangeMin, rangeMax);
 
 
-		}  else if (relationType.equals("SUBSUMPTION") && weightType.equalsIgnoreCase("NOWEIGHT")) {
+		}  else if (RELATIONTYPE.equals("SUBSUMPTION") && WEIGHTTYPE.equalsIgnoreCase("NOWEIGHT")) {
 
 			weighted = false;
 
@@ -226,6 +230,19 @@ public class EvalAllMatchersSigmoid {
 	}
 	
 
+		/**
+		 * Runs the WordEmbeddingMatcher (WEM) and produces alignments at thresholds 0.1-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runWordEmbeddingEquivalenceMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			
 			System.out.println("\nRunning the WEM matcher");
@@ -237,7 +254,7 @@ public class EvalAllMatchersSigmoid {
 			AlignmentParser aparser = new AlignmentParser(0);
 			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
 
-			AlignmentProcess a = new WordEmbeddingMatcher(onto1, onto2, wiki_vectorFile_normal, profileScore, slope, rangeMin, rangeMax);
+			AlignmentProcess a = new WordEmbeddingMatcherSigmoid(onto1, onto2, wiki_vectorFile_normal, profileScore, slope, rangeMin, rangeMax);
 			a.init(ontoFile1.toURI(), ontoFile2.toURI());
 
 			Properties params = new Properties();
@@ -411,6 +428,19 @@ public class EvalAllMatchersSigmoid {
 		}
 
 
+		/**
+		 * Runs the DefinitionEquivalenceMatcher (DEM) and produces alignments at thresholds 0.1-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runDefinitionEquivalenceMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 						
 			System.out.println("\nRunning the DEM matcher");
@@ -422,7 +452,7 @@ public class EvalAllMatchersSigmoid {
 			AlignmentParser aparser = new AlignmentParser(0);
 			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
 
-			AlignmentProcess a = new DefinitionEquivalenceMatcher(onto1, onto2, wiki_vectorFile_normal, profileScore, slope, rangeMin, rangeMax);
+			AlignmentProcess a = new DefinitionEquivalenceMatcherSigmoid(onto1, onto2, wiki_vectorFile_normal, profileScore, slope, rangeMin, rangeMax);
 			a.init(ontoFile1.toURI(), ontoFile2.toURI());
 			Properties params = new Properties();
 			params.setProperty("", "");
@@ -586,7 +616,20 @@ public class EvalAllMatchersSigmoid {
 
 		}
 
-		private static void runPropertyMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
+		/**
+		 * Runs the PropertyEquivalenceMatcher (PEM) and produces alignments at thresholds 0.1-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
+		private static void runPropertyEquivalenceMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the PEM matcher");
 
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -597,7 +640,7 @@ public class EvalAllMatchersSigmoid {
 			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
 
 			
-			AlignmentProcess a = new PropertyEquivalenceMatcher(onto1, onto2, profileScore, slope, rangeMin, rangeMax);
+			AlignmentProcess a = new PropertyEquivalenceMatcherSigmoid(onto1, onto2, profileScore, slope, rangeMin, rangeMax);
 			a.init(ontoFile1.toURI(), ontoFile2.toURI());
 			Properties params = new Properties();
 			params.setProperty("", "");
@@ -761,7 +804,20 @@ public class EvalAllMatchersSigmoid {
 		}
 
 
-		private static void runGraphMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
+		/**
+		 * Runs the GraphEquivalenceMatcher (GEM) and produces alignments at thresholds 0.1-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
+		private static void runGraphEquivalenceMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			
 			System.out.println("\nRunning the GEM matcher");
 
@@ -803,7 +859,7 @@ public class EvalAllMatchersSigmoid {
 			AlignmentParser aparser = new AlignmentParser(0);
 			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
 
-			AlignmentProcess a = new GraphEquivalenceMatcher(ontologyParameter1, ontologyParameter2, db, profileScore, slope, rangeMin, rangeMax);
+			AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(ontologyParameter1, ontologyParameter2, db, profileScore, slope, rangeMin, rangeMax);
 
 			a.init(ontoFile1.toURI(), ontoFile2.toURI());
 			Properties params = new Properties();
@@ -967,8 +1023,20 @@ public class EvalAllMatchersSigmoid {
 		}
 
 
-
-		private static void runLexicalMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
+		/**
+		 * Runs the LexicalEquivalenceMatcher (LEM) and produces alignments at thresholds 0.1-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
+		private static void runLexicalEquivalenceMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the LEM matcher");
 			
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -1142,6 +1210,19 @@ public class EvalAllMatchersSigmoid {
 		}
 
 
+		/**
+		 * Runs the CompoundMatcher (CM) and produces alignments at thresholds 0.1-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runCompoundMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException {
 			System.out.println("\nRunning the CM matcher");
 
@@ -1261,6 +1342,19 @@ public class EvalAllMatchersSigmoid {
 
 		}
 
+		/**
+		 * Runs the ContextSubsumptionMatcher (CSM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runContextSubsumptionMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the CSM matcher");
 			OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -1384,7 +1478,19 @@ public class EvalAllMatchersSigmoid {
 		}
 
 
-
+		/**
+		 * Runs the LexicalSubsumptionMatcher (LSM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runLexicalSubsumptionMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException {
 			System.out.println("\nRunning the LSM matcher");
 			
@@ -1504,6 +1610,19 @@ public class EvalAllMatchersSigmoid {
 
 		}
 
+		/**
+		 * Runs the DefinitionsSubsumptionMatcher (DSM) and produces alignments at thresholds 0.0-1.0 along with an evaluation summary in Excel.
+		 * @param profileScore the score obtained from the ontology profiling process
+		 * @param weighted weighted whether or not a weight should be applied.
+		 * @param slope a slope parameter used in the sigmoid function
+		 * @param rangeMin the min value of the confidence transformation
+		 * @param rangeMax the max value of the confidence transformation
+		 * @throws AlignmentException
+		 * @throws URISyntaxException
+		 * @throws IOException
+		 * @throws OWLOntologyCreationException
+		   Jul 16, 2019
+		 */
 		private static void runDefinitionsSubsumptionMatcher(double profileScore, boolean weighted, int slope, double rangeMin, double rangeMax) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
 			System.out.println("\nRunning the DSM matcher");
 			

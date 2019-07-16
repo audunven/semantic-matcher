@@ -2,14 +2,11 @@ package evaluation.mismatchdetection;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
@@ -19,29 +16,32 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import de.unima.alcomox.exceptions.AlcomoException;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
-import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
-import mismatchdetection.IncoherenceDetection;
 import mismatchdetection.StructureMismatch;
 import net.didion.jwnl.JWNLException;
 import utilities.StringUtilities;
 
+/**
+ * Produces an evaluation summary of the mismatch detection strategies Concept Scope Mismatch, Structure Mismatch Detection and Domain Mismatch Detection and stores their refined alignments.
+ * @author audunvennesland
+ *
+ */
 public class EvalMismatchDetection {
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, AlcomoException, OWLOntologyCreationException, JWNLException, IOException {
 
 
 		//import all alignments in folder
-		String folderPath = "./files/KEOD18/datasets_refined/d6/combination/equivalence";
-		String evalPath = "./files/KEOD18/datasets_refined/d6/MismatchDetection";
-		String referenceAlignmentPath = "./files/KEOD18/datasets_refined/d6/refalign/ref-align_aixm-obstacle-airm-mono-Equivalence.rdf";
+		String folderPath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION";
+		String evalPath = "./files";
+		String referenceAlignmentPath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
 
 		//ontologies involved
-		String onto1File = "./files/KEOD18/datasets_refined/d6/ontologies/aixm_obstacle.owl";
-		String onto2File = "./files/KEOD18/datasets_refined/d6/ontologies/airm-mono.owl";
+		String onto1File = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl";
+		String onto2File = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl";
 
 		//get the reference alignment
 		AlignmentParser aparser = new AlignmentParser(0);

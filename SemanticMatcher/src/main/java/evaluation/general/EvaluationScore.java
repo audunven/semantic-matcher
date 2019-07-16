@@ -1,5 +1,10 @@
 package evaluation.general;
 
+/**
+ * An object representing an evaluation score.
+ * @author audunvennesland
+ * @see Evalutor
+ */
 public class EvaluationScore {
 	
 	private double precision;

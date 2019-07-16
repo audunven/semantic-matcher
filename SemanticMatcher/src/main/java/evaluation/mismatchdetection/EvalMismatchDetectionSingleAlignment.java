@@ -2,14 +2,11 @@ package evaluation.mismatchdetection;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
@@ -21,17 +18,20 @@ import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
-import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
-import mismatchdetection.IncoherenceDetection;
 import mismatchdetection.StructureMismatch;
 import net.didion.jwnl.JWNLException;
 import utilities.StringUtilities;
 
+/**
+ * Produces an evaluation summary of running the mismatch detection strategies Concept Scope Mismatch Detection, Structure Mismatch Detection and Domain Mismatch Detection on a single alignment.
+ * @author audunvennesland
+ *
+ */
 public class EvalMismatchDetectionSingleAlignment {
 
 	public static void main(String[] args) throws AlignmentException, URISyntaxException, AlcomoException, OWLOntologyCreationException, JWNLException, IOException {
