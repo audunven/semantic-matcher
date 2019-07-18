@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
@@ -23,7 +22,6 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
-import graph.Graph;
 //import it.uniroma1.lcl.babelnet.BabelNet;
 import net.didion.jwnl.JWNLException;
 //import utilities.BabelNetOperations;
@@ -43,17 +41,17 @@ public class OntologyProfiler {
 	public static void main(String[] args) throws OWLOntologyCreationException, URISyntaxException, OntowrapException,
 	FileNotFoundException, JWNLException, IOException {
 
-//				String onto1Path = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl";
-//				String onto2Path = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl";
-//				String corpus = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
+		String onto1Path = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl";
+		String onto2Path = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl";
+		String corpus = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
 
 //		String onto1Path = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf";
 //		String onto2Path = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl";
 //		String corpus = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 		
-		String onto1Path = "./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-301.rdf";
-		String onto2Path = "./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-304.rdf";
-		String corpus = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+//		String onto1Path = "./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-301.rdf";
+//		String onto2Path = "./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301304/301304-304.rdf";
+//		String corpus = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 
 		System.out.println("Starting the Ontology Profiler");
 

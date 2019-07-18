@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +13,6 @@ import java.util.Set;
 import org.neo4j.graphalgo.GraphAlgoFactory;
 import org.neo4j.graphalgo.PathFinder;
 import org.neo4j.graphdb.Direction;
-import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -24,20 +22,21 @@ import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.ResourceIterable;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.graphdb.traversal.Evaluators;
 import org.neo4j.graphdb.traversal.TraversalDescription;
 import org.neo4j.graphdb.traversal.Traverser;
-import org.semanticweb.owlapi.apibinding.OWLManager;
-import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import utilities.ISub;
 import utilities.OntologyOperations;
-import utilities.StringUtilities;
 
+/**
+ * Implementation of methods using the Neo4J DB to create and navigate ontology graphs. 
+ * TODO: The code needs significant re-factoring and some methods are spread
+ * @author audunvennesland
+ *
+ */
 public class Graph {
 
 	static GraphDatabaseService db;
@@ -50,6 +49,7 @@ public class Graph {
 	 * This label represents the graph/ontology to process
 	 */
 	static Label labelOnto1;
+	
 	/**
 	 * This label represents the graph/ontology to process
 	 */
@@ -66,15 +66,11 @@ public class Graph {
 	}
 
 	/**
-	 * This method creates a Neo4J graph from an input ontology
-	 * 
-	 * @param OWLOntology
-	 *            onto
-	 * @param Label
-	 *            label
-	 * @param GraphDatabaseService
-	 *            db
+	 * Creates a Neo4J graph from an OWL ontology.
+	 * @param onto the OWL ontology from which a graph is constructed.
+	 * @param label the label distinguishes this graph from other graphs (ex. by using the ontology file name or URI)
 	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
 	 */
 	public static void createOntologyGraph(OWLOntology onto, Label label) throws OWLOntologyCreationException {
 
@@ -111,7 +107,6 @@ public class Graph {
 							// get the superclass that belongs to the key in the map
 							superClass = superClassMap.get(entry.getKey());
 							// find the "superclass-node" that matches the map value belonging to this key
-							// class
 							Node superClassNode = db.findNode(label, "classname",
 									(Object) superClassMap.get(thisClassName));
 							// create an isA relationship from this graph node to its superclass
@@ -127,17 +122,23 @@ public class Graph {
 				}
 			}
 
-			// TO-DO:create the individuals
+			// TODO:create the individuals
 
-			// TO-DO:create the object property relations
+			// TODO:create the object property relations
 
-			// TO-DO:create the datatype properties
+			// TODO:create the datatype properties
 
 			tx.success();
 		}
 
 	}
 
+	/**
+	 * Retrieves the name associated with a node (i.e. the class name)
+	 * @param n the node in the graph whose name is retrieved.
+	 * @return a String representing the name of the node.
+	   Jul 18, 2019
+	 */
 	public static String getNodeName(Node n) {
 
 		String value = null;
@@ -151,11 +152,10 @@ public class Graph {
 	}
 
 	/**
-	 * Returns a graph node given a label, a property name and property value
+	 * Returns a graph node given a label and property value (i.e. class name)
 	 * 
-	 * @param value
-	 * @param label
-	 *            a label represents the graph/ontology to process
+	 * @param value the property value associated with the node
+	 * @param label a label represents the graph/ontology to process
 	 * @return the node searched for
 	 */
 	public static Node getNode(String value, Label label) {
@@ -169,114 +169,106 @@ public class Graph {
 
 	}
 
-	/**
-	 * Returns the ID of a node given the Node instance as parameter
-	 * 
-	 * @param n
-	 *            a Node instance
-	 * @return the ID of a node as a long
-	 */
-	public long getNodeID(Node n) {
+//	/**
+//	 * Returns the ID of a node given the Node instance as parameter
+//	 * @param n a Node instance
+//	 * @return the ID of a node as a long
+//	 */
+//	public long getNodeID(Node n) {
+//
+//		long id = 0;
+//
+//		try (Transaction tx = db.beginTx()) {
+//			id = n.getId();
+//			tx.success();
+//
+//		}
+//
+//		return id;
+//	}
 
-		long id = 0;
+//	/**
+//	 * Returns a Traverser that traverses the children of a node given a Node
+//	 * instance as parameter
+//	 * @param classNode a Node instance
+//	 * @return a traverser
+//	 */
+//	public static Traverser getChildNodesTraverser(Node classNode) {
+//
+//		TraversalDescription td = null;
+//		try (Transaction tx = db.beginTx()) {
+//
+//			td = db.traversalDescription().breadthFirst().relationships(RelTypes.isA, Direction.INCOMING)
+//					.evaluator(Evaluators.excludeStartPosition());
+//			tx.success();
+//
+//		}
+//
+//		return td.traverse(classNode);
+//	}
 
-		try (Transaction tx = db.beginTx()) {
-			id = n.getId();
-			tx.success();
+//	/**
+//	 * Returns an ArrayList of all child nodes of a node
+//	 * 
+//	 * @param classNode a Node instance
+//	 * @param label representing the graph/ontology to process
+//	 * @return an arraylist of child nodes of a given node
+//	 */
+//	public static ArrayList<Object> getClosestChildNodesAsList(Node classNode, Label label) {
+//
+//		ArrayList<Object> childNodeList = new ArrayList<Object>();
+//		Traverser childNodesTraverser = null;
+//
+//		try (Transaction tx = db.beginTx()) {
+//
+//			childNodesTraverser = getChildNodesTraverser(classNode);
+//
+//			for (Path childNodePath : childNodesTraverser) {
+//				if (childNodePath.length() == 1 && childNodePath.endNode().hasLabel(label)) {
+//					childNodeList.add(childNodePath.endNode().getProperty("classname"));
+//				}
+//			}
+//
+//			tx.success();
+//
+//		}
+//
+//		return childNodeList;
+//	}
 
-		}
-
-		return id;
-	}
-
-	/**
-	 * Returns a Traverser that traverses the children of a node given a Node
-	 * instance as parameter
-	 * 
-	 * @param classNode
-	 *            a Node instance
-	 * @return a traverser
-	 */
-	public static Traverser getChildNodesTraverser(Node classNode) {
-
-		TraversalDescription td = null;
-		try (Transaction tx = db.beginTx()) {
-
-			td = db.traversalDescription().breadthFirst().relationships(RelTypes.isA, Direction.INCOMING)
-					.evaluator(Evaluators.excludeStartPosition());
-			tx.success();
-
-		}
-
-		return td.traverse(classNode);
-	}
-
-	/**
-	 * Returns an ArrayList of all child nodes of a node
-	 * 
-	 * @param classNode
-	 *            a Node instance
-	 * @param label
-	 *            representing the graph/ontology to process
-	 * @return
-	 */
-	public static ArrayList<Object> getClosestChildNodesAsList(Node classNode, Label label) {
-
-		ArrayList<Object> childNodeList = new ArrayList<Object>();
-		Traverser childNodesTraverser = null;
-
-		try (Transaction tx = db.beginTx()) {
-
-			childNodesTraverser = getChildNodesTraverser(classNode);
-
-			for (Path childNodePath : childNodesTraverser) {
-				if (childNodePath.length() == 1 && childNodePath.endNode().hasLabel(label)) {
-					childNodeList.add(childNodePath.endNode().getProperty("classname"));
-				}
-			}
-
-			tx.success();
-
-		}
-
-		return childNodeList;
-	}
-
-	/**
-	 * Returns the number of children a particular node in the graph has
-	 * 
-	 * @param classNode
-	 * @param label
-	 * @return Feb 4, 2019
-	 */
-	public static int getNumChildNodes(Node classNode, Label label) {
-
-		ArrayList<Object> childNodeList = new ArrayList<Object>();
-		Traverser childNodesTraverser = null;
-
-		try (Transaction tx = db.beginTx()) {
-
-			childNodesTraverser = getChildNodesTraverser(classNode);
-
-			for (Path childNodePath : childNodesTraverser) {
-				if (childNodePath.endNode().hasLabel(label)) {
-					childNodeList.add(childNodePath.endNode().getProperty("classname"));
-				}
-			}
-
-			tx.success();
-
-		}
-
-		return childNodeList.size();
-	}
+//	/**
+//	 * Returns the number of children a particular node in the graph has
+//	 * 
+//	 * @param classNode the node whose children nodes are counted
+//	 * @param label the label of this graph 
+//	 * @return number of children nodes as integer
+//	 */
+//	public static int getNumChildNodes(Node classNode, Label label) {
+//
+//		ArrayList<Object> childNodeList = new ArrayList<Object>();
+//		Traverser childNodesTraverser = null;
+//
+//		try (Transaction tx = db.beginTx()) {
+//
+//			childNodesTraverser = getChildNodesTraverser(classNode);
+//
+//			for (Path childNodePath : childNodesTraverser) {
+//				if (childNodePath.endNode().hasLabel(label)) {
+//					childNodeList.add(childNodePath.endNode().getProperty("classname"));
+//				}
+//			}
+//
+//			tx.success();
+//
+//		}
+//
+//		return childNodeList.size();
+//	}
 
 	/**
 	 * Returns a Traverser that traverses the parents of a node given a Node
 	 * instance as parameter
-	 * 
-	 * @param classNode
-	 *            a Node instance
+	 * @param classNode a Node instance
 	 * @return a traverser
 	 */
 	public static Traverser getParentNodeTraverser(Node classNode) {
@@ -295,47 +287,40 @@ public class Graph {
 		return td.traverse(classNode);
 	}
 
-	// TO-DO: Why is this an ArrayList and not a Node being returned?
-	/**
-	 * Returns an ArrayList holding the parent node of the node provided as
-	 * parameter
-	 * 
-	 * @param classNode
-	 *            a node for which the closest parent is to be returned
-	 * @param label
-	 *            a label representing the graph (ontology) to process
-	 * @return the closest parent node
-	 */
-	public static ArrayList<Object> getClosestParentNode(Node classNode, Label label) {
-
-		ArrayList<Object> parentNodeList = new ArrayList<Object>();
-		Traverser parentNodeTraverser = null;
-
-		try (Transaction tx = db.beginTx()) {
-
-			parentNodeTraverser = getParentNodeTraverser(classNode);
-
-			for (Path parentNodePath : parentNodeTraverser) {
-				if (parentNodePath.length() == 1 && parentNodePath.endNode().hasLabel(label)) {
-					parentNodeList.add(parentNodePath.endNode().getProperty("classname"));
-				}
-			}
-
-			tx.success();
-
-		}
-
-		return parentNodeList;
-	}
+//	/**
+//	 * Returns an ArrayList holding the parent node of the node provided as
+//	 * parameter
+//	 * @param classNode a node for which the closest parent is to be returned
+//	 * @param label a label representing the graph (ontology) to process
+//	 * @return the closest parent node
+//	 */
+//	public static ArrayList<Object> getClosestParentNode(Node classNode, Label label) {
+//
+//		ArrayList<Object> parentNodeList = new ArrayList<Object>();
+//		Traverser parentNodeTraverser = null;
+//
+//		try (Transaction tx = db.beginTx()) {
+//
+//			parentNodeTraverser = getParentNodeTraverser(classNode);
+//
+//			for (Path parentNodePath : parentNodeTraverser) {
+//				if (parentNodePath.length() == 1 && parentNodePath.endNode().hasLabel(label)) {
+//					parentNodeList.add(parentNodePath.endNode().getProperty("classname"));
+//				}
+//			}
+//
+//			tx.success();
+//
+//		}
+//
+//		return parentNodeList;
+//	}
 
 	/**
 	 * Returns an ArrayList holding all parent nodes to the Node provided as
 	 * parameter
-	 * 
-	 * @param classNode
-	 *            the Node for which all parent nodes are to be retrieved
-	 * @param label
-	 *            representing the graph/ontology to process
+	 * @param classNode the Node for which all parent nodes are to be retrieved
+	 * @param label representing the graph/ontology to process
 	 * @return all parent nodes to node provided as parameter
 	 */
 	public static ArrayList<Object> getAllParentNodes(Node classNode, Label label) {
@@ -362,25 +347,24 @@ public class Graph {
 		return parentNodeList;
 	}
 
-	/**
-	 * This method finds the shortest path between two nodes used as parameters. The
-	 * path is the full path consisting of nodes and relationships between the
-	 * classNode.. ...and the parentNode.
-	 * 
-	 * @param parentNode
-	 * @param classNode
-	 * @param label
-	 * @param rel
-	 * @return Iterable<Path> paths
-	 */
-	public static Iterable<Path> findShortestPathBetweenNodes(Node parentNode, Node classNode, Label label,
-			RelationshipType rel) {
-
-		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(PathExpanders.forType(rel), 15);
-		Iterable<Path> paths = finder.findAllPaths(classNode, parentNode);
-		return paths;
-
-	}
+//	/**
+//	 * This method finds the shortest path between two nodes used as parameters. The
+//	 * path is the full path consisting of nodes and relationships between the
+//	 * classNode.. ...and the parentNode.
+//	 * @param parentNode the parent node to which the shortest path from classnode is created.
+//	 * @param classNode the class node from which the shortest path to parentNode is created.
+//	 * @param label representing the graph/ontology to process.
+//	 * @param rel the type of relationship between classNode and parentNode.
+//	 * @return Iterable<Path> paths
+//	 */
+//	public static Iterable<Path> findShortestPathBetweenNodes(Node parentNode, Node classNode, Label label,
+//			RelationshipType rel) {
+//
+//		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(PathExpanders.forType(rel), 15);
+//		Iterable<Path> paths = finder.findAllPaths(classNode, parentNode);
+//		return paths;
+//
+//	}
 
 	/**
 	 * Returns the distance from the Node provided as parameter and the root node
@@ -390,9 +374,8 @@ public class Graph {
 	 * <edge-count, node (property)> where all nodes for each edge-count is listed
 	 * (e.g. for the node "AcademicArticle" the upwards path is <1, Article>, <2,
 	 * Document>, <3, owl:Thing>).
-	 * 
-	 * @param classNode
-	 * @return
+	 * @param classNode the node from which the distance to root is counted from.
+	 * @return the (path) distance from classNode to the root node as an integer.
 	 */
 	public static int findDistanceToRoot(Node classNode) {
 		
@@ -416,23 +399,23 @@ public class Graph {
 		return distanceToRoot;
 	}
 
-	/**
-	 * This method finds the shortest path between two nodes used as parameters. The
-	 * path is the full path consisting of nodes and relationships between the
-	 * classNode.. ...and the rootNode.
-	 * 
-	 * @param rootNode
-	 * @param classNode
-	 * @param label
-	 * @param rel
-	 * @return Iterable<Path> paths
-	 */
-	public Iterable<Path> findShortestPathToRoot(Node rootNode, Node classNode, Label label, RelationshipType rel) {
-
-		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(PathExpanders.forType(rel), 15);
-		Iterable<Path> paths = finder.findAllPaths(classNode, rootNode);
-		return paths;
-	}
+//	/**
+//	 * This method finds the shortest path between two nodes used as parameters. The
+//	 * path is the full path consisting of nodes and relationships between the
+//	 * classNode.. ...and the rootNode.
+//	 * 
+//	 * @param rootNode
+//	 * @param classNode
+//	 * @param label
+//	 * @param rel
+//	 * @return Iterable<Path> paths
+//	 */
+//	public Iterable<Path> findShortestPathToRoot(Node rootNode, Node classNode, Label label, RelationshipType rel) {
+//
+//		PathFinder<Path> finder = GraphAlgoFactory.shortestPath(PathExpanders.forType(rel), 15);
+//		Iterable<Path> paths = finder.findAllPaths(classNode, rootNode);
+//		return paths;
+//	}
 
 	/**
 	 * Registers a shutdown hook for the Neo4j instance so that it shuts down nicely
@@ -440,7 +423,7 @@ public class Graph {
 	 * 
 	 * @param graphDb
 	 */
-	private static void registerShutdownHook(final GraphDatabaseService graphDb) {
+	public static void registerShutdownHook(final GraphDatabaseService graphDb) {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
 			public void run() {
@@ -453,14 +436,14 @@ public class Graph {
 		isA
 	}
 
-	public static <K, V extends Comparable<V>> V findMapMax(Map<K, V> map) {
-		Entry<K, V> maxEntry = Collections.max(map.entrySet(), new Comparator<Entry<K, V>>() {
-			public int compare(Entry<K, V> e1, Entry<K, V> e2) {
-				return e1.getValue().compareTo(e2.getValue());
-			}
-		});
-		return maxEntry.getValue();
-	}
+//	public static <K, V extends Comparable<V>> V findMapMax(Map<K, V> map) {
+//		Entry<K, V> maxEntry = Collections.max(map.entrySet(), new Comparator<Entry<K, V>>() {
+//			public int compare(Entry<K, V> e1, Entry<K, V> e2) {
+//				return e1.getValue().compareTo(e2.getValue());
+//			}
+//		});
+//		return maxEntry.getValue();
+//	}
 
 //	public static double computeStructuralAffinity(File ontoFile1, File ontoFile2, double threshold) throws OWLOntologyCreationException {
 //		double structuralAffinity = 0;
@@ -576,55 +559,4 @@ public class Graph {
 //
 //	}
 
-	public static void main(String[] args) throws OWLOntologyCreationException {
-
-		// create the database
-		// File dbFile = new
-		// File("/Users/audunvennesland/Documents/PhD/Development/Neo4J/PathMatcher");
-		// GraphDatabaseService db = new
-		// GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-		// registerShutdownHook(db);
-		//
-		// //get the ontology
-		// OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		// File f1 = new File("./files/ConferenceOntology1.owl");
-		// System.out.println("...Loading ontology " +
-		// StringUtilities.stripPath(f1.toString()));
-		// OWLOntology o1 = manager.loadOntologyFromOntologyDocument(f1);
-		// //o1.getOntologyID().getOntologyIRI().getFragment();
-		//
-		// String ontologyName = manager.getOntologyDocumentIRI(o1).getFragment();
-		// System.out.println("The name of the ontology is " + ontologyName);
-		// System.out.println("The name of the ontology is " +
-		// o1.getOntologyID().getOntologyIRI().getFragment());
-		//
-		// Label label = DynamicLabel.label( ontologyName );
-		//
-		// Graph loader = new Graph(db);
-		//
-		// System.out.println("Trying to create a graph...");
-		//
-		// //loader.createOntologyGraph(o1, label);
-		//
-		// System.out.println("Graph created successfully!");
-		//
-		// Node node1 = getNode("owl:Thing", label);
-		// Node node2 = getNode("LegalEntity", label);
-		// int depthNode1 = findDistanceToRoot(node1);
-		// int depthNode2 = findDistanceToRoot(node2);
-		// System.out.println("The depth of node1 is " + depthNode1);
-		// System.out.println("The depth of node2 is " + depthNode2);
-		// //public static int getNumChildNodes(Node classNode, Label label) {
-		// System.out.println("The number of child nodes for LegalEntity is " +
-		// getNumChildNodes(node2, label));
-
-		// public static double computeStructuralAffinity(File ontoFile1, File
-		// ontoFile2) throws OWLOntologyCreationException {
-		File onto1 = new File("./files/SATest1.owl");
-		File onto2 = new File("./files/SATest2.owl");
-
-//		double sa = computeStructuralAffinity(onto1, onto2, 0.6);
-//		System.out.println("The structural affinity is " + sa);
-
-	}
 }
