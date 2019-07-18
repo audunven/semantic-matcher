@@ -29,7 +29,6 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 
-import alignmentcombination.HarmonyEquivalence;
 //import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import evaluation.general.Evaluator;

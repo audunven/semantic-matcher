@@ -34,7 +34,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonyEquivalence;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
@@ -167,16 +166,6 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		graphMatcherAlignment = (BasicAlignment) (a.clone());
 
 		graphMatcherAlignment.normalise();
-
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonyEquivalence.getHarmonyAlignment(graphMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
-
-		System.out.println("Printing Harmony Alignment: ");
-		for (Cell c : harmonyAlignment) {
-			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
-		}
 
 		System.out.println("\nThe alignment contains " + graphMatcherAlignment.nbCells() + " relations");
 
