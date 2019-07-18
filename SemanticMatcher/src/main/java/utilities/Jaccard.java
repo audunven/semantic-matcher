@@ -5,11 +5,13 @@ import java.util.Set;
 
 public class Jaccard {
 	
+	
 	/**
-	 * jaccardSetSim = [number of common elements] / [total num elements] - [number of common elements]
-	 * @param s1
-	 * @param s2
-	 * @return
+	 * Computes the Jaccard similarity between two sets of strings
+	 * @param set1 the first set of strings
+	 * @param set2 the second set of strings
+	 * @return the jaccard similarity score (intersection over union)
+	   Jul 17, 2019
 	 */
 	public static double jaccardSetSim (Set<String> set1, Set<String> set2) {
 		
@@ -26,9 +28,6 @@ public class Jaccard {
 
 		int union = (set1.size() + set2.size()) - intersection;
 		
-		//System.out.println("The union is " + union);
-		//System.out.println("The intersection is " + intersection);
-		
 		double jaccardSetSim = (double) intersection / (double) union;
 		
 		return jaccardSetSim;
@@ -37,19 +36,6 @@ public class Jaccard {
 	public static void main(String[] args) {
 		Set<String> set1 = new HashSet<String>();
 		Set<String> set2 = new HashSet<String>();
-		
-//		set1.add("audi");
-//		set1.add("vw");
-//		set1.add("seat");
-//		set1.add("toyota");
-//		set1.add("mitsubishi");
-//		
-//		set2.add("audi");
-//		set2.add("vw");
-//		set2.add("seat");
-//		set2.add("jaguar");
-//		set2.add("rollsroyce");
-//		set2.add("landrover");
 		
 		set1.add("links");
 		set1.add("flight");

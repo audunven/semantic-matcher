@@ -3,6 +3,12 @@ package utilities;
 import java.net.URI;
 import java.util.Set;
 
+/**
+ * Represents an object using different lexical properties relevant for lexical matching of ontology concepts.
+ * @author audunvennesland
+ *
+ * @see subsumptionmatching.LexicalSubsumptionMatcher
+ */
 public class LexicalConcept {
 	
 	String lexicalConceptName;

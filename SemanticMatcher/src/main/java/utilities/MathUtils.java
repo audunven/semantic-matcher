@@ -1,19 +1,57 @@
 package utilities;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author audunvennesland
  * 26. okt. 2017 
  */
 public class MathUtils {
+
+	public static double weightedSigmoid(int slope, double x, double weight) {
+		return (1/( 1 + Math.pow(Math.E,(-slope*(x-weight)))));
+	}
 	
-	public static void main(String[] args) {
+	public static double weightedEuzenatSigmoid(double x, double weight) {
+		return (1/( 1 + Math.pow(Math.E,(-12*(x-(1-(weight/2)))))));
+	}
+	
+	public static double sigmoidRiMom(double x) {
+	    return (1/( 1 + Math.pow(Math.E,(-5*(x-0.5)))));
+	  }
+	
+	public static double sigmoidEuzenat(double x) {
+	    return (1/( 1 + Math.pow(Math.E,(-12*(x-0.5)))));
+	  }
+	
+	public static double sigmoid(double x) {
+	    return (1/( 1 + Math.pow(Math.E,(-1*x))));
+	  }
+	
+	public static double computeInformationContent(int subConcepts, int totalConcepts) {
+		return 1-((Math.log((double)subConcepts + 1)) / Math.log((double)totalConcepts));
+	}
+	
+	
+	/**
+	 * Rounds a double to a specified number of digits after the decimal point
+	 * @param value the double to be rounded
+	 * @param places number of digits after decimal point
+	 * @return rounded double
+	 */
+	public static double round(double value, int places) {
+		if (places < 0) throw new IllegalArgumentException();
+
+		long factor = (long) Math.pow(10, places);
+		value = value * factor;
+		long tmp = Math.round(value);
+		return (double) tmp / factor;
+	}
+	
+	
+	
+public static void main(String[] args) {
 		
 		int slope = 12;
 		
@@ -64,82 +102,6 @@ public class MathUtils {
 		}
 		
 		
-	}
-	
-
-	
-	public static double weightedSigmoid(int slope, double x, double weight) {
-		return (1/( 1 + Math.pow(Math.E,(-slope*(x-weight)))));
-	}
-	
-	public static double weightedEuzenatSigmoid(double x, double weight) {
-		return (1/( 1 + Math.pow(Math.E,(-12*(x-(1-(weight/2)))))));
-	}
-	
-	public static double sigmoidRiMom(double x) {
-	    return (1/( 1 + Math.pow(Math.E,(-5*(x-0.5)))));
-	  }
-	
-	public static double sigmoidEuzenat(double x) {
-	    return (1/( 1 + Math.pow(Math.E,(-12*(x-0.5)))));
-	  }
-	
-	public static double sigmoid(double x) {
-	    return (1/( 1 + Math.pow(Math.E,(-1*x))));
-	  }
-	
-	public static double computeInformationContent(int subConcepts, int totalConcepts) {
-		return 1-((Math.log((double)subConcepts + 1)) / Math.log((double)totalConcepts));
-	}
-	
-	public static double computeListAverage(ArrayList<Double> list) {
-		double sum = 0;
-		
-		for (Double d : list) {
-			sum+=d;
-		}
-		
-		return sum / list.size();
-	}
-	
-	/**
-	 * Rounds a double to a specified number of digits after the decimal point
-	 * @param value the double to be rounded
-	 * @param places number of digits after decimal point
-	 * @return rounded double
-	 */
-	public static double round(double value, int places) {
-		if (places < 0) throw new IllegalArgumentException();
-
-		long factor = (long) Math.pow(10, places);
-		value = value * factor;
-		long tmp = Math.round(value);
-		return (double) tmp / factor;
-	}
-	
-	public static double normalise(ArrayList<Double> properties) {
-		
-		ArrayList<Double> normalisedPropValues = new ArrayList<Double>();
-		
-//		double max = Collections.max(properties);
-//		double min = Collections.min(properties);
-		
-		double max = 10.0;
-		double min = 0;
-		
-		
-		double thisPropValue = 0;
-		double normalisedProp = 0;
-		
-		for (Double d : properties) {
-			thisPropValue = d;
-			normalisedProp = (d-min) / (max-min);
-			normalisedPropValues.add((d-min)/(max-min));
-			System.out.println("Normalising " + d + " to :" + normalisedProp);
-
-		}
-		
-		return computeListAverage(normalisedPropValues);
 	}
 
 }

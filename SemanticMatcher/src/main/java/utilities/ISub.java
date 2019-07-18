@@ -9,7 +9,7 @@ package utilities;
  * This class implements the string matching method proposed in the paper
  * "A String Metric For Ontology Alignment", published in ISWC 2005 
  *
- * J�r�me Euzenat: added normalization
+ * The code is written by Jerome Euzenat
  */
 public class ISub {
 	
@@ -105,18 +105,10 @@ public class ISub {
 			}
 			s2 = new String( newString );
 
-			//if( (startS1 < 1 || startS1 > 2 )
-			//	||	(startS2 < 1 || startS2 > 2) && startS1 != startS2  )
-			//	best--;
-
 			if( best > 2 )
 				common += best;
 			else
 				best = 0;
-
-		//System.out.println( s1 + ":" + s2 );
-		//System.out.println( "StartS1 : " + startS1 + " EndS1: " + endS1 );
-		//System.out.println( "StartS2 : " + startS2 + " EndS2: " + endS2 );
 		}
 
 		double commonality = 0;
@@ -160,7 +152,6 @@ public class ISub {
 				break;
 		
 		double commonPrefixLength = Math.min( 4 , i );
-		//double commonPrefixLength = i;
 		double winkler = commonPrefixLength*0.1*(1-commonality);
 
 		return winkler;
