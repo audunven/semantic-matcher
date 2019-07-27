@@ -18,8 +18,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonyEquivalence;
-import alignmentcombination.HarmonySubsumption;
 import equivalencematching.WordEmbeddingMatcher;
 import evaluation.general.Evaluator;
 import utilities.Sigmoid;
@@ -92,11 +90,6 @@ public class CompoundMatcher extends ObjectAlignment implements AlignmentProcess
 		compoundMatcherAlignment = (BasicAlignment) (a.clone());
 
 		System.out.println("The 0.0 alignment contains " + compoundMatcherAlignment.nbCells() + " relations");
-
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonySubsumption.getHarmonyAlignment(compoundMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
 
 		System.out.println("\nThe alignment contains " + compoundMatcherAlignment.nbCells() + " relations");
 

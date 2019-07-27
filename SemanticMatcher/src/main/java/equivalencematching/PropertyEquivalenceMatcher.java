@@ -37,6 +37,7 @@ import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
+import utilities.ISub;
 import utilities.SimilarityMetrics;
 import utilities.StringUtilities;
 import utilities.WordNet;
@@ -339,6 +340,43 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 		}
 
 		return sb.toString();
+	}
+	
+	public static double jaccardSetSimISubEqualConcepts (double confidence, String concept1, String concept2, Set<String> set1, Set<String> set2) {
+
+		ISub isubMatcher = new ISub();
+
+		int intersection = 0;
+		int refinedIntersection = 0;
+		int refinedUnion = 0;
+		double isubScore = 0;
+
+		for (String s1 : set1) {
+			for (String s2 : set2) {
+				//using ISub to compute a similarity score
+				isubScore = isubMatcher.score(s1,s2);
+				if (isubScore > confidence) {
+					intersection += 1;
+				}
+			}
+		}
+		
+		int union = (set1.size() + set2.size()) - intersection;
+		
+		if (set1.contains(concept2.toLowerCase()) && set2.contains(concept1.toLowerCase())) {
+			refinedIntersection = intersection +2;
+			refinedUnion = union - 2;
+		} else if (set1.contains(concept2.toLowerCase()) || set2.contains(concept1.toLowerCase())) {
+			refinedIntersection = intersection +1;
+			refinedUnion = union - 1;
+		} else {
+			refinedIntersection = intersection;
+			refinedUnion = union;
+		}
+
+		double jaccardSetSim = (double) refinedIntersection / (double) refinedUnion;
+		
+		return jaccardSetSim;
 	}
 
 }

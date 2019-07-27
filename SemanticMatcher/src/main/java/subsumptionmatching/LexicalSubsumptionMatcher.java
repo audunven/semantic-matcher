@@ -18,7 +18,6 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonySubsumption;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
@@ -28,7 +27,6 @@ import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
 import net.didion.jwnl.JWNLException;
 import utilities.LexicalConcept;
-import utilities.Sigmoid;
 import utilities.WordNet;
 
 public class LexicalSubsumptionMatcher extends ObjectAlignment implements AlignmentProcess {
@@ -81,11 +79,6 @@ public class LexicalSubsumptionMatcher extends ObjectAlignment implements Alignm
 		BasicAlignment compoundMatcherAlignment = new BasicAlignment();
 
 		compoundMatcherAlignment = (BasicAlignment) (a.clone());
-
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonySubsumption.getHarmonyAlignment(compoundMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
 
 		System.out.println("Evaluation with no cut threshold:");
 		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);

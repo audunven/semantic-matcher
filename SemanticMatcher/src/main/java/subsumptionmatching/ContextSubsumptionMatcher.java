@@ -1,10 +1,7 @@
 package subsumptionmatching;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,23 +12,19 @@ import java.util.Set;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
-import org.semanticweb.owl.align.AlignmentVisitor;
 import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonySubsumption;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
-import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import utilities.OntologyOperations;
-import utilities.Sigmoid;
 import utilities.StringUtilities;
 
 public class ContextSubsumptionMatcher extends ObjectAlignment implements AlignmentProcess {
@@ -94,13 +87,7 @@ public class ContextSubsumptionMatcher extends ObjectAlignment implements Alignm
 
 		contextSubsumptionMatcherAlignment = (BasicAlignment) (a.clone());
 		
-		System.out.println("The 0.0 alignment contains " + contextSubsumptionMatcherAlignment.nbCells() + " relations");
-		
-		//evaluate the Harmony alignment
-		BasicAlignment harmonyAlignment = HarmonySubsumption.getHarmonyAlignment(contextSubsumptionMatcherAlignment);
-		System.out.println("The Harmony alignment contains " + harmonyAlignment.nbCells() + " cells");
-		Evaluator.evaluateSingleAlignment(harmonyAlignment, referenceAlignment);
-		
+		System.out.println("The 0.0 alignment contains " + contextSubsumptionMatcherAlignment.nbCells() + " relations");		
 
 		System.out.println("\nThe alignment contains " + contextSubsumptionMatcherAlignment.nbCells() + " relations");
 

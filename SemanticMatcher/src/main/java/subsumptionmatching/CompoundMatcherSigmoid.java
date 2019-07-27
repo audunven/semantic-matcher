@@ -1,36 +1,25 @@
 package subsumptionmatching;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
-import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import alignmentcombination.HarmonyEquivalence;
-import alignmentcombination.HarmonySubsumption;
-import equivalencematching.WordEmbeddingMatcher;
-import evaluation.general.Evaluator;
-import utilities.Sigmoid;
-import utilities.StringUtilities;
-import utilities.WordNet;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
-import fr.inrialpes.exmo.ontowrap.OntowrapException;
+import utilities.Sigmoid;
+import utilities.StringUtilities;
+import utilities.WordNet;
 
 /**
  * CompoundMatcherSigmoid identifies subsumption relations based on so-called compounds, that is, a word comprised of individual words (e.g. electronicBook)

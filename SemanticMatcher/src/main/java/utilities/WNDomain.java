@@ -149,7 +149,7 @@ public class WNDomain {
 	public static boolean sameDomainJaccard(Set<String> c1, Set<String> c2, double minJaccard) {
 		boolean similar = false;
 
-		double jaccardScore = Jaccard.jaccardSetSim(c1, c2);
+		double jaccardScore = SimilarityMetrics.jaccardSetSim(c1, c2);
 		
 		//System.out.println("The jaccard score is " + jaccardScore);
 		

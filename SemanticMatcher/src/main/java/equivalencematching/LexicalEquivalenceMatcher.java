@@ -27,6 +27,7 @@ import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
 import utilities.Jaccard;
 import utilities.Sigmoid;
+import utilities.SimilarityMetrics;
 import utilities.StringUtilities;
 import utilities.WordNet;
 
@@ -210,7 +211,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 			if (!sourceSynonyms.isEmpty() && !targetSynonyms.isEmpty()) {
 
-				jaccardSim = Jaccard.jaccardSetSim(sourceSynonyms, targetSynonyms);
+				jaccardSim = SimilarityMetrics.jaccardSetSim(sourceSynonyms, targetSynonyms);
 			}
 
 			jcSim = WordNet.computeJiangConrath(source.toLowerCase(), target.toLowerCase());

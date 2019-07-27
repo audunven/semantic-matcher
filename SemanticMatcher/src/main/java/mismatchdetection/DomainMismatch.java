@@ -18,11 +18,21 @@ import utilities.WNDomain;
 import utilities.WordNet;
 
 /**
+ * Filters out relations from an alignment where the two concepts do not represent the same domain according to the WordNet Domains classification.
  * @author audunvennesland
  * 8. jan. 2018 
  */
 public class DomainMismatch {
 
+	/**
+	 * This method uses different techniques for filtering out relations from an alignment where the two concepts (likely) does not represent the same domain.
+	 * @param inputAlignment the alignment checked for domain dissimilarity.
+	 * @return an URIAlignment where relations having concepts not from the same domain are filtered out.
+	 * @throws FileNotFoundException
+	 * @throws JWNLException
+	 * @throws AlignmentException
+	   Jul 18, 2019
+	 */
 	public static URIAlignment filterAlignment(BasicAlignment inputAlignment) throws FileNotFoundException, JWNLException, AlignmentException {
 
 		URIAlignment filteredAlignment = new URIAlignment();	

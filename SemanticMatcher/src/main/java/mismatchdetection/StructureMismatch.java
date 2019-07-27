@@ -32,12 +32,11 @@ public class StructureMismatch {
 	/** 
 	 * Iterates through relations in an already produced alignment, retrieves the context (domain and range classes linked to object properties of each pair of related classes), and measures the similarity between these
 	 * contexts using Jaccard similarity.
-	 * @param inputAlignmentFile
+	 * @param inputAlignmentFile the input alignment 
 	 * @param onto1 source ontology
 	 * @param onto2 target ontology
 	 * @return an alignment that includes relations with context similarity above a certain threshold
 	 * @throws AlignmentException
-	   Nov 26, 2018
 	 * @throws OWLOntologyCreationException 
 	 * @throws JWNLException 
 	 * @throws FileNotFoundException 

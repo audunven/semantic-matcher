@@ -9,6 +9,12 @@ import utilities.StringUtilities;
 import utilities.WNDomain;
 import utilities.WordNet;
 
+/**
+ * Used in subsumption matching to ensure that the relation proposed is in fact subsumption.
+ * @author audunvennesland
+ * @see subsumptionmatching.DefinitionSubsumptionMatcher
+ * @see subsumptionmatching.DefinitionSubsumptionMatcherSigmoid
+ */
 public class ConfirmSubsumption {
 	
 	public static void main(String[] args) throws FileNotFoundException, JWNLException {
@@ -20,11 +26,19 @@ public class ConfirmSubsumption {
 		
 	}
 	
-	
-	public static boolean conceptsFromSameDomain(String s1, String s2) throws FileNotFoundException, JWNLException {
+	/**
+	 * Uses the WordNet Domains classification to check if two concepts represent the same domain.
+	 * @param concept1 string representing a concept name
+	 * @param concept2 string representing a concept name
+	 * @return true if the two concepts represent the same domain, false if not.
+	 * @throws FileNotFoundException
+	 * @throws JWNLException
+	   Jul 18, 2019
+	 */
+	public static boolean conceptsFromSameDomain(String concept1, String concept2) throws FileNotFoundException, JWNLException {
 		
-		Set<String> concept1Tokens = StringUtilities.getWordsAsSetFromCompound(s1);
-		Set<String> concept2Tokens = StringUtilities.getWordsAsSetFromCompound(s2);
+		Set<String> concept1Tokens = StringUtilities.getWordsAsSetFromCompound(concept1);
+		Set<String> concept2Tokens = StringUtilities.getWordsAsSetFromCompound(concept2);
 		
 		Set<String> concept1Domains = new HashSet<String>();
 		Set<String> concept2Domains = new HashSet<String>();
@@ -46,23 +60,18 @@ public class ConfirmSubsumption {
 		
 	}
 	
-	public static boolean isSynonym(String concept1, String concept2) {
-		
-		Set<String> concept1Synonyms = WordNet.getAllSynonymSet(concept1);
-		Set<String> concept2Synonyms = WordNet.getAllSynonymSet(concept2);
-		
-		if (concept1Synonyms.contains(concept2.toLowerCase()) || concept2Synonyms.contains(concept2.toLowerCase())) {
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
 
-	
+	/**
+	 * Checks if two concepts represent a meronymic relation.
+	 * @param concept1 string representing a concept name
+	 * @param concept2 string representing a concept name
+	 * @return true if the concepts represent a meronymic relation, false if not.
+	 * @throws FileNotFoundException
+	 * @throws JWNLException
+	   Jul 18, 2019
+	 */
 	public static boolean isMeronym(String concept1, String concept2) throws FileNotFoundException, JWNLException {
-		
-		
+
 		Set<String> concept1Tokens = StringUtilities.getWordsAsSetFromCompound(concept1);
 		Set<String> concept2Tokens = StringUtilities.getWordsAsSetFromCompound(concept2);
 		

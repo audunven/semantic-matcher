@@ -1,8 +1,6 @@
 package equivalencematching;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -12,13 +10,11 @@ import java.util.Set;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
-import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
-import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.ObjectAlignment;
@@ -27,6 +23,7 @@ import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
 import utilities.Jaccard;
 import utilities.Sigmoid;
+import utilities.SimilarityMetrics;
 import utilities.StringUtilities;
 import utilities.WordNet;
 
@@ -152,7 +149,7 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 
 			if (!sourceSynonyms.isEmpty() && !targetSynonyms.isEmpty()) {
 				
-				jaccardSim = Jaccard.jaccardSetSim(sourceSynonyms, targetSynonyms);
+				jaccardSim = SimilarityMetrics.jaccardSetSim(sourceSynonyms, targetSynonyms);
 			}
 			
 			jcSim = WordNet.computeJiangConrath(source.toLowerCase(), target.toLowerCase());

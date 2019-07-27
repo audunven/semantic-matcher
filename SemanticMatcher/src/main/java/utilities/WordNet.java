@@ -772,7 +772,7 @@ public class WordNet {
 		Set<String> c1Set = getSynonymSet(c1);
 		Set<String> c2Set = getSynonymSet(c2);
 		
-		System.out.println("The jaccard similarity between c1Set and c2Set is " + Jaccard.jaccardSetSim(c1Set, c2Set));
+		System.out.println("The jaccard similarity between c1Set and c2Set is " + SimilarityMetrics.jaccardSetSim(c1Set, c2Set));
 
 
 

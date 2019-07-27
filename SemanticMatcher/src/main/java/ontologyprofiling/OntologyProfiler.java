@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -24,11 +21,19 @@ import org.semanticweb.owlapi.model.OWLOntologyManager;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
 //import it.uniroma1.lcl.babelnet.BabelNet;
 import net.didion.jwnl.JWNLException;
+import utilities.MathUtils;
 //import utilities.BabelNetOperations;
 import utilities.OntologyOperations;
 import utilities.StringUtilities;
 import utilities.WordNet;
 
+/**
+ * This class includes a set of metrics that evaluate the terminological, structural and lexical profile of the input ontologies. 
+ * The evaluation measures are computed as an average metric for both ontologies. 
+ * Based on these metrics, a set of optimal matchers are selected and configured given the ontologies to be matched.
+ * @author audunvennesland
+ *
+ */
 public class OntologyProfiler {
 
 	final static double affinityThreshold = 0.2;
@@ -69,70 +74,70 @@ public class OntologyProfiler {
 
 		System.out.println("*** Compound Fraction ***");
 		System.out.println("The Compound Fraction (CF) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeCompoundFraction(onto1, onto2)), 2));
+				+ MathUtils.round((computeCompoundFraction(onto1, onto2)), 2));
 
 		pw.println("*** Compound Fraction ***");
 		pw.println("The Compound Fraction (CF) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeCompoundFraction(onto1, onto2)), 2));
+				+ MathUtils.round((computeCompoundFraction(onto1, onto2)), 2));
 
 		System.out.println("\n*** Corpus Coverage (CC) ***");
 		System.out.println("The Corpus Coverage (CC) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeCorpusCoverage(onto1, onto2, corpus)), 2));
+				+ MathUtils.round((computeCorpusCoverage(onto1, onto2, corpus)), 2));
 
 		pw.println("\n*** Corpus Coverage (CC) ***");
 		pw.println("The Corpus Coverage (CC) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeCorpusCoverage(onto1, onto2, corpus)), 2));
+				+ MathUtils.round((computeCorpusCoverage(onto1, onto2, corpus)), 2));
 
 
 		System.out.println("\n*** Definition Coverage ***");
 		System.out.println("The Definition Coverage (DC) of  " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeDefinitionCoverage(onto1, onto2)), 2));
+				+ MathUtils.round((computeDefinitionCoverage(onto1, onto2)), 2));
 
 		pw.println("\n*** Definition Coverage ***");
 		pw.println("The Definition Coverage (DC) of  " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeDefinitionCoverage(onto1, onto2)), 2));
+				+ MathUtils.round((computeDefinitionCoverage(onto1, onto2)), 2));
 
 		System.out.println("\n*** Property Fraction ***");
 		System.out.println("The Property Fraction (PF) of  " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computePropertyFraction(onto1, onto2)), 2));
+				+ MathUtils.round((computePropertyFraction(onto1, onto2)), 2));
 
 		pw.println("\n*** Property Fraction ***");
 		pw.println("The Property Fraction (DF) of  " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computePropertyFraction(onto1, onto2)), 2));
+				+ MathUtils.round((computePropertyFraction(onto1, onto2)), 2));
 
 		System.out.println("\n*** Structural Profile ***");
 		System.out.println("The Structural Profile (SP) of " + onto1.getName() + " and " + onto2.getName() + " is: " + 
-				round((computeStructuralProfile(onto1, onto2)), 2));
+				MathUtils.round((computeStructuralProfile(onto1, onto2)), 2));
 
 		pw.println("\n*** Structural Profile ***");
 		pw.println("The Structural Profile (SP) of " + onto1.getName() + " and " + onto2.getName() + " is: " + 
-				round((computeStructuralProfile(onto1, onto2)), 2));
+				MathUtils.round((computeStructuralProfile(onto1, onto2)), 2));
 
 
 		System.out.println("\n*** Lexical Coverage (WordNet) ***");
 		System.out.println("The Lexical Coverage (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeLexicalCoverage(onto1, onto2)), 2));
+				+ MathUtils.round((computeLexicalCoverage(onto1, onto2)), 2));
 
 		pw.println("\n*** Lexical Coverage (WordNet) ***");
 		pw.println("The Lexical Coverage (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeLexicalCoverage(onto1, onto2)), 2));
+				+ MathUtils.round((computeLexicalCoverage(onto1, onto2)), 2));
 
 
 		System.out.println("\n*** Synonym Richness (WordNet) ***");
 		System.out.println("The Synonym Richness (SR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
+				+ MathUtils.round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
 
 		pw.println("\n*** Synonym Richness (WordNet) ***");
 		pw.println("The Synonym Richness (SR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
+				+ MathUtils.round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
 
 		System.out.println("\n*** Hyponym Richness (WordNet) ***");
 		System.out.println("The Hyponym Richness (HR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
+				+ MathUtils.round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
 
 		pw.println("\n*** Hyponym Richness (WordNet) ***");
 		pw.println("The Hyponym Richness (HR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
+				+ MathUtils.round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
 
 
 		pw.close();
@@ -140,6 +145,17 @@ public class OntologyProfiler {
 		System.out.println("\nOntology Profiling results are stored at " + storedOntologyProfileFile.getPath());
 	}
 
+	/**
+	 * Creates a map that for two input ontologies represents the ontology profiling scores.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param corpus a file with word embeddings used to compute the Corpus Coverage (CC) measure.
+	 * @return a map where the short name of the ontology profiling metric is key and the score from the ontology profiling is value.
+	 * @throws OWLOntologyCreationException
+	 * @throws JWNLException
+	 * @throws IOException
+	   Jul 18, 2019
+	 */
 	public static Map<String, Double> computeOntologyProfileScores(File ontoFile1, File ontoFile2, String corpus) throws OWLOntologyCreationException, JWNLException, IOException {
 
 		Map<String, Double> ontologyProfileScores = new HashMap<String, Double>();
@@ -157,6 +173,16 @@ public class OntologyProfiler {
 
 	}
 
+	/**
+	 * The Corpus Coverage (CC) metric analyses how many individual tokens from the two input ontologies reside in a corpus representing word embeddings. 
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param corpusPath the path to the relevant file holding word embeddings.
+	 * @return the Corpus Coverage score.
+	 * @throws IOException
+	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
+	 */
 	public static double computeCorpusCoverage(File ontoFile1, File ontoFile2, String corpusPath) throws IOException, OWLOntologyCreationException {
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -192,6 +218,15 @@ public class OntologyProfiler {
 
 	}
 
+	/**
+	 * The Structural Profile onsiders the coverage of subclasses and superclasses in the two ontologies, and is computed as the fraction 
+	 * of classes that have sub- or superclasses associated with them over all classes in both ontologies.
+	 * @param ontoFile1
+	 * @param ontoFile2
+	 * @return
+	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
+	 */
 	public static double computeStructuralProfile(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
@@ -236,15 +271,10 @@ public class OntologyProfiler {
 	/**
 	 * Returns a count of how many classes are considered compound words in an
 	 * ontology
-	 * 
-	 * @param ontoFile
-	 *            the file path of the input OWL ontology
-	 * @return numCompounds a double stating the percentage of how many of the
-	 *         classes in the ontology are compounds
-	 * @throws OWLOntologyCreationException
-	 *             An exception which describes an error during the creation of
-	 *             an ontology. If an ontology cannot be created then subclasses
-	 *             of this class will describe the reasons.
+	 * @param ontoFile the file path of the input OWL ontology
+	 * @return numCompounds a double stating the percentage of how many of the classes in the ontology are compounds
+	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
+	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
 	 */
 	public static double computeCompoundFraction(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
 
@@ -275,6 +305,16 @@ public class OntologyProfiler {
 		return (compoundRatioOnto1 + compoundRatioOnto2) / 2;
 	}
 
+	/**
+	 * The Definition Coverage (DC) metric aims to capture how well annotated the concepts in the input ontologies are.
+	 * It is calculated by measuring the fraction of concepts that are annotated in each of the two ontologies, and the 
+	 * minimum of the two fractions is used to define the Definition Coverage. 
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @return a score representing the Definition Coverage (DC)
+	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
+	 */
 	public static double computeDefinitionCoverage(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
@@ -330,107 +370,14 @@ public class OntologyProfiler {
 
 	}
 
-
-
-
+	
 	/**
-	 * Computes the concept name equality by finding the number of longest common substrings (lcs) in the two input ontologies. The lcs is considered as the longest sequence of
-	 * identical characters in two concept names, but it should have a minimum length of 3 (English nouns are usually > 3 chars) and also a minimum length of 80 % of the average length of the 
-	 * concept names to account for very common character sequences such as "ation" (organisation, publication, etc.).
-	 * @param ontoFile1
-	 * @param ontoFile2
-	 * @return
+	 * Returns the average number of hyponyms in WordNet for each class in an ontology
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @return a score representing the average number of hyponyms per class for two input ontologies.
 	 * @throws OWLOntologyCreationException
-	   Feb 6, 2019
-	 */
-	public static double computeConceptNameEquality(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-
-		Set<String> lcs = new HashSet<String>();
-		for (OWLClass s : onto1.getClassesInSignature()) {
-			for (OWLClass t : onto2.getClassesInSignature()) {
-
-				lcs.addAll(longestCommonSubstrings(s.getIRI().getFragment(), t.getIRI().getFragment()));
-				if (longestCommonSubstrings(s.getIRI().getFragment(), t.getIRI().getFragment()).size() > 0) {
-					break;
-				}
-			}
-		}
-
-		int minOntology = Math.min(onto1.getClassesInSignature().size(), onto2.getClassesInSignature().size());
-
-		double cne = (double) lcs.size() / (double) minOntology;
-		return cne;
-
-	}
-
-	public static double computeDefinitionTokenEquality(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
-		int commonEntities = 0; 
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-		int numClassesTotalOnto1 = onto1.getClassesInSignature().size();
-		int numClassesTotalOnto2 = onto2.getClassesInSignature().size();
-		int minEntities = Math.min(numClassesTotalOnto1, numClassesTotalOnto2);
-
-
-		for (OWLClass s : onto1.getClassesInSignature()) {
-			for (OWLClass t : onto2.getClassesInSignature()) {
-
-				ArrayList<String> tokensS = new ArrayList<String>();
-				ArrayList<String> tokensT = new ArrayList<String>();
-
-				Set<String> sDefinitions = OntologyOperations.cleanClassDefinitions(onto1, s);
-
-				Set<String> tDefinitions = OntologyOperations.cleanClassDefinitions(onto2, t);
-
-
-				for (String sDef : sDefinitions) {
-					tokensS = StringUtilities.tokenize(StringUtilities.removeStopWords(sDef), true);
-				}
-
-				for (String tDef : tDefinitions) {
-					tokensT = StringUtilities.tokenize(StringUtilities.removeStopWords(tDef), true);
-				}
-
-				double tokenEquality = computeTokenEquality(tokensS, tokensT);
-
-				if (tokenEquality > tokenEqualityThreshold) {
-					commonEntities++;
-					break; //to ensure that we don´t compare several target concepts with a single source concept
-				}
-
-			}		
-		}	
-
-		return (double) commonEntities / (double) minEntities;
-
-	}
-
-	public static double computeTokenEquality(ArrayList<String> sourceList, ArrayList<String> targetList) {
-		int counter = 0;
-		int numAvgTokensInList = ( sourceList.size() + targetList.size() ) / 2;
-		for (String s : sourceList) {
-			for (String t : targetList) {
-				if (s.equalsIgnoreCase(t)) {
-					counter++;
-				}
-			}
-		}
-		return (double) counter / (double) numAvgTokensInList;
-
-	}
-
-	/**
-	 * Returns the average number of hyponyms in WordNet for each class in an
-	 * ontology
-	 * 
-	 * @param ontoFile:
-	 *            an ontology file
-	 * @return the average number of hyponyms per class in an ontology
-	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
 	 */
 	public static double computeHyponymRichnessWordNet(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
 
@@ -470,15 +417,14 @@ public class OntologyProfiler {
 		return (hyponymRichnessOnto1 + hyponymRichnessOnto2) / 2;
 	}
 
-
+	
 	/**
-	 * Returns the average number of synonyms in WordNet for each class in an
-	 * ontology
-	 * 
-	 * @param ontoFile:
-	 *            an ontology file
-	 * @return the average number of synonyms per class in an ontology
+	 * Returns the average number of synonyms in WordNet for each class in two input ontologies
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @return a score representing the average number of synonyms per class in two input ontologies.
 	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
 	 */
 	public static double computeSynonymRichnessWordNet(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
 
@@ -519,21 +465,15 @@ public class OntologyProfiler {
 	}
 
 
-	public static double computePropertyFraction(File ontoFile) throws OWLOntologyCreationException {
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		int numClassesTotal = onto.getClassesInSignature().size();
-		int counter = 0;
-		for (OWLClass cl : onto.getClassesInSignature()) {
-			if (OntologyOperations.getProperties(onto, cl.getIRI().getFragment().toLowerCase()).size() > 0) {
-				counter++;
-			}
-		}
-
-		return (double) counter / (double) numClassesTotal;
-
-	}
-
+	/**
+	 * The Property Fraction (PF) measures the extent to which the input ontologies include properties (data- and object properties). 
+	 * PF is computed as the fraction of classes that are associated with data- or object properties over the total number of classes in the two ontologies. 
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @return a score representing the Property Fraction (PF)
+	 * @throws OWLOntologyCreationException
+	   Jul 18, 2019
+	 */
 	public static double computePropertyFraction(File ontoFile1, File ontoFile2) throws OWLOntologyCreationException {
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
@@ -561,16 +501,16 @@ public class OntologyProfiler {
 		return (propertyRatioOnto1 + propertyRatioOnto2) / 2;
 
 	}
-
+	
 	/**
-	 * WordNet Coverage (WC): The percentage of terms with label or local name
-	 * present in WordNet.
-	 * 
-	 * @param onto1
-	 * @param onto2
+	 * The Lexical Coverage (WC) measures the percentage of terms with label or local name present in WordNet.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @return a score representing the Lexical Coverage (LC)
 	 * @throws OWLOntologyCreationException
-	 * @throws JWNLException
 	 * @throws FileNotFoundException
+	 * @throws JWNLException
+	   Jul 18, 2019
 	 */
 	public static double computeLexicalCoverage(File ontoFile1, File ontoFile2)
 			throws OWLOntologyCreationException, FileNotFoundException, JWNLException {
@@ -581,58 +521,6 @@ public class OntologyProfiler {
 		return lexicalCoverage;
 	}
 
-
-	/**
-	 * Returns a set of common substrings (after having compared character by
-	 * character)
-	 * 
-	 * @param s:
-	 *            an input string
-	 * @param t:
-	 *            an input string
-	 * @return a set of common substrings among the input strings
-	 */
-	private static Set<String> longestCommonSubstrings(String s, String t) {
-
-		int[][] table = new int[s.length()][t.length()];
-		int lengthS = s.length();
-		int lengthT = t.length();
-
-		//make longest 80 percent of the average length of s and t
-		int longest = (int)Math.round(((lengthS + lengthT) / 2) * 0.80);
-		Set<String> result = new HashSet<String>();
-
-		//English nouns usually contains more than 3 characters, so we limit the comparison of s and t > 3
-		if (lengthS > 3 && lengthT > 3) {
-			for (int i = 0; i < s.length(); i++) {
-				for (int j = 0; j < t.length(); j++) {
-					if (s.toLowerCase().charAt(i) != t.toLowerCase().charAt(j)) {
-						continue;
-					}
-
-					table[i][j] = (i == 0 || j == 0) ? 1 : 1 + table[i - 1][j - 1];
-					if (table[i][j] > longest) {
-						longest = table[i][j];
-						result.clear();
-					}
-					if (table[i][j] == longest) {
-						result.add(s.substring(i - longest + 1, i + 1));
-					}
-				}
-			}
-		}
-
-		return result;
-	}
-
-	private static double round(double value, int places) {
-		if (places < 0)
-			throw new IllegalArgumentException();
-
-		BigDecimal bd = new BigDecimal(value);
-		bd = bd.setScale(places, RoundingMode.HALF_UP);
-		return bd.doubleValue();
-	}
 
 
 }
