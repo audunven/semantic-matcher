@@ -2,6 +2,12 @@ package utilities;
 
 import java.util.Comparator;
 
+/**
+ * Implements Comparator in order to sort relations for a matrix representation.
+ * @author audunvennesland
+ * @see alignmentcombination.ProfileWeight
+ * @see alignmentcombination.ProfileWeightSubsumption
+ */
 public class RelationComparator implements Comparator<Relation> {
 
 
@@ -17,15 +23,4 @@ public class RelationComparator implements Comparator<Relation> {
 
 }
 
-//StringAndDateComparator implements Comparator<MyObject> {
-//
-//	   public int compare(MyObject first, MyObject second) {
-//	        int result = first.getString().compareTo(second.getString());
-//	        if (result != 0) {
-//	            return result;
-//	        }
-//	        else {
-//	            return first.getDate().compareTo(second.getDate());
-//	        }
-//	}
 

@@ -37,12 +37,15 @@ public class GraphCreator {
 		
 	}
 
+	
 	/**
 	 * This method creates a Neo4J graph from an input ontology
-	 * @param OWLOntology onto
-	 * @param Label label
-	 * @param GraphDatabaseService db
-	 * @throws OWLOntologyCreationException
+	 * @param onto an OWLOntology
+	 * @param label the label distinguishing this graph
+	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
+	 * an ontology. If an ontology cannot be created then subclasses
+	 * of this class will describe the reasons.
+	   Jul 27, 2019
 	 */
 	public static void createOntologyGraph(OWLOntology onto, Label label) throws OWLOntologyCreationException {
 
@@ -106,11 +109,11 @@ public class GraphCreator {
 	/**
 	 * This method finds the shortest path between two nodes used as parameters. The path is the full path consisting of nodes and relationships between the classNode..
 	 * ...and the rootNode.
-	 * @param rootNode
-	 * @param classNode
-	 * @param label
-	 * @param rel
-	 * @return Iterable<Path> paths
+	 * @param rootNode the topmost node in the graph 
+	 * @param classNode the node from which the path to the rootnote is calculated.
+	 * @param label a label distinguishing this graph
+	 * @param rel type of relation (edge) between the nodes.
+	 * @return Iterable<Path> paths the path between the two nodes.
 	 */
 	public Iterable<Path> findShortestPathToRoot(Node rootNode, Node classNode, Label label, RelationshipType rel) {
 
@@ -123,7 +126,7 @@ public class GraphCreator {
 
 	/**
 	 * Registers a shutdown hook for the Neo4j instance so that it shuts down nicely when the VM exits
-	 * @param graphDb
+	 * @param graphDb the GraphDatabaseService
 	 */
 	private static void registerShutdownHook(final GraphDatabaseService graphDb)
 	{

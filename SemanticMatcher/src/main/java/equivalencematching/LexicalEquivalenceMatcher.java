@@ -25,8 +25,6 @@ import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
-import utilities.Jaccard;
-import utilities.Sigmoid;
 import utilities.SimilarityMetrics;
 import utilities.StringUtilities;
 import utilities.WordNet;
@@ -252,7 +250,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 			//compute the Jaccard similarity for the compound modifier tokens
 			if (!sourceSynonyms.isEmpty() && !targetSynonyms.isEmpty()) {
-				jaccardSim = Jaccard.jaccardSetSim(sourceSynonyms, targetSynonyms);
+				jaccardSim = SimilarityMetrics.jaccardSetSim(sourceSynonyms, targetSynonyms);
 
 				if (jcSim > 0.1 && jaccardSim > 0.1) {
 
@@ -317,7 +315,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 				//compute the Jaccard similarity between the source compound head synonyms and target concept synonyms
 				if (!sourceSynonyms.isEmpty() && !targetSynonyms.isEmpty()) {
-					jaccardSim = Jaccard.jaccardSetSim(sourceSynonyms, targetSynonyms);
+					jaccardSim = SimilarityMetrics.jaccardSetSim(sourceSynonyms, targetSynonyms);
 				} else {
 					jaccardSim = 0;
 				}
@@ -369,7 +367,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 				//compute the Jaccard similarity between the source compound head synonyms and target concept synonyms
 				if (!sourceSynonyms.isEmpty() && !targetSynonyms.isEmpty()) {
-					jaccardSim = Jaccard.jaccardSetSim(sourceSynonyms, targetSynonyms);
+					jaccardSim = SimilarityMetrics.jaccardSetSim(sourceSynonyms, targetSynonyms);
 				} else {
 					jaccardSim = 0;
 				}

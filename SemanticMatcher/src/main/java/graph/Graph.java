@@ -371,9 +371,9 @@ public class Graph {
 	 * (i.e. owl:Thing) We use a Map as a work-around to counting the edges between
 	 * a given node and the root (owl:Thing). This is possible since a Map only
 	 * allows unique keys and a numbered Neo4J path consists of a set of path items
-	 * <edge-count, node (property)> where all nodes for each edge-count is listed
-	 * (e.g. for the node "AcademicArticle" the upwards path is <1, Article>, <2,
-	 * Document>, <3, owl:Thing>).
+	 * edge-count, node (property) where all nodes for each edge-count is listed
+	 * (e.g. for the node "AcademicArticle" the upwards path is (1, Article), (2,
+	 * Document), (3, owl:Thing)).
 	 * @param classNode the node from which the distance to root is counted from.
 	 * @return the (path) distance from classNode to the root node as an integer.
 	 */
@@ -421,7 +421,7 @@ public class Graph {
 	 * Registers a shutdown hook for the Neo4j instance so that it shuts down nicely
 	 * when the VM exits
 	 * 
-	 * @param graphDb
+	 * @param graphDb the GraphDatabaseService
 	 */
 	public static void registerShutdownHook(final GraphDatabaseService graphDb) {
 		Runtime.getRuntime().addShutdownHook(new Thread() {

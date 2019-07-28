@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 /**
  * A class that defines a semantic relation through the two concepts involved in the relation, the type of relation and the confidence measure associated with the relation
+ * Implements Comparable in order to sort relations.
  * @author audunvennesland
  *
  */
@@ -16,6 +17,14 @@ public class Relation implements Comparable<Relation> {
 	private double confidence;
 	private int sigmoidSlope;
 
+	/**
+	 * Constructor holding params for a semantic relation
+	 * @param id the unique identifier of a relation (cell)
+	 * @param concept1 source concept
+	 * @param concept2 target concept
+	 * @param relationType type of relation
+	 * @param confidence the confidence value assigned by a matcher
+	 */
 	public Relation(String id, String concept1, String concept2, String relationType, double confidence) {
 		super();
 		this.id = id;
@@ -25,6 +34,7 @@ public class Relation implements Comparable<Relation> {
 		this.confidence = confidence;
 	}
 	
+/*
 	public Relation(String id, String concept1, String concept2, String relationType, double confidence, int sigmoidSlope) {
 		super();
 		this.id = id;
@@ -33,7 +43,7 @@ public class Relation implements Comparable<Relation> {
 		this.relationType = relationType;
 		this.confidence = confidence;
 		this.sigmoidSlope = sigmoidSlope;
-	}
+	}*/
 
 	public Relation() {}
 

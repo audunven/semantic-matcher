@@ -39,7 +39,7 @@ public class ConceptScopeMismatch {
 		String compoundHead = null;
 		for (Cell c : inputAlignment) {
 			if (StringUtilities.isCompoundWord(c.getObject1AsURI().getFragment())) {
-				qualifier = StringUtilities.getCompoundQualifier(c.getObject1AsURI().getFragment());
+				qualifier = StringUtilities.getCompoundFirstQualifier(c.getObject1AsURI().getFragment());
 				compoundHead = StringUtilities.getCompoundHead(c.getObject1AsURI().getFragment());
 				
 				//e.g. [Cloud]Layer - Cloud || Aircraft[Flow]-Flow
@@ -48,7 +48,7 @@ public class ConceptScopeMismatch {
 				}
 
 			} else if (StringUtilities.isCompoundWord(c.getObject2AsURI().getFragment())) {
-				qualifier = StringUtilities.getCompoundQualifier(c.getObject2AsURI().getFragment());
+				qualifier = StringUtilities.getCompoundFirstQualifier(c.getObject2AsURI().getFragment());
 				compoundHead = StringUtilities.getCompoundHead(c.getObject2AsURI().getFragment());
 				//e.g. [Sector] || Location-Reference[Location]
 				if (qualifier.toLowerCase().equals(c.getObject1AsURI().getFragment().toLowerCase()) || compoundHead.toLowerCase().equals(c.getObject1AsURI().getFragment().toLowerCase())) {

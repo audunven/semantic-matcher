@@ -595,7 +595,7 @@ public class AlignmentOperations {
 				for (String sc : subclasses) {
 					subsumptionReferenceAlignment.addAlignCell(new URI(sc), c.getObject2AsURI(), "<", 1.0);
 					//print justification for entailed subsumption relation
-					System.out.println(StringUtilities.getString(sc) + " < " + c.getObject2AsURI().getFragment() + " because: " + 
+					System.out.println(StringUtilities.getLabelWithoutPrefix(sc) + " < " + c.getObject2AsURI().getFragment() + " because: " + 
 							c.getObject1AsURI().getFragment() + " = " + c.getObject2AsURI().getFragment());
 
 				}
@@ -608,7 +608,7 @@ public class AlignmentOperations {
 				for (String sc : subclasses) {
 					subsumptionReferenceAlignment.addAlignCell(c.getObject1AsURI(), new URI(sc), ">", 1.0);
 					//print justification for entailed subsumption relation
-					System.out.println(c.getObject2AsURI().getFragment() + " > " + StringUtilities.getString(sc)+  " because: " + 
+					System.out.println(c.getObject2AsURI().getFragment() + " > " + StringUtilities.getLabelWithoutPrefix(sc)+  " because: " + 
 							c.getObject1AsURI().getFragment() + " = " + c.getObject2AsURI().getFragment());
 
 				}
@@ -628,7 +628,7 @@ public class AlignmentOperations {
 				for (String sc : superclasses) {
 					subsumptionReferenceAlignment.addAlignCell(new URI(sc), c.getObject2AsURI(), ">", 1.0);
 					//print justification for entailed subsumption relation
-					System.out.println(StringUtilities.getString(sc) + " > " + c.getObject2AsURI().getFragment() + " because: " + 
+					System.out.println(StringUtilities.getLabelWithoutPrefix(sc) + " > " + c.getObject2AsURI().getFragment() + " because: " + 
 							c.getObject1AsURI().getFragment() + " = " + c.getObject2AsURI().getFragment());
 
 				}
@@ -638,7 +638,7 @@ public class AlignmentOperations {
 				for (String sc : superclasses) {
 					subsumptionReferenceAlignment.addAlignCell(c.getObject1AsURI(), new URI(sc), "<", 1.0);
 					//print justification for entailed subsumption relation
-					System.out.println(c.getObject1AsURI().getFragment() + " < " + StringUtilities.getString(sc) +  " because: " + 
+					System.out.println(c.getObject1AsURI().getFragment() + " < " + StringUtilities.getLabelWithoutPrefix(sc) +  " because: " + 
 							c.getObject1AsURI().getFragment() + " = " + c.getObject2AsURI().getFragment());
 
 					//System.out.println("Adding " + sc + " as superclass to " + c.getObject1AsURI());
@@ -839,7 +839,7 @@ public class AlignmentOperations {
 				path1 = new StringBuffer();
 				fullPath1 = new String();
 				for (String s : superclasses1) {
-					path1.append(StringUtilities.getString(s) + ".");
+					path1.append(StringUtilities.getLabelWithoutPrefix(s) + ".");
 				}
 				fullPath1 = path1.toString() + c.getObject1AsURI().getFragment();
 			} else {
@@ -851,7 +851,7 @@ public class AlignmentOperations {
 				path2 = new StringBuffer();
 				fullPath2 = new String();
 			for (String t : superclasses2) {
-				path2.append(StringUtilities.getString(t) + ".");
+				path2.append(StringUtilities.getLabelWithoutPrefix(t) + ".");
 			}
 			fullPath2 = path2.toString() + c.getObject2AsURI().getFragment();
 			} else {
