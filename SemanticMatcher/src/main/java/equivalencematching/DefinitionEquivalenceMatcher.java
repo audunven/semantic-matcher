@@ -161,7 +161,7 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 	 */
 	public void align(Alignment alignment, Properties param) throws AlignmentException {
 		
-		//create the vector map holding word - embedding vectors		
+		//as a preparatory step: create the vector map holding word - embedding vectors	for all entries in the vector file	
 		Map<String, ArrayList<Double>> vectorMap = null;
 		
 		try {
@@ -170,12 +170,14 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 			e1.printStackTrace();
 		}
 		
+		//create the vector maps holding the global vectors specifically for the source ontology and the target ontology
 		Map<String, double[]> sourceVectorMap = new HashMap<String, double[]>();
 		Map<String, double[]> targetVectorMap = new HashMap<String, double[]>();
 		
 		double[] sourceGlobalVectors = null;
 		double[] targetGlobalVectors = null;
 		
+		//for the DEM matcher we extract the global vectors (average of label vectors + comment vectors)
 		for (OWLClass sourceClass : sourceOntology.getClassesInSignature()) {
 			try {
 				sourceGlobalVectors = VectorExtractor.getGlobalVector(sourceClass.getIRI().getFragment().toLowerCase(), 
@@ -208,7 +210,7 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 		double cosineSim = 0;
 		double idCounter = 0;
 		
-
+		//we match the global vectors for each pair of concepts using cosine similarity. If for either of the concept there is no vector representation, we return 0.
 		try {
 			// Match classes
 			for ( Object sourceObject: ontology1().getClasses() ){

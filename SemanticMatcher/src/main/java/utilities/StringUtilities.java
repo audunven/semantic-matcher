@@ -346,7 +346,9 @@ public class StringUtilities {
 	   Jul 28, 2019
 	 */
 	public static boolean isCompoundWord(String inputString) {
-		String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
+		//02.03.2020: Replaced regex for decompounding
+		String[] compounds = inputString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
 		
 		//must check if s is not all uppercase
 		if (compounds.length > 1 && !StringUtils.isAllUpperCase(inputString)) {
@@ -390,8 +392,9 @@ public class StringUtilities {
 		
 		if (isCompoundWord(inputString)) {
 		
-		String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
-		
+		//02.03.2020: Replaced regex for decompounding			
+		String[] compounds = inputString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
 		String compoundHead = compounds[compounds.length-1];
 		
 		return compoundHead;
@@ -409,7 +412,10 @@ public class StringUtilities {
 	   Jul 28, 2019
 	 */
 	public static String getCompoundFirstQualifier(String inputString) {
-		String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
+		
+		//02.03.2020: Replaced regex for decompounding			
+		String[] compounds = inputString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
 		
 		String compoundQualifier = compounds[0];
 		
@@ -436,7 +442,10 @@ public class StringUtilities {
 	   Jul 28, 2019
 	 */
 	public static ArrayList<String> getWordsFromCompound (String inputString) {
-		String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
+		
+		//02.03.2020: Replaced regex for decompounding			
+		String[] compounds = inputString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
 		
 		ArrayList<String> compoundWordsList = new ArrayList<String>();
 		
@@ -455,7 +464,10 @@ public class StringUtilities {
 	   Jul 28, 2019
 	 */
 	public static Set<String> getWordsAsSetFromCompound (String inputString) {
-		String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
+		
+		//02.03.2020: Replaced regex for decompounding			
+		String[] compounds = inputString.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//String[] compounds = inputString.split("(?<=.)(?=\\p{Lu})");
 		
 		Set<String> compoundWordsList = new HashSet<String>();
 		

@@ -1,21 +1,15 @@
 package subsumptionmatching;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
-import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
@@ -35,9 +29,7 @@ import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import mismatchdetection.ConfirmSubsumption;
 import net.didion.jwnl.JWNLException;
 import utilities.OntologyOperations;
-import utilities.Sigmoid;
 import utilities.StringUtilities;
-import utilities.WNDomain;
 
 public class DefinitionSubsumptionMatcher extends ObjectAlignment implements AlignmentProcess {
 

@@ -226,8 +226,11 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 			sourceModifierBasis = source.replace(sourceCompoundHead, "");
 			targetModifierBasis = target.replace(targetCompoundHead, "");
 
-			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));		
-			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
+			//02.03.2020: Replaced regex for decompounding			
+			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));		
+			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));			
+//			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));		
+//			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
 
 
 			//get the Jiang-Conrath similarity of the compound heads
@@ -283,7 +286,11 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 			targetSynonyms = WordNet.getAllSynonymSet(target.toLowerCase());
 
 			sourceModifierBasis = source.replace(sourceCompoundHead, "");
-			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));	
+			
+			//02.03.2020: Replaced regex for decompounding
+			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));	
+			//sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));	
+			
 			double localJcSim = 0;
 
 			//if the compound head of the source equals the target, we have most likely a subsumption relation, so we give that a score of zero
@@ -337,7 +344,11 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 			sourceSynonyms = WordNet.getAllSynonymSet(source.toLowerCase());
 
 			targetModifierBasis = target.replace(targetCompoundHead, "");
-			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
+			
+			//02.03.2020: Replaced regex for decompounding
+			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));
+			//targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
+			
 			double localJcSim = 0;
 
 			//if the compound head of the target equals the source, we have most likely a subsumption relation, so we give that a score of zero

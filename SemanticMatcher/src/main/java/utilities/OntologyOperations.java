@@ -740,7 +740,9 @@ public class OntologyOperations {
 
 		for (OWLClass cl : classes) {
 			//get all tokens of the class name
-			String[] tokens = cl.getIRI().getFragment().split("(?<=.)(?=\\p{Lu})");
+			//02.03.2020: Replaced regex for decompounding
+			String[] tokens = cl.getIRI().getFragment().split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+			//String[] tokens = cl.getIRI().getFragment().split("(?<=.)(?=\\p{Lu})");
 
 			int numTokens = tokens.length;
 			int tokenCounter = 0;
@@ -785,7 +787,9 @@ public class OntologyOperations {
 	public static boolean isCompound(String a) {
 		boolean test = false;
 
-		String[] compounds = a.split("(?<=.)(?=\\p{Lu})");
+		//02.03.2020: Replaced regex for decompounding		
+		String[] compounds = a.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//String[] compounds = a.split("(?<=.)(?=\\p{Lu})");
 
 		if (compounds.length > 1) {
 			test = true;

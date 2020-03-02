@@ -3,15 +3,11 @@ package wordembedding;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLAnnotation;
@@ -20,13 +16,12 @@ import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLLiteral;
 import org.semanticweb.owlapi.model.OWLOntology;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 
-import utilities.StringUtilities;
 import utilities.MathUtils;
+import utilities.StringUtilities;
 
 /**
  * Extracts VectorConcepts by retrieving vectors from a Word Embedding file according to concepts in an ontology.
@@ -314,7 +309,10 @@ public class VectorExtractor {
 			
 
 			//get the compounds and check if any of them are in the vector file
-			String[] compounds = label.split("(?<=.)(?=\\p{Lu})");
+			
+			//02.03.2020: Replaced regex for decompounding			
+			String[] compounds = label.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+			//String[] compounds = label.split("(?<=.)(?=\\p{Lu})");
 
 
 			for (int i = 0; i < compounds.length; i++) {
@@ -505,7 +503,9 @@ public class VectorExtractor {
 		} else if (isCompound(label)) {
 
 			//get the compounds and check if any of them are in the vector file
-			String[] compounds = label.split("(?<=.)(?=\\p{Lu})");
+			//02.03.2020: Replaced regex for decompounding			
+			String[] compounds = label.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+			//String[] compounds = label.split("(?<=.)(?=\\p{Lu})");
 
 
 			for (int i = 0; i < compounds.length; i++) {
