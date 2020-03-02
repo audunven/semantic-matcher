@@ -308,12 +308,8 @@ public class VectorExtractor {
 		} else if (StringUtilities.isCompoundWord(label)) {
 			
 
-			//get the compounds and check if any of them are in the vector file
-			
-			//02.03.2020: Replaced regex for decompounding			
-			String[] compounds = label.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-			//String[] compounds = label.split("(?<=.)(?=\\p{Lu})");
-
+			//get the compounds and check if any of them are in the vector file			
+			String[] compounds = StringUtilities.getCompoundParts(label);
 
 			for (int i = 0; i < compounds.length; i++) {
 				
@@ -503,10 +499,7 @@ public class VectorExtractor {
 		} else if (isCompound(label)) {
 
 			//get the compounds and check if any of them are in the vector file
-			//02.03.2020: Replaced regex for decompounding			
-			String[] compounds = label.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-			//String[] compounds = label.split("(?<=.)(?=\\p{Lu})");
-
+			String[] compounds = StringUtilities.getCompoundParts(label);
 
 			for (int i = 0; i < compounds.length; i++) {
 				if (vectorMap.containsKey(compounds[i].toLowerCase())) {

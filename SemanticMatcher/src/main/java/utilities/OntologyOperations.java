@@ -740,9 +740,7 @@ public class OntologyOperations {
 
 		for (OWLClass cl : classes) {
 			//get all tokens of the class name
-			//02.03.2020: Replaced regex for decompounding
-			String[] tokens = cl.getIRI().getFragment().split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-			//String[] tokens = cl.getIRI().getFragment().split("(?<=.)(?=\\p{Lu})");
+			String[] tokens = StringUtilities.getCompoundParts(cl.getIRI().getFragment());
 
 			int numTokens = tokens.length;
 			int tokenCounter = 0;
@@ -787,9 +785,7 @@ public class OntologyOperations {
 	public static boolean isCompound(String a) {
 		boolean test = false;
 
-		//02.03.2020: Replaced regex for decompounding		
-		String[] compounds = a.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-		//String[] compounds = a.split("(?<=.)(?=\\p{Lu})");
+		String[] compounds = StringUtilities.getCompoundParts(a);
 
 		if (compounds.length > 1) {
 			test = true;
@@ -1125,7 +1121,7 @@ public class OntologyOperations {
 		Set<String> tokensSet = new HashSet<String>();
 		for (OWLClass c : onto.getClassesInSignature()) {
 			if (isCompound(c.getIRI().getFragment())) {
-				tokensSet.add(StringUtilities.splitCompounds(c.getIRI().getFragment()).toLowerCase());
+				tokensSet.add(StringUtilities.getCompoundWordWithSpaces(c.getIRI().getFragment()).toLowerCase());
 				tokensSet.addAll(OntologyOperations.getClassDefinitionTokensFull(onto, c));
 			} else {
 				tokensSet.add(c.getIRI().getFragment().toLowerCase());

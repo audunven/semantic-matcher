@@ -309,7 +309,7 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 
 
 		if (StringUtilities.isCompoundWord(propName)) {
-			propName = StringUtilities.splitCompounds(propName);
+			propName = StringUtilities.getCompoundWordWithSpaces(propName);
 		}
 
 		String tag = maxentTagger.tagString(propName);

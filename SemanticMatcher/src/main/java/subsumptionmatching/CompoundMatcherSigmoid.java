@@ -202,9 +202,7 @@ public class CompoundMatcherSigmoid extends ObjectAlignment implements Alignment
 	public static boolean isCompoundRelation(String a, String b) {
 		boolean test = false;
 
-		//02.03.2020: Added new regex for decompounding
-		String[] compounds = a.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-		//String[] compounds = a.split("(?<=.)(?=\\p{Lu})");
+		String[] compounds = StringUtilities.getCompoundParts(a);
 
 		if (compounds.length > 2) {
 

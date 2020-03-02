@@ -225,13 +225,9 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 			targetCompoundHead = StringUtilities.getCompoundHead(target);
 			sourceModifierBasis = source.replace(sourceCompoundHead, "");
 			targetModifierBasis = target.replace(targetCompoundHead, "");
-
-			//02.03.2020: Replaced regex for decompounding			
-			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));		
-			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));			
-//			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));		
-//			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
-
+			
+			sourceModifierTokens = new HashSet<String>(Arrays.asList(StringUtilities.getCompoundParts(sourceModifierBasis)));		
+			targetModifierTokens = new HashSet<String>(Arrays.asList(StringUtilities.getCompoundParts(targetModifierBasis)));			
 
 			//get the Jiang-Conrath similarity of the compound heads
 			jcSim = WordNet.computeJiangConrath(sourceCompoundHead, targetCompoundHead);
@@ -287,9 +283,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 			sourceModifierBasis = source.replace(sourceCompoundHead, "");
 			
-			//02.03.2020: Replaced regex for decompounding
-			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));	
-			//sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));	
+			sourceModifierTokens = new HashSet<String>(Arrays.asList(StringUtilities.getCompoundParts(sourceModifierBasis)));	
 			
 			double localJcSim = 0;
 
@@ -345,9 +339,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 			targetModifierBasis = target.replace(targetCompoundHead, "");
 			
-			//02.03.2020: Replaced regex for decompounding
-			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));
-			//targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
+			targetModifierTokens = new HashSet<String>(Arrays.asList(StringUtilities.getCompoundParts(targetModifierBasis)));
 			
 			double localJcSim = 0;
 

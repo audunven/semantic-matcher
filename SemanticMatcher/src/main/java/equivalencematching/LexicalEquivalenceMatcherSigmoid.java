@@ -229,9 +229,7 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 			
 			sourceModifierBasis = source.replace(sourceCompoundHead, "");
 			
-			//02.03.2020: Replaced regex for decompounding
-			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));	
-//			sourceModifierTokens = new HashSet<String>(Arrays.asList(sourceModifierBasis.split("(?<=.)(?=\\p{Lu})")));	
+			sourceModifierTokens = new HashSet<String>(Arrays.asList(StringUtilities.getCompoundParts(sourceModifierBasis)));	
 			
 			double localJcSim = 0;
 
@@ -287,9 +285,7 @@ public class LexicalEquivalenceMatcherSigmoid extends ObjectAlignment implements
 			
 			targetModifierBasis = target.replace(targetCompoundHead, "");
 			
-			//02.03.2020: Replaced regex for decompounding
-			targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])")));
-			//targetModifierTokens = new HashSet<String>(Arrays.asList(targetModifierBasis.split("(?<=.)(?=\\p{Lu})")));
+			targetModifierTokens = new HashSet<String>(Arrays.asList(StringUtilities.getCompoundParts(targetModifierBasis)));
 			
 			double localJcSim = 0;
 

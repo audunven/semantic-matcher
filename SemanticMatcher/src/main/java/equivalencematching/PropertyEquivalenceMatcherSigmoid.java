@@ -263,7 +263,7 @@ public class PropertyEquivalenceMatcherSigmoid extends ObjectAlignment implement
 
 
 		if (StringUtilities.isCompoundWord(text)) {
-			text = StringUtilities.splitCompounds(text);
+			text = StringUtilities.getCompoundWordWithSpaces(text);
 		}
 
 		String tag = maxentTagger.tagString(text);
