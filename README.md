@@ -1,4 +1,4 @@
-# Source Code for Sematic Matcher Artefacts
+# Source Code for Semantic Matcher Artefacts
 This repository contains the source code for the semantic matching artefacts. All code is written in Java (1.7). 
 
 ## Algorithms for Equivalence and Subsumption Matching
