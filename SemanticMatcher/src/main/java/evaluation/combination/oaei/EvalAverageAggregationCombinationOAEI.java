@@ -21,6 +21,7 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import alignmentcombination.AlignmentConflictResolution;
 import alignmentcombination.AverageAggregation;
 import alignmentcombination.NaiveDescendingExtraction;
+import evaluation.general.ComputeSyntacticEvaluationScores;
 import evaluation.general.EvaluationScore;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
@@ -28,7 +29,7 @@ import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import mismatchdetection.MismatchDetection;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.AlignmentOperations;
 import utilities.StringUtilities;
 
@@ -74,14 +75,14 @@ public class EvalAverageAggregationCombinationOAEI {
 
 		for (int i = 0; i < ontos.length; i++) {
 
-			sourceOntologyFile = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + ontos[i] + "/" + ontos[i] + "-" + ontos[i].substring(0, 3) + ".rdf");
-			targetOntologyFile = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + ontos[i] + "/" + ontos[i] + "-" + ontos[i].substring(3, ontos[i].length()) + ".rdf");
-			reference_alignment_eq_and_sub ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQ_SUB.rdf";
-			reference_alignment_eq ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQUIVALENCE.rdf";
-			reference_alignment_sub ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-SUBSUMPTION.rdf";
+			sourceOntologyFile = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/ONTOLOGIES/" + ontos[i] + "/" + ontos[i] + "-" + ontos[i].substring(0, 3) + ".rdf");
+			targetOntologyFile = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/ONTOLOGIES/" + ontos[i] + "/" + ontos[i] + "-" + ontos[i].substring(3, ontos[i].length()) + ".rdf");
+			reference_alignment_eq_and_sub ="./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQ_SUB.rdf";
+			reference_alignment_eq ="./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-EQUIVALENCE.rdf";
+			reference_alignment_sub ="./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/REFALIGN/" + ontos[i] + "/" + ontos[i].substring(0, 3) + "-" + ontos[i].substring(3, ontos[i].length()) + "-SUBSUMPTION.rdf";
 			
-			EQ_folder = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/EQ";
-			SUB_folder = "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/SUB";
+			EQ_folder = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/EQ";
+			SUB_folder = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/SUB";
 			aparser = new AlignmentParser(0);
 			refalign_EQ_AND_SUB = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq_and_sub)));
 			refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(reference_alignment_eq)));
@@ -128,11 +129,11 @@ public class EvalAverageAggregationCombinationOAEI {
 			
 			double[] confidence = {0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
 			
-			double precision = 0;
-			double recall = 0;
-			double fMeasure = 0;
-			PRecEvaluator eval = null;
-			Properties p = new Properties();
+//			double precision = 0;
+//			double recall = 0;
+//			double fMeasure = 0;
+//			PRecEvaluator eval = null;
+//			Properties p = new Properties();
 			
 			URIAlignment averageAggEQAlignment = AverageAggregation.getAverageAggregatedAlignment(eqAlignments);
 			URIAlignment averageAggSUBAlignment = AverageAggregation.getAverageAggregatedAlignment(subAlignments);
@@ -150,21 +151,22 @@ public class EvalAverageAggregationCombinationOAEI {
 			Map<String, EvaluationScore> eqEvaluationMap = new TreeMap<String, EvaluationScore>();
 
 			for (double conf : confidence) {
-				EvaluationScore evalScore = new EvaluationScore();
+				//EvaluationScore evalScore = new EvaluationScore();
 				eqOnly.cut(conf);
-				eval = new PRecEvaluator(refalign_EQ, eqOnly);
-				eval.eval(p);
-				precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-				recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-				fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-				evalScore.setPrecision(precision);
-				evalScore.setRecall(recall);
-				evalScore.setfMeasure(fMeasure);
+//				eval = new PRecEvaluator(refalign_EQ, eqOnly);
+//				eval.eval(p);
+//				precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//				recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//				fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//				evalScore.setPrecision(precision);
+//				evalScore.setRecall(recall);
+//				evalScore.setfMeasure(fMeasure);
+				EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(eqOnly, refalign_EQ);
 				//put the evalation score according to each confidence value in the map
 				eqEvaluationMap.put(String.valueOf(conf), evalScore);			
 			}
 
-			Evaluator.evaluateSingleMatcherThresholds(eqEvaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/AVERAGE_EQ_ONLY_"+ontos[i]+"_"+date);
+			Evaluator.evaluateSingleMatcherThresholds(eqEvaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/AVERAGE_EQ_ONLY_"+ontos[i]+"_"+date);
 
 
 			//isolate the subsumption relations and evaluate the subsumption alignment only
@@ -173,21 +175,22 @@ public class EvalAverageAggregationCombinationOAEI {
 			Map<String, EvaluationScore> subEvaluationMap = new TreeMap<String, EvaluationScore>();
 
 			for (double conf : confidence) {
-				EvaluationScore evalScore = new EvaluationScore();
+				//EvaluationScore evalScore = new EvaluationScore();
 				subOnly.cut(conf);
-				eval = new PRecEvaluator(refalign_SUB, subOnly);
-				eval.eval(p);
-				precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-				recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-				fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-				evalScore.setPrecision(precision);
-				evalScore.setRecall(recall);
-				evalScore.setfMeasure(fMeasure);
+//				eval = new PRecEvaluator(refalign_SUB, subOnly);
+//				eval.eval(p);
+//				precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//				recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//				fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//				evalScore.setPrecision(precision);
+//				evalScore.setRecall(recall);
+//				evalScore.setfMeasure(fMeasure);
+				EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(subOnly, refalign_SUB);
 				//put the evalation score according to each confidence value in the map
 				subEvaluationMap.put(String.valueOf(conf), evalScore);			
 			}
 
-			Evaluator.evaluateSingleMatcherThresholds(subEvaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/AVERAGE_SUB_ONLY_"+ontos[i]+"_"+date);
+			Evaluator.evaluateSingleMatcherThresholds(subEvaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/AVERAGE_SUB_ONLY_"+ontos[i]+"_"+date);
 			
 			PrintWriter writer = null;
 			AlignmentVisitor renderer = null;
@@ -196,20 +199,20 @@ public class EvalAverageAggregationCombinationOAEI {
 			Map<String, EvaluationScore> evaluationMap = new TreeMap<String, EvaluationScore>();
 			
 			for (double conf : confidence) {
-				EvaluationScore evalScore = new EvaluationScore();
+				//EvaluationScore evalScore = new EvaluationScore();
 				nonConflictedMergedAlignment.cut(conf);
-				eval = new PRecEvaluator(refalign_EQ_AND_SUB, nonConflictedMergedAlignment);
-				eval.eval(p);
-				precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-				recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-				fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-				evalScore.setPrecision(precision);
-				evalScore.setRecall(recall);
-				evalScore.setfMeasure(fMeasure);
-				
+//				eval = new PRecEvaluator(refalign_EQ_AND_SUB, nonConflictedMergedAlignment);
+//				eval.eval(p);
+//				precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//				recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//				fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//				evalScore.setPrecision(precision);
+//				evalScore.setRecall(recall);
+//				evalScore.setfMeasure(fMeasure);
+				EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(nonConflictedMergedAlignment, refalign_EQ_AND_SUB);
 				//put the evalation score according to each confidence value in the map
 				evaluationMap.put(String.valueOf(conf), evalScore);			
-				outputAlignment = new File("./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/AverageAggregation"+DATASET+"_"+ontos[i]+"_"+conf+".rdf");
+				outputAlignment = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/MERGED_NOWEIGHT/AverageAggregation"+DATASET+"_"+ontos[i]+"_"+conf+".rdf");
 				writer = new PrintWriter(
 						new BufferedWriter(
 								new FileWriter(outputAlignment)), true); 
@@ -221,7 +224,7 @@ public class EvalAverageAggregationCombinationOAEI {
 
 			}
 			
-			Evaluator.evaluateSingleMatcherThresholds(evaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/AVERAGE_"+ontos[i]+"_"+date);
+			Evaluator.evaluateSingleMatcherThresholds(evaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos[i]+"/AVERAGE/AVERAGE_"+ontos[i]+"_"+date);
 
 		}
 		}

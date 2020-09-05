@@ -13,7 +13,6 @@ import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentVisitor;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.unima.alcomox.exceptions.AlcomoException;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
@@ -21,7 +20,7 @@ import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
 import mismatchdetection.StructureMismatch;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.StringUtilities;
 
 /**
@@ -31,7 +30,7 @@ import utilities.StringUtilities;
  */
 public class EvalMismatchDetection {
 
-	public static void main(String[] args) throws AlignmentException, URISyntaxException, AlcomoException, OWLOntologyCreationException, JWNLException, IOException {
+	public static void main(String[] args) throws AlignmentException, URISyntaxException, OWLOntologyCreationException, JWNLException, IOException {
 
 
 		//import all alignments in folder

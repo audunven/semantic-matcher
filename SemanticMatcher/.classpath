@@ -22,7 +22,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
@@ -32,57 +32,12 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/alcomo.jar"/>
-	<classpathentry kind="lib" path="lib/align.jar"/>
-	<classpathentry kind="lib" path="lib/alignsvc.jar"/>
-	<classpathentry kind="lib" path="lib/aterm-java-1.6.jar"/>
-	<classpathentry kind="lib" path="lib/aterm-java-1.8.2-p1.jar"/>
-	<classpathentry kind="lib" path="lib/axiom-1.2.8.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="lib/dk.brics.automaton-1.11-2.jar"/>
-	<classpathentry kind="lib" path="lib/HermiT.jar"/>
-	<classpathentry kind="lib" path="lib/jautomata-core-2.0-alpha-1.jar"/>
-	<classpathentry kind="lib" path="lib/jaws-bin.jar"/>
-	<classpathentry kind="lib" path="lib/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="lib/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="lib/jgrapht-core-0.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/jgrapht-ext-0.9.2.jar"/>
-	<classpathentry kind="lib" path="lib/jgrapht-jdk1.5.jar"/>
-	<classpathentry kind="lib" path="lib/jjtraveler-0.6.jar"/>
-	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jwnl.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
-	<classpathentry kind="lib" path="lib/ontosim.jar"/>
-	<classpathentry kind="lib" path="lib/ontowrap.jar"/>
-	<classpathentry kind="lib" path="lib/owlapi-3.2.2.jar"/>
-	<classpathentry kind="lib" path="lib/owlapi-bin.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-cli.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-core-2.3.2-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-core.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-datatypes.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-dig.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-el.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-examples-2.3.2-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-explanation.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-jena.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-modularity.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-owlapiv3-2.3.2-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-owlapiv3.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-pellint.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-query.jar"/>
-	<classpathentry kind="lib" path="lib/pellet-rules.jar"/>
-	<classpathentry kind="lib" path="lib/procalign.jar"/>
-	<classpathentry kind="lib" path="lib/PropString.jar"/>
 	<classpathentry kind="lib" path="lib/rita.jar"/>
+	<classpathentry kind="lib" path="lib/owlapi-bin.jar"/>
 	<classpathentry kind="lib" path="lib/rita.support.jar"/>
-	<classpathentry kind="lib" path="lib/secondstring-20060615.jar"/>
-	<classpathentry kind="lib" path="lib/secondstring-20120620.jar"/>
-	<classpathentry kind="lib" path="lib/servlet.jar"/>
-	<classpathentry kind="lib" path="lib/shared-objects-1.4.9-p1.jar"/>
-	<classpathentry kind="lib" path="lib/simplenlg-v4.4.2.jar"/>
-	<classpathentry kind="lib" path="lib/stanford-postagger-3.3.1.jar"/>
-	<classpathentry kind="lib" path="lib/stanford-postagger.jar"/>
+	<classpathentry kind="lib" path="lib/procalign.jar"/>
+	<classpathentry kind="lib" path="lib/ontosim.jar"/>
 	<classpathentry kind="lib" path="lib/ws4j-1.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/owlapi-3.2.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

@@ -120,9 +120,9 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		String dbName = String.valueOf(timestamp.getTime());
 		File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
-		System.out.println("Creating a new NEO4J database");
+		//System.out.println("Creating a new NEO4J database");
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-		System.out.println("Database created");
+		//System.out.println("Database created");
 
 		ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
 		ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
@@ -135,7 +135,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		labelO1 = DynamicLabel.label( ontologyParameter1 );
 		labelO2 = DynamicLabel.label( ontologyParameter2 );
 
-		System.out.println("Creating ontology graphs");
+		//System.out.println("Creating ontology graphs");
 		creator = new Graph(db);
 
 		creator.createOntologyGraph(o1, labelO1);
@@ -209,9 +209,9 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		String dbName = String.valueOf(timestamp.getTime());
 		File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
-		System.out.println("Creating a new NEO4J database ( " + dbFile.getPath() + " )");
+		//System.out.println("Creating a new NEO4J database ( " + dbFile.getPath() + " )");
 		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-		System.out.println("Database created");		
+		//System.out.println("Database created");		
 
 		ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
 		ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
@@ -224,7 +224,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 		labelO1 = DynamicLabel.label( ontologyParameter1 );
 		labelO2 = DynamicLabel.label( ontologyParameter2 );
 
-		System.out.println("Creating ontology graphs");
+		//System.out.println("Creating ontology graphs");
 		creator = new Graph(db);
 
 		creator.createOntologyGraph(o1, labelO1);
@@ -244,7 +244,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 		GEMAlignment = GraphEquivalenceMatcherSigmoidAlignment.toURIAlignment();
 
-		GEMAlignment.init( o1.getOntologyID().getOntologyIRI().toURI(), o2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		GEMAlignment.init( o1.getOntologyID().getOntologyIRI().get().toURI(), o2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return GEMAlignment;
 

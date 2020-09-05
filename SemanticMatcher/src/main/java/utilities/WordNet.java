@@ -12,15 +12,14 @@ import edu.cmu.lti.lexical_db.NictWordNet;
 import edu.cmu.lti.ws4j.impl.JiangConrath;
 import edu.cmu.lti.ws4j.impl.Resnik;
 import edu.cmu.lti.ws4j.util.WS4JConfiguration;
-//import edu.stanford.nlp.simple.Sentence;
-//import edu.stanford.nlp.tagger.maxent.MaxentTagger;
-import net.didion.jwnl.JWNL;
-import net.didion.jwnl.JWNLException;
-import net.didion.jwnl.data.IndexWord;
-import net.didion.jwnl.data.POS;
-import net.didion.jwnl.data.Synset;
-import net.didion.jwnl.dictionary.Dictionary;
+
 import rita.RiWordNet;
+import rita.wordnet.jwnl.JWNL;
+import rita.wordnet.jwnl.JWNLException;
+import rita.wordnet.jwnl.dictionary.Dictionary;
+import rita.wordnet.jwnl.wndata.IndexWord;
+import rita.wordnet.jwnl.wndata.POS;
+import rita.wordnet.jwnl.wndata.Synset;
 
 
 
@@ -33,8 +32,21 @@ public class WordNet {
 
 	final static POS pos = POS.NOUN;
 	private static ILexicalDatabase db = new NictWordNet();
-	final static String JWNL_FILE = "/Users/audunvennesland/git/Compose/compose/file_property.xml";
-	static RiWordNet database = new RiWordNet("/Users/audunvennesland/Documents/PhD/Development/WordNet/WordNet-3.0/dict");
+	//final static String JWNL_FILE = "./files/WordNet-3.0/file_property.xml";
+	static RiWordNet database = new RiWordNet("./files/WordNet-3.0/dict");
+	
+	public static void main(String[] args) throws FileNotFoundException, JWNLException {
+		
+		String inputWord = "automobile";
+		
+		System.out.println(getLexicalName(inputWord));
+		
+		Synset[] synsets = getSynsetsJWNL(inputWord);
+		
+		for (Synset s : synsets) {
+			System.out.println(s);
+		}
+	}
 
 
 	/**
@@ -72,7 +84,7 @@ public class WordNet {
 	 */
 	public static Synset[] getSynsetsJWNL (String inputWord) throws FileNotFoundException, JWNLException {
 
-		JWNL.initialize(new FileInputStream(JWNL_FILE));
+		//JWNL.initialize(new FileInputStream(JWNL_FILE));
 		Dictionary dictionary = Dictionary.getInstance();
 
 		String token = StringUtilities.stringTokenize(inputWord, true);
@@ -82,7 +94,7 @@ public class WordNet {
 
 		Synset[] synsets = indexWord.getSenses();
 
-		JWNL.shutdown();
+		//JWNL.shutdown();
 
 		return synsets;
 
@@ -98,13 +110,13 @@ public class WordNet {
 	 */
 	public static boolean containedInWordNet(String inputWord) throws FileNotFoundException, JWNLException {
 
-		JWNL.initialize(new FileInputStream(JWNL_FILE));
+		//JWNL.initialize(new FileInputStream(JWNL_FILE));
 
 		Dictionary dictionary = Dictionary.getInstance();
 
 		IndexWord indexWord = dictionary.lookupIndexWord(pos, inputWord);
 
-		JWNL.shutdown();
+		//JWNL.shutdown();
 
 		if (indexWord == null)
 		{

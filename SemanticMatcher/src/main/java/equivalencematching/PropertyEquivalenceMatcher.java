@@ -162,7 +162,7 @@ public class PropertyEquivalenceMatcher extends ObjectAlignment implements Align
 
 		PEMAlignment = propertyEquivalenceMatcherAlignment.toURIAlignment();
 
-		PEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		PEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return PEMAlignment;
 

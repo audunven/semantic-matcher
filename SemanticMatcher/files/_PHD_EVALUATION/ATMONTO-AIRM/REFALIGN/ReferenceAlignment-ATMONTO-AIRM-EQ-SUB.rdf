@@ -1,29 +1,24 @@
 <?xml version='1.0' encoding='utf-8' standalone='no'?>
-<rdf:RDF xmlns="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#"
-	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-	xmlns:align="http://knowledgeweb.semanticweb.org/heterogeneity/alignment#">
-	<!--Notes: 
-    * This alignment contains both EQ and SUB relations.
-    * Last update: 05.01.2019
-    * Author: Audun Vennesland
-  -->
-	<Alignment>
-		<xml>yes</xml>
-		<level>0</level>
-		<type>11</type>
-		<onto1>
-			<Ontology rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM">
-				<!--<location>/Users/audunvennesland/git/Compose/compose/files/ESWC_ATMONTO_AIRM/ATMOntoCoreMerged.owl#</location>-->
-			  <location>https://data.nasa.gov/ontologies/atmonto/ATM</location>
-			</Ontology>
-		</onto1>
-		<onto2>
-		  <Ontology rdf:about="https://raw.githubusercontent.com/airm-o/airm-o/master/airm-o.owl">
-				<!--<location>/Users/audunvennesland/git/Compose/compose/files/ESWC_ATMONTO_AIRM/airm-mono.owl</location>-->
-		    <location>https://raw.githubusercontent.com/airm-o/airm-o/master/airm-o.owl</location>
-			</Ontology>
-		</onto2>
+<rdf:RDF xmlns='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+  xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema#'
+  xmlns:alext='http://exmo.inrialpes.fr/align/ext/1.0/'
+  xmlns:align='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'>
+  <Alignment>
+    <xml>yes</xml>
+    <!--        <level>0</level>
+        <type>**</type>-->
+    <!--        <relationClass>fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation</relationClass>
+-->        <onto1>
+      <Ontology rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM">
+        <location>file:/Users/audunvennesland/ontologies/ATM/ATMOntoCoreMerged.owl</location>
+      </Ontology>
+    </onto1>
+    <onto2>
+      <Ontology rdf:about="https://raw.githubusercontent.com/airm-o/airm-o/master/airm-o.owl">
+        <location>file:/Users/audunvennesland/ontologies/ATM/airm-mono.owl</location>
+      </Ontology>
+    </onto2>
 		<!--EQUIVALENCE RELATIONS-->
 		<map>
 			<Cell>

@@ -3,6 +3,7 @@ package equivalencematching;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -150,8 +151,8 @@ public class DefinitionEquivalenceMatcher extends ObjectAlignment implements Ali
 		
 		DEMAlignment = definitionEquivalenceMatcherAlignment.toURIAlignment();
 		
-		DEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-		
+		DEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+				
 		return DEMAlignment;
 		
 	}

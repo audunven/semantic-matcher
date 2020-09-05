@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLAnnotationAssertionAxiom;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLDataProperty;
 import org.semanticweb.owlapi.model.OWLDataPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLEntity;
@@ -28,14 +30,17 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyRangeAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.model.PrefixManager;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
+import org.semanticweb.owlapi.search.EntitySearcher;
+import org.semanticweb.owlapi.util.DefaultPrefixManager;
 
 import fr.inrialpes.exmo.ontosim.string.StringDistances;
-import net.didion.jwnl.JWNLException;
-import rita.RiWordNet;
+import rita.wordnet.jwnl.JWNLException;
+
 
 /**
  * @author audunvennesland Date:02.02.2017
@@ -97,30 +102,6 @@ public class OntologyOperations {
 		OWLClass cls = labelToClassMap.get(label);
 		return cls;
 	}
-
-	/**
-	 * Retrieves the rdfs label from a class signature
-	 * @param cls
-	 * @param onto
-	 * @return
-	   Dec 7, 2018
-	 */
-	public static String getLabel (OWLClass cls, OWLOntology onto) {
-		String label = null;
-
-		IRI cIRI = cls.getIRI();
-		for(OWLAnnotationAssertionAxiom a : onto.getAnnotationAssertionAxioms(cIRI)) {
-			if(a.getProperty().isLabel()) {
-				if(a.getValue() instanceof OWLLiteral) {
-					OWLLiteral val = (OWLLiteral) a.getValue();
-					label = val.getLiteral();
-				}
-			}
-		}
-
-		return label;
-	}
-
 
 
 	/**
@@ -477,198 +458,7 @@ public class OntologyOperations {
 	}
 
 
-
-	/**
-	 * Get number of distinct classes in an ontology
-	 * @param ontoFile the file path of the OWL ontology
-	 * @return numClasses an integer stating how many OWL classes the OWL ontology has
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int getNumClasses(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		int numClasses = onto.getClassesInSignature().size();
-
-		manager.removeOntology(onto);
-
-		return numClasses;
-	}
-
-	/**
-	 * Returns an integer stating how many object properties an OWL ontology has
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return numObjectProperties an integer stating number of object properties in an OWL ontology
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int getNumObjectProperties(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		int numObjectProperties = onto.getObjectPropertiesInSignature().size();
-
-		manager.removeOntology(onto);
-
-		return numObjectProperties;
-	}
-
-	/**
-	 * Returns an integer stating how many individuals an OWL ontology has
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return numIndividuals an integer stating number of individuals in an OWL ontology
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int getNumIndividuals(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-
-		int numIndividuals = onto.getIndividualsInSignature().size();
-
-		manager.removeOntology(onto);
-
-		return numIndividuals;
-	}
-
-	/**
-	 * Returns an integer stating how many subclasses reside in an OWL ontology.
-	 * The method iterates over all classes in the OWL ontology and for each
-	 * class counts how many subclasses the current class have. This count is
-	 * updated for each class being iterated.
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return totalSubClassCount an integer stating number of subclasses in an OWL ontology
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int getNumSubClasses(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		OWLReasoner reasoner = reasonerFactory.createReasoner(onto);
-
-		OWLClass thisClass;
-		NodeSet<OWLClass> subClasses;
-		Iterator<OWLClass> itr = onto.getClassesInSignature().iterator();
-		Map<OWLClass, NodeSet<OWLClass>> classesAndSubClasses = new HashMap<OWLClass, NodeSet<OWLClass>>();
-		int subClassCount = 0;
-		int totalSubClassCount = 0;
-
-		while (itr.hasNext()) {
-			thisClass = itr.next();
-			subClasses = reasoner.getSubClasses(thisClass, true);
-			subClassCount = subClasses.getNodes().size();
-			classesAndSubClasses.put(thisClass, subClasses);
-			totalSubClassCount += subClassCount;
-		}
-
-		manager.removeOntology(onto);
-
-		return totalSubClassCount;
-	}
-
-	/**
-	 * Returns an integer stating how many of the classes in an OWL ontology contains individuals (members)
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return countClassesWithIndividuals an integer stating number of classes having individuals/members in an OWL ontology
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int containsIndividuals(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		OWLReasoner reasoner = reasonerFactory.createReasoner(onto);
-		Iterator<OWLClass> itr = onto.getClassesInSignature().iterator();
-		int countClassesWithIndividuals = 0;
-
-		OWLClass thisClass;
-
-		while (itr.hasNext()) {
-			thisClass = itr.next();
-			if (!reasoner.getInstances(thisClass, true).isEmpty()) {
-				countClassesWithIndividuals++;
-			}
-
-		}
-		manager.removeOntology(onto);
-
-		return countClassesWithIndividuals;
-	}
-
-	/**
-	 * Returns an integer stating how many of the classes in an OWL ontology do
-	 * not have comment annotations associated with them
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return numClassesWithoutComments an integer stating number of classes not having annotations associated with them
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int getNumClassesWithoutComments(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		Iterator<OWLClass> itr = onto.getClassesInSignature().iterator();
-		int countClassesWithComments = 0;
-		int sumClasses = onto.getClassesInSignature().size();
-
-		IRI thisClass;
-
-		while (itr.hasNext()) {
-			thisClass = itr.next().getIRI();
-
-			for (OWLAnnotationAssertionAxiom a : onto.getAnnotationAssertionAxioms(thisClass)) {
-				if (a.getProperty().isComment()) {
-					countClassesWithComments++;
-				}
-			}
-
-		}
-
-		manager.removeOntology(onto);
-
-		int numClassesWithoutComments = sumClasses - countClassesWithComments;
-
-		return numClassesWithoutComments;
-	}
-
-	/**
-	 * Returns an integer stating how many of the classes in an OWL ontology do
-	 * not have label annotations associated with them
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return numClassesWithoutLabels an integer stating number of classes not having label annotations associated with them
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 */
-	public static int getNumClassesWithoutLabels(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		Iterator<OWLClass> itr = onto.getClassesInSignature().iterator();
-		int countClassesWithLabels = 0;
-		int sumClasses = onto.getClassesInSignature().size();
-
-		IRI thisClass;
-
-		while (itr.hasNext()) {
-			thisClass = itr.next().getIRI();
-
-			for (OWLAnnotationAssertionAxiom a : onto.getAnnotationAssertionAxioms(thisClass)) {
-				if (a.getProperty().isLabel()) {
-					countClassesWithLabels++;
-				}
-			}
-
-		}
-
-		manager.removeOntology(onto);
-
-		int numClassesWithoutLabels = sumClasses - countClassesWithLabels;
-
-		return numClassesWithoutLabels;
-	}
+	
 
 	/**
 	 * Returns a double stating the percentage of how many classes and object
@@ -682,53 +472,7 @@ public class OntologyOperations {
 	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
 	 * @throws JWNLException 
 	 * @throws FileNotFoundException 
-	 */
-	public static double getWordNetCoverage(File ontoFile) throws OWLOntologyCreationException, FileNotFoundException, JWNLException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-		Iterator<OWLClass> itr = onto.getClassesInSignature().iterator();
-		Iterator<OWLObjectProperty> itrOP = onto.getObjectPropertiesInSignature().iterator();
-
-		String thisClass;
-		String thisOP;
-
-		int numClasses = onto.getClassesInSignature().size();
-		//int numOPs = onto.getObjectPropertiesInSignature().size();
-
-		int classCounter = 0;
-		int OPCounter = 0;
-
-		while (itr.hasNext()) {
-			thisClass = itr.next().getIRI().getFragment();
-			if (WordNet.containedInWordNet(thisClass) == true) {
-				classCounter++;
-			}
-		}
-
-
-		//double wordNetClassCoverage = ((double) classCounter / (double) numClasses);
-		double wordNetCoverage = ((double) classCounter / (double) numClasses);
-		//double wordNetOPCoverage = ((double) OPCounter / (double) numOPs);
-
-		//double wordNetCoverage = (wordNetClassCoverage + wordNetOPCoverage) / 2;
-
-		return wordNetCoverage;
-	}
-
-
-	/**
-	 * Returns a double stating the percentage of how many classes and object
-	 * properties are present as words in WordNet. For object properties their
-	 * prefix (e.g. isA, hasA, etc.) is stripped so only their "stem" is
-	 * retained.
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return wordNetCoverage a double stating a percentage of how many of the
-	 * classes and object properties are represented in WordNet
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses of this class will describe the reasons.
-	 * @throws JWNLException 
-	 * @throws FileNotFoundException 
+	 * @throws net.sf.extjwnl.JWNLException 
 	 */
 	public static double getWordNetCoverageComp(File ontoFile) throws OWLOntologyCreationException, FileNotFoundException, JWNLException {
 
@@ -769,13 +513,6 @@ public class OntologyOperations {
 		return wordNetCoverage;
 	}
 
-	
-
-	
-
-
-
-
 	/**
 	 * Returns a boolean stating whether a term is considered a compound term
 	 * (e.g. ElectronicBook)
@@ -792,43 +529,6 @@ public class OntologyOperations {
 		}
 
 		return test;
-	}
-
-	/**
-	 * Returns a count of how many classes are considered compound words in an
-	 * ontology
-	 * @param ontoFile the file path of the input OWL ontology
-	 * @return numCompounds a double stating the percentage of how many of the
-	 * classes in the ontology are compounds
-	 * @throws OWLOntologyCreationException An exception which describes an error during the creation of
-	 * an ontology. If an ontology cannot be created then subclasses
-	 * of this class will describe the reasons.
-	 */
-	public static double getNumClassCompounds(File ontoFile) throws OWLOntologyCreationException {
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
-
-		Iterator<OWLClass> itr = onto.getClassesInSignature().iterator();
-
-		String thisClass;
-
-		int numClasses = onto.getClassesInSignature().size();
-
-		int counter = 0;
-
-		while (itr.hasNext()) {
-			thisClass = StringUtilities.replaceUnderscore(itr.next().getIRI().getFragment());
-
-			if (isCompound(thisClass) == true) {
-				counter++;
-
-			}
-		}
-
-		double numCompounds = ((double) counter / (double) numClasses);
-
-		return numCompounds;
 	}
 
 
@@ -975,12 +675,6 @@ public class OntologyOperations {
 	}
 
 
-	/**
-	 * Retrieves all datatype properties related to an OWLClass. 
-	 * @param onto the OWL ontology holding the OWL class.
-	 * @param clsString
-	 * @return
-	 */
 	
 	/**
 	 * Retrieves all datatype properties related to an OWLClass. 
@@ -1153,13 +847,12 @@ public class OntologyOperations {
 	 */
 	private static Set<OWLClass> getDomainClasses (OWLOntology onto, OWLObjectProperty op) {
 		Set<OWLClass> clsSet = new HashSet<OWLClass>();
+				
+		Collection<OWLClassExpression> domainClasses = EntitySearcher.getDomains(op, onto);
 
-		//get the domain class(es)
-		Set<OWLClassExpression> domainClasses = op.getDomains(onto);
-
-		for (OWLClassExpression exp : domainClasses) {
-			if (!exp.isAnonymous()) { //need to check if exp represents an anonymous class (a class expression without an IRI identifier)
-				clsSet.add(exp.asOWLClass());
+		for (OWLClassExpression e : domainClasses) {
+			if (!e.isAnonymous()) {
+			clsSet.add(e.asOWLClass());
 			}
 		}
 
@@ -1177,18 +870,47 @@ public class OntologyOperations {
 	 */
 	public static Set<OWLClass> getRangeClasses (OWLOntology onto, OWLObjectProperty op) {
 		Set<OWLClass> clsSet = new HashSet<OWLClass>();
-
-		//get the domain class(es)
-		Set<OWLClassExpression> rangeClasses = op.getRanges(onto);
-
-		for (OWLClassExpression exp : rangeClasses) {
-			if (!exp.isAnonymous()) { //need to check if exp represents an anonymous class (a class expression without an IRI identifier)
-				clsSet.add(exp.asOWLClass());
+						
+		Collection<OWLClassExpression> rangeClasses = EntitySearcher.getRanges(op, onto);
+		
+		for (OWLClassExpression e : rangeClasses) {
+			if (!e.isAnonymous()) {
+			clsSet.add(e.asOWLClass());
 			}
 		}
 
-
 		return clsSet;
 	}
+	
+	
+	public static void main(String[] args) throws OWLOntologyCreationException {
+		
+		File ontoFile = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
+		
+		OWLClass cl = getClass("Person", onto);
+		
+		System.out.println("The OWLClass is " + cl.getIRI());
+		
+		Set<OWLObjectProperty> ops = getObjectProperties(onto, cl);
+		
+		System.out.println("Object Properties associated with " + cl);
+		Set<OWLClass> classes = new HashSet<OWLClass>();
+		
+		for (OWLObjectProperty op : ops) {
+			System.out.println("\n" + op.getIRI());
+			classes = getRangeClasses(onto, op);
+			for (OWLClass c : classes) {
+				System.out.println(c.getIRI());
+			}
+		}
+		
+		
+		
+		
+		
+	}
+
 
 }

@@ -26,7 +26,6 @@ import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
-import net.didion.jwnl.JWNLException;
 import ontologyprofiling.OntologyProfiler;
 import subsumptionmatching.CompoundMatcherSigmoid;
 import subsumptionmatching.ContextSubsumptionMatcherSigmoid;
@@ -34,23 +33,23 @@ import subsumptionmatching.DefinitionSubsumptionMatcherSigmoid;
 import subsumptionmatching.LexicalSubsumptionMatcherSigmoid;
 import utilities.AlignmentOperations;
 
+import rita.wordnet.jwnl.JWNLException;
+
 public class SemanticMatcher {
 	
-	static String onto1 = "303";
-	static String onto2 = "304";
 	
-	static File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/"+onto1+""+onto2+"/"+onto1+onto2+"-"+onto1+".rdf");
-	static File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/"+onto1+""+onto2+"/"+onto1+onto2+"-"+onto2+".rdf");
-	static String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
-	static String mismatchStorePath = "./files/_PHD_EVALUATION/OAEI2011/"+onto1+onto2+"/MISMATCHES";
-	static String finalAlignmentStorePath = "./files/_PHD_EVALUATION/OAEI2011/"+onto1+onto2+"/FINAL_ALIGNMENT/";
+	static File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+	static File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+	static String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
+	static String mismatchStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/MISMATCHES";
+	static String finalAlignmentStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/FINAL_ALIGNMENT/";
 
 	//these parameters are used for the sigmoid weight configuration
 	final static int slope = 3;
 	final static double rangeMin = 0.5;
 	final static double rangeMax = 0.7;
 	
-	public static void main(String[] args) throws OWLOntologyCreationException, JWNLException, IOException, AlignmentException, URISyntaxException {
+	public static void main(String[] args) throws OWLOntologyCreationException, IOException, AlignmentException, URISyntaxException, JWNLException {
 				
 	long startTimeMatchingProcess = System.currentTimeMillis();
 	
@@ -66,9 +65,7 @@ public class SemanticMatcher {
 	for (Entry<String, Double> e : ontologyProfilingScores.entrySet()) {
 		System.out.println(e.getKey() + ": " + e.getValue());
 	}
-	
 
-	
 	/* run matcher ensemble EQ */
 	ArrayList<URIAlignment> eqAlignments = computeEQAlignments(ontoFile1, ontoFile2, ontologyProfilingScores, vectorFile);
 

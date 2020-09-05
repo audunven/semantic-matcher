@@ -13,7 +13,6 @@ import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentVisitor;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
-import de.unima.alcomox.exceptions.AlcomoException;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
@@ -24,7 +23,7 @@ import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
 import mismatchdetection.StructureMismatch;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.StringUtilities;
 
 /**
@@ -34,7 +33,7 @@ import utilities.StringUtilities;
  */
 public class EvalMismatchDetectionSingleAlignment {
 
-	public static void main(String[] args) throws AlignmentException, URISyntaxException, AlcomoException, OWLOntologyCreationException, JWNLException, IOException {
+	public static void main(String[] args) throws AlignmentException, URISyntaxException, OWLOntologyCreationException, JWNLException, IOException {
 		
 		String folderPath = "./files/_PHD_EVALUATION/MISMATCH_DETECTION_EXAMPLE";
 		String amlAlignment = "./files/_PHD_EVALUATION/MISMATCH_DETECTION_EXAMPLE/AML_CrossDomain_23062019.rdf";

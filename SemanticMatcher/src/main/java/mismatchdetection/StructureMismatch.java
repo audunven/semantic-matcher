@@ -18,10 +18,11 @@ import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
-import net.didion.jwnl.JWNLException;
 
 import utilities.AlignmentOperations;
 import utilities.OntologyOperations;
+
+import rita.wordnet.jwnl.JWNLException;
 
 public class StructureMismatch {
 	

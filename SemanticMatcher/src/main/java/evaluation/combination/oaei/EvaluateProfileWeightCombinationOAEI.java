@@ -27,6 +27,7 @@ import equivalencematching.GraphEquivalenceMatcherSigmoid;
 import equivalencematching.LexicalEquivalenceMatcherSigmoid;
 import equivalencematching.PropertyEquivalenceMatcherSigmoid;
 import equivalencematching.WordEmbeddingMatcherSigmoid;
+import evaluation.general.ComputeSyntacticEvaluationScores;
 import evaluation.general.EvaluationScore;
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
@@ -36,7 +37,7 @@ import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
 import mismatchdetection.StructureMismatch;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import ontologyprofiling.OntologyProfiler;
 import subsumptionmatching.CompoundMatcherSigmoid;
 import subsumptionmatching.ContextSubsumptionMatcherSigmoid;
@@ -66,14 +67,14 @@ public class EvaluateProfileWeightCombinationOAEI {
 	public static void main(String[] args) throws OWLOntologyCreationException, JWNLException, IOException, AlignmentException, URISyntaxException {
 
 		String ontos = "303304";
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + ontos + "/" + ontos + "-" + ontos.substring(0, 3) + ".rdf");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/" + ontos + "/" + ontos + "-" + ontos.substring(3, ontos.length()) + ".rdf");
-		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/ONTOLOGIES/" + ontos + "/" + ontos + "-" + ontos.substring(0, 3) + ".rdf");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/ONTOLOGIES/" + ontos + "/" + ontos + "-" + ontos.substring(3, ontos.length()) + ".rdf");
+		String vectorFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/EMBEDDINGS/wikipedia_embeddings.txt";
 		
-		String referenceAlignmentEQ ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos + "/" + ontos.substring(0, 3) + "-" + ontos.substring(3, ontos.length()) + "-EQUIVALENCE.rdf";
-		String referenceAlignmentSUB = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos + "/" + ontos.substring(0, 3) + "-" + ontos.substring(3, ontos.length()) + "-SUBSUMPTION.rdf";
-		String referenceAlignmentEQAndSUB ="./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + ontos + "/" + ontos.substring(0, 3) + "-" + ontos.substring(3, ontos.length()) + "-EQ_SUB.rdf";
-		String mismatchStorePath = "./files/_PHD_EVALUATION/OAEI2011/ALIGNMENTS/" + ontos + "/MISMATCHES";
+		String referenceAlignmentEQ ="./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/REFALIGN/" + ontos + "/" + ontos.substring(0, 3) + "-" + ontos.substring(3, ontos.length()) + "-EQUIVALENCE.rdf";
+		String referenceAlignmentSUB = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/REFALIGN/" + ontos + "/" + ontos.substring(0, 3) + "-" + ontos.substring(3, ontos.length()) + "-SUBSUMPTION.rdf";
+		String referenceAlignmentEQAndSUB ="./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/REFALIGN/" + ontos + "/" + ontos.substring(0, 3) + "-" + ontos.substring(3, ontos.length()) + "-EQ_SUB.rdf";
+		String mismatchStorePath = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/OAEI2011/ALIGNMENTS/" + ontos + "/MISMATCHES";
 		
 		AlignmentParser aparser = new AlignmentParser(0);
 		URIAlignment refalign_EQ = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignmentEQ)));
@@ -121,11 +122,11 @@ public class EvaluateProfileWeightCombinationOAEI {
 		//resolve conflicts in merged alignment
 		URIAlignment nonConflictedMergedAlignment = AlignmentConflictResolution.resolveAlignmentConflict(mergedEQAndSubAlignment);
 		
-		double precision = 0;
-		double recall = 0;
-		double fMeasure = 0;
-		PRecEvaluator eval = null;
-		Properties p = new Properties();
+//		double precision = 0;
+//		double recall = 0;
+//		double fMeasure = 0;
+//		PRecEvaluator eval = null;
+//		Properties p = new Properties();
 		Map<String, EvaluationScore> evaluationMap = new TreeMap<String, EvaluationScore>();
 
 		double[] confidence = {0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
@@ -136,21 +137,22 @@ public class EvaluateProfileWeightCombinationOAEI {
 		Map<String, EvaluationScore> eqEvaluationMap = new TreeMap<String, EvaluationScore>();
 
 		for (double conf : confidence) {
-			EvaluationScore evalScore = new EvaluationScore();
+//			EvaluationScore evalScore = new EvaluationScore();
 			eqOnly.cut(conf);
-			eval = new PRecEvaluator(refalign_EQ, eqOnly);
-			eval.eval(p);
-			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-			evalScore.setPrecision(precision);
-			evalScore.setRecall(recall);
-			evalScore.setfMeasure(fMeasure);
+//			eval = new PRecEvaluator(refalign_EQ, eqOnly);
+//			eval.eval(p);
+//			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//			evalScore.setPrecision(precision);
+//			evalScore.setRecall(recall);
+//			evalScore.setfMeasure(fMeasure);
+			EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(eqOnly, refalign_EQ);
 			//put the evalation score according to each confidence value in the map
 			eqEvaluationMap.put(String.valueOf(conf), evalScore);			
 		}
 		
-		Evaluator.evaluateSingleMatcherThresholds(eqEvaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/PROFILEWEIGHT_EQ_ONLY_"+ontos+"_"+date);
+		Evaluator.evaluateSingleMatcherThresholds(eqEvaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/PROFILEWEIGHT_EQ_ONLY_"+ontos+"_"+date);
 
 
 		//isolate the subsumption relations and evaluate the subsumption alignment only
@@ -159,21 +161,22 @@ public class EvaluateProfileWeightCombinationOAEI {
 		Map<String, EvaluationScore> subEvaluationMap = new TreeMap<String, EvaluationScore>();
 
 		for (double conf : confidence) {
-			EvaluationScore evalScore = new EvaluationScore();
+//			EvaluationScore evalScore = new EvaluationScore();
 			subOnly.cut(conf);
-			eval = new PRecEvaluator(refalign_SUB, subOnly);
-			eval.eval(p);
-			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-			evalScore.setPrecision(precision);
-			evalScore.setRecall(recall);
-			evalScore.setfMeasure(fMeasure);
+//			eval = new PRecEvaluator(refalign_SUB, subOnly);
+//			eval.eval(p);
+//			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//			evalScore.setPrecision(precision);
+//			evalScore.setRecall(recall);
+//			evalScore.setfMeasure(fMeasure);
+			EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(subOnly, refalign_SUB);
 			//put the evalation score according to each confidence value in the map
 			subEvaluationMap.put(String.valueOf(conf), evalScore);			
 		}
 
-		Evaluator.evaluateSingleMatcherThresholds(subEvaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/PROFILEWEIGHT_SUB_ONLY_"+ontos+"_"+date);
+		Evaluator.evaluateSingleMatcherThresholds(subEvaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/PROFILEWEIGHT_SUB_ONLY_"+ontos+"_"+date);
 
 		System.err.println("\nThe merged EQ and SUB alignment contains " + nonConflictedMergedAlignment.nbCells() + " relations");
 
@@ -183,20 +186,20 @@ public class EvaluateProfileWeightCombinationOAEI {
 
 		for (double conf : confidence) {
 
-			EvaluationScore evalScore = new EvaluationScore();
+//			EvaluationScore evalScore = new EvaluationScore();
 			nonConflictedMergedAlignment.cut(conf);
-			eval = new PRecEvaluator(refalign, nonConflictedMergedAlignment);
-			eval.eval(p);
-			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-			evalScore.setPrecision(precision);
-			evalScore.setRecall(recall);
-			evalScore.setfMeasure(fMeasure);
-
+//			eval = new PRecEvaluator(refalign, nonConflictedMergedAlignment);
+//			eval.eval(p);
+//			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//			evalScore.setPrecision(precision);
+//			evalScore.setRecall(recall);
+//			evalScore.setfMeasure(fMeasure);
+			EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(nonConflictedMergedAlignment, refalign);
 			//put the evalation score according to each confidence value in the map
 			evaluationMap.put(String.valueOf(conf), evalScore);			
-			outputAlignment = new File("./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/MERGED_SIGMOID/PROFILEWEIGHT_MERGED_SIGMOID_"+DATASET+"_"+ontos+"_"+conf+".rdf");
+			outputAlignment = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/MERGED_SIGMOID/PROFILEWEIGHT_MERGED_SIGMOID_"+DATASET+"_"+ontos+"_"+conf+".rdf");
 			writer = new PrintWriter(
 					new BufferedWriter(
 							new FileWriter(outputAlignment)), true); 
@@ -209,7 +212,7 @@ public class EvaluateProfileWeightCombinationOAEI {
 			Evaluator.evaluateSingleAlignment("Cut Threshold " + conf, nonConflictedMergedAlignment, referenceAlignmentEQAndSUB);
 		}
 
-		Evaluator.evaluateSingleMatcherThresholds(evaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/PROFILEWEIGHT_"+ontos+"_"+date);
+		Evaluator.evaluateSingleMatcherThresholds(evaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/"+ontos+"/PROFILEWEIGHT/PROFILEWEIGHT_"+ontos+"_"+date);
 
 		writer = new PrintWriter(
 				new BufferedWriter(

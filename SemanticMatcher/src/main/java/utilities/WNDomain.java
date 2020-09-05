@@ -9,8 +9,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import net.didion.jwnl.JWNLException;
-import net.didion.jwnl.data.Synset;
+import rita.wordnet.jwnl.JWNLException;
+import rita.wordnet.jwnl.wndata.Synset;
 
 /**
  * Various methods used for interacting with the WordNet Domains Classification.

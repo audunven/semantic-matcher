@@ -19,13 +19,13 @@ import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
-//import it.uniroma1.lcl.babelnet.BabelNet;
-import net.didion.jwnl.JWNLException;
+
 import utilities.MathUtils;
-//import utilities.BabelNetOperations;
 import utilities.OntologyOperations;
 import utilities.StringUtilities;
 import utilities.WordNet;
+
+import rita.wordnet.jwnl.JWNLException;
 
 /**
  * This class includes a set of metrics that evaluate the terminological, structural and lexical profile of the input ontologies. 
@@ -122,22 +122,22 @@ public class OntologyProfiler {
 		pw.println("The Lexical Coverage (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
 				+ MathUtils.round((computeLexicalCoverage(onto1, onto2)), 2));
 
-
-		System.out.println("\n*** Synonym Richness (WordNet) ***");
-		System.out.println("The Synonym Richness (SR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ MathUtils.round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
-
-		pw.println("\n*** Synonym Richness (WordNet) ***");
-		pw.println("The Synonym Richness (SR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ MathUtils.round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
-
-		System.out.println("\n*** Hyponym Richness (WordNet) ***");
-		System.out.println("The Hyponym Richness (HR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ MathUtils.round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
-
-		pw.println("\n*** Hyponym Richness (WordNet) ***");
-		pw.println("The Hyponym Richness (HR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
-				+ MathUtils.round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
+//
+//		System.out.println("\n*** Synonym Richness (WordNet) ***");
+//		System.out.println("The Synonym Richness (SR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
+//				+ MathUtils.round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
+//
+//		pw.println("\n*** Synonym Richness (WordNet) ***");
+//		pw.println("The Synonym Richness (SR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
+//				+ MathUtils.round((computeSynonymRichnessWordNet(onto1, onto2)), 2));
+//
+//		System.out.println("\n*** Hyponym Richness (WordNet) ***");
+//		System.out.println("The Hyponym Richness (HR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
+//				+ MathUtils.round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
+//
+//		pw.println("\n*** Hyponym Richness (WordNet) ***");
+//		pw.println("The Hyponym Richness (HR) (WordNet) of " + onto1.getName() + " and " + onto2.getName() + " is: "
+//				+ MathUtils.round((computeHyponymRichnessWordNet(onto1, onto2)), 2));
 
 
 		pw.close();
@@ -155,6 +155,7 @@ public class OntologyProfiler {
 	 * @throws JWNLException
 	 * @throws IOException
 	   Jul 18, 2019
+	 * @throws net.sf.extjwnl.JWNLException 
 	 */
 	public static Map<String, Double> computeOntologyProfileScores(File ontoFile1, File ontoFile2, String corpus) throws OWLOntologyCreationException, JWNLException, IOException {
 
@@ -511,6 +512,7 @@ public class OntologyProfiler {
 	 * @throws FileNotFoundException
 	 * @throws JWNLException
 	   Jul 18, 2019
+	 * @throws net.sf.extjwnl.JWNLException 
 	 */
 	public static double computeLexicalCoverage(File ontoFile1, File ontoFile2)
 			throws OWLOntologyCreationException, FileNotFoundException, JWNLException {

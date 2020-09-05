@@ -24,7 +24,7 @@ public class MajorityVote {
 	//test method
 		public static void main(String[] args) throws AlignmentException, URISyntaxException {
 			
-			String folderName = "./files/_PHD_EVALUATION/ATMONTO-AIRM/ALIGNMENTS/INDIVIDUAL_ALIGNMENTS/EQUIVALENCE_NOWEIGHT";
+			String folderName = "./files/_PHD_EVALUATION/OAEI2011/ALIGNMENTS/301302/INDIVIDUAL_ALIGNMENTS/EQUIVALENCE_NOWEIGHT";
 			Map<Double, URIAlignment> majorityVoteAlignmentMap = getMajorityVotes(folderName);
 			
 			System.out.println("Printing majorityvotes");

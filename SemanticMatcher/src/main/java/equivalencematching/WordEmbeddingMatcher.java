@@ -58,15 +58,6 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
 		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
 		
-//		File ontoFile1 = new File("./files/SATest1.owl");
-//		File ontoFile2 = new File("./files/SATest2.owl");
-//		String referenceAlignment = "./files/ReferenceAlignmentSATest.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
-
-//		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
-//		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
-//		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
@@ -146,7 +137,7 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 		
 		WEMAlignment = wordEmbeddingMatcherAlignment.toURIAlignment();
 		
-		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 		
 		return WEMAlignment;
 		
@@ -253,9 +244,6 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 			}
 
 		} catch (Exception e) { e.printStackTrace(); }
-		
-
-
 
 	}
 

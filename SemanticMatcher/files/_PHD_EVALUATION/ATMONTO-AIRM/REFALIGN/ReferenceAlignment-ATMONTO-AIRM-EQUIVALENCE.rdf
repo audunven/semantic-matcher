@@ -15,13 +15,15 @@
 		<level>0</level>
 		<type>11</type>
 		<onto1>
-			<Ontology rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM">
-				<location>/Users/audunvennesland/git/Compose/compose/files/ESWC_ATMONTO_AIRM/ATMOntoCoreMerged.owl#</location>
+			<!--		file:///home/stain/Desktop/EDAM_1.6.owl
+-->		<Ontology rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM#">
+				<location>/Users/audunvennesland/ontologies/ATM/ATMOntoCoreMerged.owl</location>
 			</Ontology>
 		</onto1>
 		<onto2>
 			<Ontology rdf:about="http://www.project-best.eu/owl/airm-mono/airm.owl">
-				<location>/Users/audunvennesland/git/Compose/compose/files/ESWC_ATMONTO_AIRM/airm-mono.owl</location>
+				<!--<location>http://www.project-best.eu/downloads/ontologies/airm-mono/airm-mono.owl</location>-->
+				<location>/Users/audunvennesland/ontologies/ATM/airm-mono.owl</location>		
 			</Ontology>
 		</onto2>
 

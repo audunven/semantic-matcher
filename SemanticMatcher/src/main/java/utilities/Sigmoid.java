@@ -43,8 +43,8 @@ public class Sigmoid {
 
 		int slope = 3;
 
-		double confidence = 1.0;
-		double profileWeight = 0.9;
+		double confidence = 0.8;
+		double profileWeight = 0.8;
 		double rangeMin = 0.5;
 		double rangeMax = 0.7;		
 

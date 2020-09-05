@@ -12,10 +12,11 @@ import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
-import net.didion.jwnl.JWNLException;
 import utilities.StringUtilities;
 import utilities.WNDomain;
 import utilities.WordNet;
+
+import rita.wordnet.jwnl.JWNLException;
 
 /**
  * Filters out relations from an alignment where the two concepts do not represent the same domain according to the WordNet Domains classification.

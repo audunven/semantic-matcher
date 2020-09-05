@@ -81,15 +81,15 @@
     
 
 
-    <!-- http://www.w3.org/2001/XMLSchema#date -->
+    <!-- http://www.w3.org/2001/XMLSchema#string -->
 
-    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#date"/>
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
     
 
 
-    <!-- http://www.w3.org/2001/XMLSchema#time -->
+    <!-- http://www.w3.org/2001/XMLSchema#string -->
 
-    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#time"/>
+    <rdfs:Datatype rdf:about="http://www.w3.org/2001/XMLSchema#string"/>
     
 
 
@@ -1963,7 +1963,7 @@
     <owl:DatatypeProperty rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM#certificateIssueDate">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="https://data.nasa.gov/ontologies/atmonto/ATM#Aircraft"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment>The date that an operating certificate was issued to the aircraft.</rdfs:comment>
         <rdfs:label>certificate issue date</rdfs:label>
     </owl:DatatypeProperty>
@@ -2076,7 +2076,7 @@
     <owl:DatatypeProperty rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM#date">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="https://data.nasa.gov/ontologies/atmonto/ATM#NASday"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#date"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment>The date corresponding to the day represented by the day class. The value of this property is a date datatype. In contrast, the class represents the day conceptually as an object.</rdfs:comment>
         <rdfs:label>date</rdfs:label>
     </owl:DatatypeProperty>
@@ -3408,7 +3408,7 @@
     <owl:DatatypeProperty rdf:about="https://data.nasa.gov/ontologies/atmonto/ATM#startingTime">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
         <rdfs:domain rdf:resource="https://data.nasa.gov/ontologies/atmonto/ATM#NAShour"/>
-        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#time"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:comment>The beginning of the hour stored as a datetime value.</rdfs:comment>
         <rdfs:label>starting time</rdfs:label>
     </owl:DatatypeProperty>

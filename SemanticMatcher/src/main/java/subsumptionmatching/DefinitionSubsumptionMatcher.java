@@ -27,7 +27,7 @@ import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import mismatchdetection.ConfirmSubsumption;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.OntologyOperations;
 import utilities.StringUtilities;
 
@@ -111,7 +111,7 @@ public class DefinitionSubsumptionMatcher extends ObjectAlignment implements Ali
 
 		DSMAlignment = definitionSubsumptionMatcherAlignment.toURIAlignment();
 
-		DSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		DSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return DSMAlignment;
 

@@ -4,10 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.didion.jwnl.JWNLException;
 import utilities.StringUtilities;
 import utilities.WNDomain;
 import utilities.WordNet;
+
+import rita.wordnet.jwnl.JWNLException;
 
 /**
  * Used in subsumption matching to ensure that the relation proposed is in fact subsumption.

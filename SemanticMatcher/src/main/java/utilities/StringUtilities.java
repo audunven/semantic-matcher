@@ -27,6 +27,20 @@ public class StringUtilities {
 
 	static OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 	static OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
+	
+	public static void main(String[] args) {
+		String input = "Challenge";
+		
+		System.out.println("Lemma: " + getLemma(input));
+		
+		String compound = "TESTAcademicResearchProject";
+		
+		String[] parts = getCompoundParts(compound);
+		
+		for (int i = 0; i < parts.length; i++) {
+			System.out.println(parts[i]);
+		}
+	}
 
 	/**
 	 * Returns the lemma of a word using the Stanford SimpleNLP API
@@ -322,6 +336,7 @@ public class StringUtilities {
 	public static String[] getCompoundParts(String input) {
 		
 		return input.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+		//return input.split("(?<=.)(?=\\p{Lu})");
 	}
 
 	
@@ -472,6 +487,8 @@ public class StringUtilities {
 		return compoundWordsList;
 		
 	}
+	
+
 
 
 }

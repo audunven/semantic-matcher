@@ -22,7 +22,7 @@ import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.LexicalConcept;
 import utilities.Sigmoid;
 import utilities.WordNet;
@@ -71,7 +71,7 @@ public class LexicalSubsumptionMatcherSigmoid extends ObjectAlignment implements
 
 		LSMAlignment = LexicalSubsumptionMatcherSigmoidAlignment.toURIAlignment();
 
-		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return LSMAlignment;
 
@@ -79,7 +79,7 @@ public class LexicalSubsumptionMatcherSigmoid extends ObjectAlignment implements
 
 	public void align( Alignment alignment, Properties param ) throws AlignmentException {
 
-		System.out.println("\nStarting Lexical Subsumption Matcher...");
+		//System.out.println("\nStarting Lexical Subsumption Matcher...");
 		long startTimeMatchingProcess = System.currentTimeMillis();
 
 		LexicalConcept sourceLexicalConcept = new LexicalConcept();
@@ -197,7 +197,7 @@ public class LexicalSubsumptionMatcherSigmoid extends ObjectAlignment implements
 
 		long endTimeMatchingProcess = System.currentTimeMillis();
 
-		System.out.println("The matching operation took " + (endTimeMatchingProcess - startTimeMatchingProcess) / 1000 + " seconds.");
+		//System.out.println("The matching operation took " + (endTimeMatchingProcess - startTimeMatchingProcess) / 1000 + " seconds.");
 	}
 
 

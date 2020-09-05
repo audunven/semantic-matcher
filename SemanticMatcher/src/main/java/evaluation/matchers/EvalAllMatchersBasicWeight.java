@@ -42,7 +42,7 @@ import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import graph.Graph;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import ontologyprofiling.OntologyProfiler;
 import subsumptionmatching.CompoundMatcher;
 import subsumptionmatching.ContextSubsumptionMatcher;
@@ -318,7 +318,7 @@ public class EvalAllMatchersBasicWeight {
 										
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 					
 					//perform the evaluation here...				
@@ -388,7 +388,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -508,7 +508,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -575,7 +575,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -691,7 +691,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -758,7 +758,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -907,7 +907,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -975,7 +975,7 @@ public class EvalAllMatchersBasicWeight {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				

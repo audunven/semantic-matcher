@@ -1,10 +1,7 @@
 package alignmentcombination;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -24,7 +21,6 @@ import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import utilities.AlignmentOperations;
 import utilities.Relation;
 import utilities.RelationComparator;
-import utilities.StringUtilities;
 
 public class ProfileWeight {
 	

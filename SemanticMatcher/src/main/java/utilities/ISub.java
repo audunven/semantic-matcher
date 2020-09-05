@@ -180,8 +180,8 @@ public class ISub {
 		
 		ISub i = new ISub();
 		
-		String s1 = "airspaceroute";
-		String s2 = "airspace";
+		String s1 = "publication";
+		String s2 = "published";
 		
 		double result = i.score(s1, s2);
 		

@@ -31,7 +31,7 @@ import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import mismatchdetection.ConfirmSubsumption;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.OntologyOperations;
 import utilities.Sigmoid;
 import utilities.StringUtilities;
@@ -126,7 +126,7 @@ public class DefinitionSubsumptionMatcherSigmoid extends ObjectAlignment impleme
 
 		DSMAlignment = DefinitionSubsumptionMatcherSigmoidAlignment.toURIAlignment();
 
-		DSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		DSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return DSMAlignment;
 
@@ -170,7 +170,7 @@ public class DefinitionSubsumptionMatcherSigmoid extends ObjectAlignment impleme
 
 							if (s.equalsIgnoreCase(target)) {
 
-								//if any of the compounds in source and target are from the same domain according to WNDomain, we return a confidence of 1.0
+								//if any of the compounds in source and target are from the same domain AND they´re not meronyms we return a confidence of 1.0
 								if (ConfirmSubsumption.conceptsFromSameDomain(ontology1().getEntityName(sourceObject), ontology2().getEntityName(targetObject)) 
 										&& !ConfirmSubsumption.isMeronym(ontology1().getEntityName(sourceObject), ontology2().getEntityName(targetObject))) {
 									addAlignCell("DefinitionSubsumptionMatcherSigmoid" +idCounter, sourceObject, targetObject, "&gt;", 
@@ -252,7 +252,7 @@ public class DefinitionSubsumptionMatcherSigmoid extends ObjectAlignment impleme
 
 			if (def.contains("including")) {
 				extract = def.substring(def.indexOf("including")+10, def.length());
-				if (extract.contains(".")) {
+				if (extract.contains(".")) { //include only current sentence if more than one sentence in definition.
 					cut = extract.substring(0, extract.indexOf("."));
 					refined = removeStopWordsAndDigits(cut);
 				} else {

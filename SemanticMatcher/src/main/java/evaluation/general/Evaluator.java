@@ -51,6 +51,7 @@ import org.semanticweb.owl.align.AlignmentException;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
+import fr.inrialpes.exmo.align.impl.eval.SemPRecEvaluator;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import utilities.StringUtilities;
 
@@ -63,7 +64,18 @@ import utilities.StringUtilities;
  */
 public class Evaluator {
 	
-
+	public static void main(String[] args) throws AlignmentException, URISyntaxException {
+		
+		String referenceAlignmentFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/ALIGNMENTS/PROFILEWEIGHT/SUBSUMPTION_SIGMOID/ALIGNMENTS/PROFILEWEIGHT_SUBSUMPTION_SIGMOID_0.0.rdf";
+		String evaluatedAlignmentFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
+		
+		AlignmentParser evaluatedAlignParser = new AlignmentParser(0);
+		
+		URIAlignment evaluatedAlignment = (URIAlignment) evaluatedAlignParser.parse(new URI(StringUtilities.convertToFileURL(evaluatedAlignmentFile)));
+				
+		evaluateSingleAlignment(evaluatedAlignment, referenceAlignmentFile);
+	}
+	
 	/**
 	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN)
 	 * @param inputAlignmentFileName
@@ -71,14 +83,16 @@ public class Evaluator {
 	 * @throws AlignmentException
 	 * @throws URISyntaxException
 	 */
-	public static void evaluateSingleAlignment (URIAlignment inputAlignment, String referenceAlignmentFileName) throws AlignmentException, URISyntaxException {
+	public static void evaluateSemanticPrecisionAndRecall (URIAlignment inputAlignment, String referenceAlignmentFileName) throws AlignmentException, URISyntaxException {
 
 		AlignmentParser refAlignParser = new AlignmentParser(0);
 
 		Alignment referenceAlignment = refAlignParser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignmentFileName)));
 
 		Properties p = new Properties();
-		PRecEvaluator eval = new PRecEvaluator(referenceAlignment, inputAlignment);
+		//PRecEvaluator eval = new PRecEvaluator(referenceAlignment, inputAlignment);
+		
+		SemPRecEvaluator eval = new SemPRecEvaluator(referenceAlignment, inputAlignment);
 
 		eval.eval(p);
 
@@ -97,6 +111,31 @@ public class Evaluator {
 		System.out.println("False negatives (FN): " + fn);
 		System.out.println("\n");
 
+	}
+	
+
+	/**
+	 * Evaluates a single alignment against a reference alignment and prints precision, recall, f-measure, true positives (TP), false positives (FP) and false negatives (FN)
+	 * @param inputAlignmentFileName
+	 * @param referenceAlignmentFileName
+	 * @throws AlignmentException
+	 * @throws URISyntaxException
+	 */
+	public static void evaluateSingleAlignment (URIAlignment inputAlignment, String referenceAlignmentFileName) throws AlignmentException, URISyntaxException {
+
+		AlignmentParser refAlignParser = new AlignmentParser(0);
+
+		Alignment referenceAlignment = refAlignParser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignmentFileName)));
+		
+		EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(inputAlignment, referenceAlignment);
+
+		System.out.println("------------------------------");
+		System.out.println("Evaluator scores for " + inputAlignment.getType());
+		System.out.println("------------------------------");
+		System.out.println("F-measure: " + evalScore.getfMeasure());
+		System.out.println("Precision: " + evalScore.getPrecision());
+		System.out.println("Recall: " + evalScore.getRecall());
+		
 	}
 	
 	/**
@@ -124,6 +163,7 @@ public class Evaluator {
 
 		Properties p = new Properties();
 		PRecEvaluator eval = new PRecEvaluator(referenceAlignment, inputAlignment);
+		
 
 		eval.eval(p);
 		int fp = eval.getFound() - eval.getCorrect();
@@ -622,6 +662,8 @@ public class Evaluator {
 		FileOutputStream fileOut = new FileOutputStream(output+".xlsx");
 		wb.write(fileOut);
 		fileOut.close();
+		
+		System.out.println("Chart written to disk.");
 		
 
 	}

@@ -25,7 +25,7 @@ import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
-import net.didion.jwnl.JWNLException;
+import rita.wordnet.jwnl.JWNLException;
 import utilities.LexicalConcept;
 import utilities.WordNet;
 
@@ -125,7 +125,7 @@ public class LexicalSubsumptionMatcher extends ObjectAlignment implements Alignm
 
 		LSMAlignment = lexicalSubsumptionMatcherAlignment.toURIAlignment();
 
-		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return LSMAlignment;
 

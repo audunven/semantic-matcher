@@ -58,21 +58,11 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 	
 	//test method
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
-		
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_trained_ontology_tokens.txt";
-		
-//		File ontoFile1 = new File("./files/SATest1.owl");
-//		File ontoFile2 = new File("./files/SATest2.owl");
-//		String referenceAlignment = "./files/ReferenceAlignmentSATest.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
 
-//		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
-//		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
-//		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-//		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_trained.txt";
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
+		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
@@ -146,6 +136,7 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
 		
 		AlignmentProcess a = new WordEmbeddingMatcherSigmoid(onto1, onto2, vectorFile, profileScore, slope, rangeMin, rangeMax);
+				
 		a.init(ontoFile1.toURI(), ontoFile2.toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
@@ -158,7 +149,7 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 		
 		WEMAlignment = WordEmbeddingMatcherSigmoidAlignment.toURIAlignment();
 		
-		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 		
 		return WEMAlignment;
 		

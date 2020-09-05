@@ -7,7 +7,8 @@ import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import fr.inrialpes.exmo.align.impl.URIAlignment;
-import net.didion.jwnl.JWNLException;
+
+import rita.wordnet.jwnl.JWNLException;
 
 /**
  * Removes mismatches from an alignment using the Concept Scope Mismatch Detection, Structure Mismatch Detection and Domain Mismatch Detection strategies.

@@ -23,7 +23,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
+import org.semanticweb.owl.align.AlignmentVisitor;
 import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.AxiomType;
@@ -35,12 +37,15 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
+import org.semanticweb.owlapi.search.EntitySearcher;
 
+import evaluation.general.EvaluationScore;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.BasicRelation;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
+import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 
 /**
@@ -48,6 +53,116 @@ import fr.inrialpes.exmo.align.parser.AlignmentParser;
  * 19. aug. 2017 
  */
 public class AlignmentOperations {
+	
+	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, IOException, URISyntaxException {	
+
+	String alignmentPath = "./files/_PHD_EVALUATION/_EVALUATION_SEMPREC_REC/ATMONTO-AIRM/AML/input/ATM_AML_Automatic_040820.rdf";
+	String outputPath = "./files/_PHD_EVALUATION/_EVALUATION_SEMPREC_REC/ATMONTO-AIRM/AML/output/";
+	String ontoFile1 = "/Users/audunvennesland/ontologies/ATM/ATMOntoCoreMerged.owl";
+	String ontoFile2 = "/Users/audunvennesland/ontologies/ATM/airm-mono.owl";
+	
+	extractAllConfidenceThresholds(alignmentPath, outputPath, ontoFile1, ontoFile2);
+	
+	String candidateAlignment = "./files/_PHD_EVALUATION/_EVALUATION_SEMPREC_REC/BIBFRAME-SCHEMAORG/AML/output/bibframe-schema-org_AML_0.0.rdf";
+	String referenceAlignment = "./files/_PHD_EVALUATION/_EVALUATION_SEMPREC_REC/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
+	
+	AlignmentParser aparser = new AlignmentParser(0);
+	Alignment refalign =  aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
+	Alignment candAlign =  aparser.parse(new URI(StringUtilities.convertToFileURL(candidateAlignment)));
+	Alignment extractedAlignment = extractEqualRelations(candAlign, refalign);
+	
+	System.out.println("extractedAlignment contains " + extractedAlignment.nbCells());
+	
+	}
+	
+	/**
+	 * Returns an EvaluationScore object that measures the precision, recall and F-measure of a candidate alignment against a reference alignment. The method considers the type of relation.
+	 * @param candidateAlignment the alignment being evaluated
+	 * @param referenceAlignment the alignment holding the correct set of relations.
+	 * @return EvaluationScore
+	 * @throws AlignmentException
+	   Aug 13, 2020
+	 */
+	public static Alignment extractEqualRelations (Alignment candidateAlignment, Alignment referenceAlignment) throws AlignmentException {
+		
+		
+		Alignment thisAlignment = new BasicAlignment();
+		
+		for (Cell rac : referenceAlignment) {
+			for (Cell ac : candidateAlignment) {
+				
+				if (rac.getObject1AsURI().equals(ac.getObject1AsURI()) 
+						&& rac.getObject2AsURI().equals(ac.getObject2AsURI()) 
+						&& rac.getRelation().getRelation().equals(ac.getRelation().getRelation())) {
+					thisAlignment.addAlignCell(ac.getObject1(), ac.getObject2(), ac.getRelation().getRelation(), ac.getStrength());
+				}
+				
+			}
+		}
+		
+		return thisAlignment;
+				
+	
+
+	}
+	
+	public static void extractAllConfidenceThresholds (String alignmentPath, String storePath, String ontoFile1, String ontoFile2) throws AlignmentException, IOException, OWLOntologyCreationException {
+		
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(new File(ontoFile1));
+		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(new File(ontoFile2));
+		
+		String matcher = "AML";
+		
+		AlignmentParser parser = new AlignmentParser();		
+		URIAlignment alignment = (URIAlignment) parser.parse(new File(alignmentPath).toURI().toString());
+		
+		double[] confidence = {0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
+				
+		AlignmentVisitor renderer = null; 
+		File outputAlignment = null;
+		PrintWriter writer = null;
+		String alignmentFileName = null;
+		BasicAlignment cutAlignment = null;
+		BasicAlignment clonedAlignment = null;
+		URIAlignment tempAlignment = null;
+		
+		System.out.println("The initial alignment contains " + alignment.nbCells() + " relations");
+		
+		for (double conf : confidence) {
+			cutAlignment = (BasicAlignment)(alignment.clone());
+			cutAlignment.toURIAlignment();
+			cutAlignment.cut(conf);
+			
+			System.out.println("The cut alignment at confidence " + conf + " contains " + cutAlignment.nbCells() + " relations.");
+			alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
+					"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "_" + matcher + "_"+ conf + ".rdf";
+			
+			outputAlignment = new File(alignmentFileName);
+			
+			writer = new PrintWriter(
+					new BufferedWriter(
+							new FileWriter(outputAlignment)), true); 
+			renderer = new RDFRendererVisitor(writer);
+			
+			clonedAlignment = (BasicAlignment)(cutAlignment.clone());
+			
+			System.out.println("The cloned alignment at confidence " + conf + " contains " + clonedAlignment.nbCells() + " relations.");
+			
+			
+			tempAlignment = clonedAlignment.toURIAlignment();
+			
+			System.out.println("The temp alignment at confidence " + conf + " contains " + tempAlignment.nbCells() + " relations.");
+			
+			//tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+			tempAlignment.render(renderer);
+			
+			writer.flush();
+			writer.close();
+			
+
+		}
+	}
 	
 	/**
 	 * Prints relations from an alignment to console with additional details related to each concept in the relation: definitions, subclasses and superclasses. Primarily used
@@ -535,7 +650,7 @@ public class AlignmentOperations {
 			
 			//get the range classes from the object properties 
 			for (OWLObjectProperty oop : ops) {
-				Set<OWLClassExpression> rangeCls = oop.getRanges(onto);
+				Set<OWLClassExpression> rangeCls = (Set<OWLClassExpression>) EntitySearcher.getRanges(oop, onto);
 				for (OWLClassExpression oce : rangeCls) {
 					if (!oce.isAnonymous()) {
 						range.add(oce.asOWLClass().getIRI().getFragment());
@@ -735,8 +850,8 @@ public class AlignmentOperations {
 		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
 		URIAlignment alignment = new URIAlignment();
 		
-		URI onto1URI = onto1.getOntologyID().getOntologyIRI().toURI();
-		URI onto2URI = onto2.getOntologyID().getOntologyIRI().toURI();
+		URI onto1URI = onto1.getOntologyID().getOntologyIRI().get().toURI();
+		URI onto2URI = onto2.getOntologyID().getOntologyIRI().get().toURI();
 		System.out.println("Test: The URIs are " + onto1URI.toString() + " and " + onto2URI.toString());
 
 		//need to initialise the alignment with ontology URIs and the type of relation (e.g. A5AlgebraRelation) otherwise exceptions are thrown
@@ -768,8 +883,8 @@ public class AlignmentOperations {
 	private static URIAlignment convertFromComaToAlignmentAPI (String comaTextFilePath, OWLOntology onto1, OWLOntology onto2) throws AlignmentException, FileNotFoundException, IOException {
 		
 		URIAlignment convertedAlignment = new URIAlignment();
-		URI onto1URI = onto1.getOntologyID().getOntologyIRI().toURI();
-		URI onto2URI = onto2.getOntologyID().getOntologyIRI().toURI();
+		URI onto1URI = onto1.getOntologyID().getOntologyIRI().get().toURI();
+		URI onto2URI = onto2.getOntologyID().getOntologyIRI().get().toURI();
 		
 		System.out.println("onto1URI: " + onto1URI);
 		System.out.println("onto2URI: " + onto2URI);
