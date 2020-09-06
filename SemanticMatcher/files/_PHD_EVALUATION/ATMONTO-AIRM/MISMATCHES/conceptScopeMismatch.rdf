@@ -20,11 +20,27 @@
     </Ontology>
   </onto2>
   <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid11761">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#NavigationPath'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Route'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.26161924887659904</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="WordEmbeddingMatcherSigmoid47041">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#ARTCC'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#TACAN'/>
       <relation>=</relation>
       <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.4621054182245468</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid14231">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#ActualFlightRoute'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#FlightRestrictionRoute'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6268888403778062</measure>
     </Cell>
   </map>
   <map>
@@ -36,11 +52,11 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher6844">
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid6464">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#WeatherCondition'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeSignificantWeatherQualifierType'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#WeatherCondition'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.3939311170161697</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7173577783980118</measure>
     </Cell>
   </map>
   <map>
@@ -84,6 +100,14 @@
     </Cell>
   </map>
   <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid25778">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#CrewMember'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CrewMember'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7173577783980118</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="PropertyMatcher78206">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#Polygonal2DRegion'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AirportTransitView'/>
@@ -108,6 +132,30 @@
     </Cell>
   </map>
   <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid69465">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#JetRoute'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#SeaplaneRampSite'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.2078589550181652</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid65032">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#VisibilityCondition'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Qualification'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.16357934388918668</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid114716">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftEngineManufacturer'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#EngineRegime'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.18927283031507602</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="PropertyMatcher94422">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#RunwayStatusData'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeStatusOperationsType'/>
@@ -121,6 +169,22 @@
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#RunwayVisualRange'/>
       <relation>=</relation>
       <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.4145703600217234</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid5604">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AirspaceRouteSegment'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#RouteSegment'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6929071340467574</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid137115">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftEngine'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Vehicle'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.2632432361990649</measure>
     </Cell>
   </map>
   <map>
@@ -164,11 +228,35 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid67410">
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid83316">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#SequencedItem'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Marking'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.15939608969358815</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid43870">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#NavigationElement'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeNavigationCapabilityType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.1959677508009459</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid119847">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AirspaceInfrastructureComponent'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AirspaceGeometryComponent'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6049876001354778</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid67410">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#Airport'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Aerodrome'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5282237922929849</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6640494953851946</measure>
     </Cell>
   </map>
   <map>
@@ -204,11 +292,11 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher131635">
-      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#TAFmeteorologicalCondition'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeChangeIndicatorType'/>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid75550">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#NavigationAid'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#RadioNavigationAid'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7972480284902884</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6560359765446786</measure>
     </Cell>
   </map>
   <map>
@@ -220,6 +308,14 @@
     </Cell>
   </map>
   <map>
+    <Cell rdf:about="PropertyMatcher131635">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#TAFmeteorologicalCondition'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeChangeIndicatorType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7972480284902884</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="PropertyMatcher92924">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#CloudLayer'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeCloudType'/>
@@ -228,11 +324,11 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher85221">
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid85104">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftType'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeAircraftEquipmentType'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AircraftType'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6500325790744413</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7173577783980118</measure>
     </Cell>
   </map>
   <map>
@@ -252,14 +348,6 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher1061">
-      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AirportData'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeFiledFlightRulesType'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.1832541552019016</measure>
-    </Cell>
-  </map>
-  <map>
     <Cell rdf:about="PropertyMatcher61632">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#CircularRegion'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AirspaceEntry'/>
@@ -268,27 +356,43 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher100572">
+    <Cell rdf:about="PropertyMatcher1061">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AirportData'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeFiledFlightRulesType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.1832541552019016</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid33697">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#TrafficManagementInitiative'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AviationCondition'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.2024000897617895</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid100646">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AirspaceLayer'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeAltitudeUseType'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AirspaceLayer'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.3156847257101996</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7173577783980118</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher4166">
-      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#PlannedFlightRoute'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#FlightRestrictionRoute'/>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid135325">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#IntervalData'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#TrafficVolumeSet'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.4145703600217234</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.18586140469122367</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher93964">
-      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#ReRouteSegment'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeRouteSegmentPathType'/>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid41074">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#IntegerParameter'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Unit'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5912614066013914</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.24930634699147367</measure>
     </Cell>
   </map>
   <map>
@@ -300,11 +404,27 @@
     </Cell>
   </map>
   <map>
+    <Cell rdf:about="PropertyMatcher93964">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#ReRouteSegment'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeRouteSegmentPathType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5912614066013914</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="PropertyMatcher58437">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#NAShour'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Boarding'/>
       <relation>=</relation>
       <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.4673421642221606</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid87006">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftNavigationSystem'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#SpecialNavigationSystem'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5982213481508567</measure>
     </Cell>
   </map>
   <map>
@@ -324,19 +444,19 @@
     </Cell>
   </map>
   <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid20664">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftWakeCategory'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#AircraftCategory'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6013239639027255</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="PropertyMatcher98451">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#TimeInterval'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Timesheet'/>
       <relation>=</relation>
       <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5912614066013914</measure>
-    </Cell>
-  </map>
-  <map>
-    <Cell rdf:about="PropertyMatcher139471">
-      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftTrackPoint'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeHeadingType'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.3939311170161697</measure>
     </Cell>
   </map>
   <map>
@@ -348,6 +468,14 @@
     </Cell>
   </map>
   <map>
+    <Cell rdf:about="PropertyMatcher139471">
+      <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#AircraftTrackPoint'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#CodeHeadingType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.3939311170161697</measure>
+    </Cell>
+  </map>
+  <map>
     <Cell rdf:about="WordEmbeddingMatcherSigmoid53758">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#Sector'/>
       <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#Airspace'/>
@@ -356,11 +484,11 @@
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="PropertyMatcher64963">
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid64867">
       <entity1 rdf:resource='https://data.nasa.gov/ontologies/atmonto/ATM#PointLocation'/>
-      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#SafeAltitudeArea'/>
+      <entity2 rdf:resource='http://www.project-best.eu/owl/airm-mono/airm.owl#TimeToPointBoundary'/>
       <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.2677991536342723</measure>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.27681627523799596</measure>
     </Cell>
   </map>
 </Alignment>
