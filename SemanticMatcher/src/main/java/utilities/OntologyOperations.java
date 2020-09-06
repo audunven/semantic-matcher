@@ -31,12 +31,17 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.model.PrefixManager;
+import org.semanticweb.owlapi.reasoner.BufferingMode;
 import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
 //import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
+
+import com.clarkparsia.pellet.owlapiv3.PelletReasoner;
+import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
+import com.clarkparsia.pellet.owlapiv3.Reasoner;
 
 import fr.inrialpes.exmo.ontosim.string.StringDistances;
 import rita.wordnet.jwnl.JWNLException;
@@ -73,6 +78,57 @@ public class OntologyOperations {
 	 */
 	public OntologyOperations() {
 
+	}
+	
+	/**
+	 * Returns a Map holding a class as key and its superclass as value. This version uses the Pellet reasoner, since the structural reasoner does not include all inferred superclasses of a class.
+	 *
+	 * @param o
+	 *            the input OWL ontology from which classes and superclasses
+	 *            should be derived
+	 * @return classesAndSuperClasses a Map holding a class as key and its
+	 *         superclass as value
+	 * @throws OWLOntologyCreationException
+	 *             An exception which describes an error during the creation of
+	 *             an ontology. If an ontology cannot be created then subclasses
+	 *             of this class will describe the reasons.
+	 */
+	public static Map<String, String> getClassesAndSuperClassesUsingPellet (OWLOntology o)  {
+
+		PelletReasoner reasoner = new PelletReasoner(o, BufferingMode.BUFFERING);
+		
+		Set<OWLClass> cls = o.getClassesInSignature();
+		Map<String, String> classesAndSuperClasses = new HashMap<String, String>();
+		ArrayList<OWLClass> classList = new ArrayList<OWLClass>();
+
+		for (OWLClass i : cls) {
+			classList.add(i);
+		}
+
+		// Iterate through the arraylist and for each class get the subclasses
+		// belonging to it
+		// Transform from OWLClass to String to simplify further processing...
+		for (int i = 0; i < classList.size(); i++) {
+			OWLClass currentClass = classList.get(i);
+			NodeSet<OWLClass> n = reasoner.getSuperClasses(currentClass, true);
+			Set<OWLClass> s = n.getFlattened();
+			for (OWLClass j : s) {
+				classesAndSuperClasses.put(currentClass.getIRI().getFragment(), j.getIRI().getFragment());
+			}
+		}
+
+		return classesAndSuperClasses;
+
+	}
+	
+	public static Set<String> getClassesAsString (OWLOntology onto) {
+		Set<String> classesAsString = new HashSet<String>();
+		for (OWLClass c : onto.getClassesInSignature()) {
+
+			classesAsString.add(c.getIRI().getFragment());
+		}
+
+		return classesAsString;
 	}
 
 	/**
@@ -914,6 +970,15 @@ public class OntologyOperations {
 		
 		//test lexical coverage
 		System.out.println("Lexical Coverage of ontology is " + getWordNetCoverageComp(ontoFile));
+		
+		//test pellet reasoner
+		//public static Map<String, String> getClassesAndSuperClassesUsingPellet (OWLOntology o)  {
+		Map<String, String> classesAndSuperClasses = getClassesAndSuperClassesUsingPellet(onto);
+		
+		
+		for (Entry<String, String> e : classesAndSuperClasses.entrySet()) {
+			System.out.println(e);
+		}
 		
 		
 		
