@@ -1,10 +1,13 @@
 package mismatchdetection;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.Cell;
 
@@ -12,6 +15,7 @@ import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
+import fr.inrialpes.exmo.align.parser.AlignmentParser;
 import utilities.StringUtilities;
 import utilities.WNDomain;
 import utilities.WordNet;
@@ -24,6 +28,18 @@ import rita.wordnet.jwnl.JWNLException;
  * 8. jan. 2018 
  */
 public class DomainMismatch {
+	
+	public static void main(String[] args) throws AlignmentException, URISyntaxException, FileNotFoundException, JWNLException {
+		
+		String alignmentFile = "./files/_PHD_EVALUATION/ATMONTO-AIRM/MISMATCHES/initialAlignment.rdf";
+		
+		AlignmentParser aparser = new AlignmentParser(0);
+		BasicAlignment alignment =  (BasicAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(alignmentFile)));
+		
+		URIAlignment filteredAlignment = filterAlignment(alignment);
+		
+		
+	}
 
 	/**
 	 * This method uses different techniques for filtering out relations from an alignment where the two concepts (likely) does not represent the same domain.

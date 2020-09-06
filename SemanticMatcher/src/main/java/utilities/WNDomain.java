@@ -20,6 +20,19 @@ import rita.wordnet.jwnl.wndata.Synset;
 public class WNDomain {
 	
 	final static String WN_DOMAINS_FILE = "./files/wndomains/wn-domains-3.2-20070223.txt";
+	
+	public static void main(String[] args) throws FileNotFoundException, JWNLException {
+		
+		String s1 = "car";
+		String s2 = "automobile";
+		
+		String offset = "2853224";
+		
+		System.out.println("Domain is " + findDomain(WN_DOMAINS_FILE, offset));
+		
+		System.out.println(sameDomainJaccard(s1, s2, 0.3));
+		
+	}
 
 	/**
 	 * Returns a list of offsets associated with an input word
