@@ -88,7 +88,7 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 		double testRangeMax = 0.7;
 
 		AlignmentProcess a = new DefinitionEquivalenceMatcherSigmoid(sourceOntology, targetOntology, vectorFile, testProfileScore, testSlope, testRangeMin, testRangeMax);
-		a.init(sourceOntology.getOntologyID().getOntologyIRI().get().toURI(), targetOntology.getOntologyID().getOntologyIRI().get().toURI());
+		a.init(sourceOntology.getOntologyID().getOntologyIRI().toURI(), targetOntology.getOntologyID().getOntologyIRI().toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
 		a.align((Alignment)null, params);	
@@ -161,7 +161,7 @@ public class DefinitionEquivalenceMatcherSigmoid extends ObjectAlignment impleme
 		
 		DEMAlignment = definitionEquivalenceMatcherAlignment.toURIAlignment();
 		
-		DEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		DEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 		
 		return DEMAlignment;
 		

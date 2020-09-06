@@ -244,7 +244,7 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 		GEMAlignment = GraphEquivalenceMatcherSigmoidAlignment.toURIAlignment();
 
-		GEMAlignment.init( o1.getOntologyID().getOntologyIRI().get().toURI(), o2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		GEMAlignment.init( o1.getOntologyID().getOntologyIRI().toURI(), o2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return GEMAlignment;
 

@@ -137,7 +137,7 @@ public class WordEmbeddingMatcher extends ObjectAlignment implements AlignmentPr
 		
 		WEMAlignment = wordEmbeddingMatcherAlignment.toURIAlignment();
 		
-		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 		
 		return WEMAlignment;
 		

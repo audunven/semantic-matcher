@@ -62,7 +62,7 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
 		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
 		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-		String vectorFile = "./files//_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+		String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
 
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
@@ -74,6 +74,8 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 		double testRangeMax = 0.7;
 
 		AlignmentProcess a = new WordEmbeddingMatcherSigmoid(sourceOntology, targetOntology, vectorFile, testProfileScore, testSlope, testRangeMin, testRangeMax);
+		
+		
 		a.init(ontoFile1.toURI(), ontoFile2.toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
@@ -149,8 +151,8 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 		
 		WEMAlignment = WordEmbeddingMatcherSigmoidAlignment.toURIAlignment();
 		
-		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-		
+//		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		WEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 		return WEMAlignment;
 		
 	}
@@ -169,22 +171,23 @@ public class WordEmbeddingMatcherSigmoid extends ObjectAlignment implements Alig
 		
 		//create the vector map from the source vector file
 		Map<String, ArrayList<Double>> vectorMap = VectorExtractor.createVectorMap (new File(vectorFile));
-		ArrayList<Double> labelVector = new ArrayList<Double>();
-		
+		ArrayList<Double> labelVector = new ArrayList<Double>();		
 		
 		for (OWLClass cls : onto.getClassesInSignature()) {
-
+			
 			if (vectorMap.containsKey(cls.getIRI().getFragment().toLowerCase())) {				
 				
 				labelVector = VectorExtractor.getLabelVector(cls.getIRI().getFragment(), vectorMap);
-				
+								
 				double[] labelVectorArray = new double[labelVector.size()];
 				for (int i = 0; i < labelVectorArray.length; i++) {
 					labelVectorArray[i] = labelVector.get(i);
 				}
+				
 				vectors.put(cls.getIRI().getFragment().toLowerCase(), labelVectorArray);
 			}	
 		}
+		
 
 		return vectors;
 		

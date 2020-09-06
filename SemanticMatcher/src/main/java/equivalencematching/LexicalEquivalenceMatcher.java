@@ -145,7 +145,7 @@ public class LexicalEquivalenceMatcher extends ObjectAlignment implements Alignm
 
 		LEMAlignment = lexicalEquivalenceMatcherAlignment.toURIAlignment();
 
-		LEMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		LEMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return LEMAlignment;
 
