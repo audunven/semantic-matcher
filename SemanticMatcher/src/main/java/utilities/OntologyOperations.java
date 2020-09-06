@@ -35,7 +35,7 @@ import org.semanticweb.owlapi.reasoner.NodeSet;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
-import org.semanticweb.owlapi.search.EntitySearcher;
+//import org.semanticweb.owlapi.search.EntitySearcher;
 import org.semanticweb.owlapi.util.DefaultPrefixManager;
 
 import fr.inrialpes.exmo.ontosim.string.StringDistances;
@@ -483,9 +483,10 @@ public class OntologyOperations {
 		int classCounter = 0;
 
 		for (OWLClass cl : classes) {
+						
 			//get all tokens of the class name
 			String[] tokens = StringUtilities.getCompoundParts(cl.getIRI().getFragment());
-
+			
 			int numTokens = tokens.length;
 			int tokenCounter = 0;
 			int totalCounter = 0;
@@ -845,14 +846,15 @@ public class OntologyOperations {
 	 * @return a set of OWL classes
 	   Jul 27, 2019
 	 */
-	private static Set<OWLClass> getDomainClasses (OWLOntology onto, OWLObjectProperty op) {
+	public static Set<OWLClass> getDomainClasses (OWLOntology onto, OWLObjectProperty op) {
 		Set<OWLClass> clsSet = new HashSet<OWLClass>();
-				
-		Collection<OWLClassExpression> domainClasses = EntitySearcher.getDomains(op, onto);
 
-		for (OWLClassExpression e : domainClasses) {
-			if (!e.isAnonymous()) {
-			clsSet.add(e.asOWLClass());
+		//get the domain class(es)
+		Set<OWLClassExpression> domainClasses = op.getDomains(onto);
+
+		for (OWLClassExpression exp : domainClasses) {
+			if (!exp.isAnonymous()) { //need to check if exp represents an anonymous class (a class expression without an IRI identifier)
+				clsSet.add(exp.asOWLClass());
 			}
 		}
 
@@ -870,24 +872,28 @@ public class OntologyOperations {
 	 */
 	public static Set<OWLClass> getRangeClasses (OWLOntology onto, OWLObjectProperty op) {
 		Set<OWLClass> clsSet = new HashSet<OWLClass>();
-						
-		Collection<OWLClassExpression> rangeClasses = EntitySearcher.getRanges(op, onto);
-		
-		for (OWLClassExpression e : rangeClasses) {
-			if (!e.isAnonymous()) {
-			clsSet.add(e.asOWLClass());
+
+		//get the domain class(es)
+		Set<OWLClassExpression> rangeClasses = op.getRanges(onto);
+
+		for (OWLClassExpression exp : rangeClasses) {
+			if (!exp.isAnonymous()) { //need to check if exp represents an anonymous class (a class expression without an IRI identifier)
+				clsSet.add(exp.asOWLClass());
 			}
 		}
+
 
 		return clsSet;
 	}
 	
 	
-	public static void main(String[] args) throws OWLOntologyCreationException {
+	public static void main(String[] args) throws OWLOntologyCreationException, FileNotFoundException, JWNLException {
 		
 		File ontoFile = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology onto = manager.loadOntologyFromOntologyDocument(ontoFile);
+		
+		System.out.println("Ontology URI: " + onto.getOntologyID().getOntologyIRI().toURI());
 		
 		OWLClass cl = getClass("Person", onto);
 		
@@ -906,6 +912,8 @@ public class OntologyOperations {
 			}
 		}
 		
+		//test lexical coverage
+		System.out.println("Lexical Coverage of ontology is " + getWordNetCoverageComp(ontoFile));
 		
 		
 		
