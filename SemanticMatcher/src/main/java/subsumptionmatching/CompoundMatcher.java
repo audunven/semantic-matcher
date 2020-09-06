@@ -136,7 +136,7 @@ public class CompoundMatcher extends ObjectAlignment implements AlignmentProcess
 
 		CMAlignment = compoundMatcherAlignment.toURIAlignment();
 
-		CMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		CMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return CMAlignment;
 

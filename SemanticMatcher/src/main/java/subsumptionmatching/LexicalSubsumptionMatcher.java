@@ -125,14 +125,13 @@ public class LexicalSubsumptionMatcher extends ObjectAlignment implements Alignm
 
 		LSMAlignment = lexicalSubsumptionMatcherAlignment.toURIAlignment();
 
-		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return LSMAlignment;
 
 	}
 
 	public void align( Alignment alignment, Properties param ) throws AlignmentException {
-
 		System.out.println("\nStarting Lexical Subsumption Matcher...");
 		long startTimeMatchingProcess = System.currentTimeMillis();
 

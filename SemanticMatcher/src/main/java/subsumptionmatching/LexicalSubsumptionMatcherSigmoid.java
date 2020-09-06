@@ -71,7 +71,7 @@ public class LexicalSubsumptionMatcherSigmoid extends ObjectAlignment implements
 
 		LSMAlignment = LexicalSubsumptionMatcherSigmoidAlignment.toURIAlignment();
 
-		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		LSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return LSMAlignment;
 

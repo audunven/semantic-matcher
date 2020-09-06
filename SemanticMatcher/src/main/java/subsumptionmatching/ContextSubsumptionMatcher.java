@@ -138,7 +138,7 @@ public class ContextSubsumptionMatcher extends ObjectAlignment implements Alignm
 
 		CSMAlignment = contextSubsumptionMatcherAlignment.toURIAlignment();
 
-		CSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		CSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return CSMAlignment;
 

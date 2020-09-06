@@ -126,7 +126,7 @@ public class DefinitionSubsumptionMatcherSigmoid extends ObjectAlignment impleme
 
 		DSMAlignment = DefinitionSubsumptionMatcherSigmoidAlignment.toURIAlignment();
 
-		DSMAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+		DSMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return DSMAlignment;
 
