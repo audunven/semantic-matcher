@@ -33,11 +33,15 @@ public class WordNet {
 	final static POS pos = POS.NOUN;
 	private static ILexicalDatabase db = new NictWordNet();
 	//final static String JWNL_FILE = "./files/WordNet-3.0/file_property.xml";
-	static RiWordNet database = new RiWordNet("./files/WordNet-3.0/dict");
+	
+	//Note that the WNDomains classification relies on WordNet-2.0
+	static RiWordNet database = new RiWordNet("./files/WordNet-2.0/dict");
 	
 	public static void main(String[] args) throws FileNotFoundException, JWNLException {
 		
 		String inputWord = "automobile";
+		
+		System.out.println("Is " + inputWord + " contained in WordNet?: " + containedInWordNet(inputWord));
 		
 		System.out.println(getLexicalName(inputWord));
 		
@@ -114,7 +118,7 @@ public class WordNet {
 
 		Dictionary dictionary = Dictionary.getInstance();
 
-		IndexWord indexWord = dictionary.lookupIndexWord(pos, inputWord);
+		IndexWord indexWord = dictionary.lookupIndexWord(pos, inputWord.toLowerCase());
 
 		//JWNL.shutdown();
 
