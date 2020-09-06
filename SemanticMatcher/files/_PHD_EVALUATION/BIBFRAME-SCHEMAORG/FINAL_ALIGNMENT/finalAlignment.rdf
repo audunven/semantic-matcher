@@ -1,0 +1,1415 @@
+<?xml version='1.0' encoding='utf-8' standalone='no'?>
+<rdf:RDF xmlns='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'
+         xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+         xmlns:xsd='http://www.w3.org/2001/XMLSchema#'
+         xmlns:alext='http://exmo.inrialpes.fr/align/ext/1.0/'
+         xmlns:align='http://knowledgeweb.semanticweb.org/heterogeneity/alignment#'>
+<Alignment>
+  <xml>yes</xml>
+  <level>0</level>
+  <type>**</type>
+  <relationClass>fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation</relationClass>
+  <onto1>
+    <Ontology rdf:about="http://id.loc.gov/ontologies/bibframe">
+      <location>http://id.loc.gov/ontologies/bibframe</location>
+    </Ontology>
+  </onto1>
+  <onto2>
+    <Ontology rdf:about="http://schema.org">
+      <location>http://schema.org</location>
+    </Ontology>
+  </onto2>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid40282">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicInstrument'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid84831">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GeographicCoverage'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid84738">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GeographicCoverage'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid84181">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ShelfMarkLcc'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid84088">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ShelfMarkLcc'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid42815">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#WPHeader'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid42816">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#QualitativeValue'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42814">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Residence'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid42882">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42825">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#TouristAttraction'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42634">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#AdministrativeArea'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42653">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Landform'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42845">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#LandmarksOrHistoricalBuildings'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42844">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#LocalBusiness'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid42283">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#CivicStructure'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid9953">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Identifier'/>
+      <entity2 rdf:resource='http://schema.org#Barcode'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid34818">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Dataset'/>
+      <entity2 rdf:resource='http://schema.org#DataFeed'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid34972">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Dataset'/>
+      <entity2 rdf:resource='http://schema.org#Dataset'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid34785">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Dataset'/>
+      <entity2 rdf:resource='http://schema.org#CreativeWork'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid52823">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#EnumerationAndChronology'/>
+      <entity2 rdf:resource='http://schema.org#Enumeration'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid99381">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Coden'/>
+      <entity2 rdf:resource='http://schema.org#Library'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid99016">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Coden'/>
+      <entity2 rdf:resource='http://schema.org#Mass'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid62338">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#BroadcastStandard'/>
+      <entity2 rdf:resource='http://schema.org#BroadcastEvent'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.35489523750884</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid41582">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#PlaybackCharacteristic'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid40932">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Electronic'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid104506">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ProvisionActivity'/>
+      <entity2 rdf:resource='http://schema.org#Distribution'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid90643">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Distribution'/>
+      <entity2 rdf:resource='http://schema.org#MediaObject'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid90856">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Distribution'/>
+      <entity2 rdf:resource='http://schema.org#Distribution'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid30211">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Gtin14Number'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid78203">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://schema.org#Barcode'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326436</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid78501">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid78519">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
+      <entity2 rdf:resource='http://schema.org#ImageObject'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid4205">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid4186">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#PerformanceRole'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid4508">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#OrganizationRole'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid4021">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#Role'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid4212">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#EmployeeRole'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid86612">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Agent'/>
+      <entity2 rdf:resource='http://schema.org#RealEstateAgent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6324511187714826</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid55243">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
+      <entity2 rdf:resource='http://schema.org#Text'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid54656">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid9411">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ReportNumber'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid86131">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TapeConfig'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid86038">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TapeConfig'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid83438">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GenerationProcess'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid83531">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GenerationProcess'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid39324">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Item'/>
+      <entity2 rdf:resource='http://schema.org#OrderItem'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid39561">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Item'/>
+      <entity2 rdf:resource='http://schema.org#ListItem'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid62711">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#CopyrightNumber'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid91873">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Publication'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid92065">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Publication'/>
+      <entity2 rdf:resource='http://schema.org#Periodical'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51521">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MusicAlbumReleaseType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51730">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#GamePlayMode'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51707">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BookFormatType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51544">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ReservationStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51634">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#Specialty'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51366">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MusicAlbumProductionType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51692">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalEvidenceLevel'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51664">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MusicReleaseFormatType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51902">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#EventStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51659">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#InfectiousAgentClass'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51459">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalDevicePurpose'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51855">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#WarrantyScope'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51368">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalTrialDesign'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51717">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#PaymentStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51589">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DrugPregnancyCategory'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51724">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalAudience'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51388">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#PhysicalExam'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51708">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicineSystem'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51474">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#PaymentMethod'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51991">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#OrderStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51497">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalObservationalStudyDesign'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51850">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ItemAvailability'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51817">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalImagingTechnique'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51376">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MapCategoryType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51511">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#PhysicalActivityCategory'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51424">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#OfferItemCondition'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51423">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#RsvpResponseType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51702">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BusinessEntityType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51979">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ActionStatusType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51887">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DrugCostCategory'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51909">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DayOfWeek'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51352">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalProcedureType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51711">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalStudyStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51481">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DeliveryMethod'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51741">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#GameServerStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51401">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ItemListOrderType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51655">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51727">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BusinessFunction'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51559">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#DrugPrescriptionStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51648">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalEnumeration'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51749">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#BoardingPolicyType'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid51523">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#Enumeration'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51916">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#QualitativeValue'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51876">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#MedicalSpecialty'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid51409">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
+      <entity2 rdf:resource='http://schema.org#ContactPointOption'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid94147">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Person'/>
+      <entity2 rdf:resource='http://schema.org#Person'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid37361">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StudyNumber'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid58852">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#CartographicObjectType'/>
+      <entity2 rdf:resource='http://schema.org#BusinessEntityType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6635073720970247</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50257">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ExhibitionEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50134">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#Festival'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50540">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#SaleEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50516">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ComedyEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50214">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#MusicEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50635">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#UserInteraction'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50542">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#DanceEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50245">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ScreeningEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50633">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#SportsEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50095">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#VisualArtsEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50535">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#BusinessEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50057">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#DeliveryEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50231">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#SocialEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50659">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#LiteraryEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50182">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#TheaterEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid50488">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#Event'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50489">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#EducationEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50566">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#FoodEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid50638">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#BroadcastEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50299">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#PublicationEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid50064">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
+      <entity2 rdf:resource='http://schema.org#ChildrensEvent'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77345">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#GameServer'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77344">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#MarryAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid77005">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Intangible'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77348">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#AlignmentObject'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid76756">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77346">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#UserPlays'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77347">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#LakeBodyOfWater'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77350">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#InfectiousDisease'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77349">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#BusReservation'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid77343">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Text'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid98461">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid98366">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Mass'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid98731">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Library'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid67451">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StillImage'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid116851">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MovingImage'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid68954">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#IntendedAudience'/>
+      <entity2 rdf:resource='http://schema.org#Audience'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid98078">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Collection'/>
+      <entity2 rdf:resource='http://schema.org#Class'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid43422">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Dataset'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid43235">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#CreativeWork'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid43114">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Service'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid43295">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Action'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid43543">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Text'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid82881">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Issn'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid82788">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Issn'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid31511">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MatrixNumber'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid49938">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicMedium'/>
+      <entity2 rdf:resource='http://schema.org#MusicAlbum'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.40345916419422256</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid66948">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#AlignmentObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid66425">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#AudioObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid66450">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#Vehicle'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid66922">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#VideoObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid66593">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#MediaObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid66819">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#ImageObject'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid12316">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Unit'/>
+      <entity2 rdf:resource='http://schema.org#AutomatedTeller'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid12317">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Unit'/>
+      <entity2 rdf:resource='http://schema.org#BuyAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid12315">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Unit'/>
+      <entity2 rdf:resource='http://schema.org#Organization'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid47795">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#SportsOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid47716">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#EducationalOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid47616">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#Corporation'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid48071">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#GovernmentOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid47454">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#Airline'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid48088">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#PerformingGroup'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid48044">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#LocalBusiness'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid47854">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#NGO'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid48065">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#Organization'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid47648">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+      <entity2 rdf:resource='http://schema.org#MedicalOrganization'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid44586">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Mount'/>
+      <entity2 rdf:resource='http://schema.org#Mountain'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5251823178600012</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid65292">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Status'/>
+      <entity2 rdf:resource='http://schema.org#Order'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid65641">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Status'/>
+      <entity2 rdf:resource='http://schema.org#OrderStatus'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="CompoundMatcherSigmoid111461">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#PublisherNumber'/>
+      <entity2 rdf:resource='http://schema.org#Number'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7846117194453696</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid55306">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#VideoRecordingNumber'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid85481">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#FileSize'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalSubsumptionMatcherSigmoid85388">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#FileSize'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6626739416481976</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="WordEmbeddingMatcherSigmoid81214">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#Review'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="ContextSubsumptionMatcherSigmoid80935">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#CreativeWork'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.810179854636787</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid50829">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#CartographicDataType'/>
+      <entity2 rdf:resource='http://schema.org#DataType'/>
+      <relation>=</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    </Cell>
+  </map>
+</Alignment>
+</rdf:RDF>
