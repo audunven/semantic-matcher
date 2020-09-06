@@ -3,18 +3,12 @@ package equivalencematching;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
@@ -24,6 +18,8 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import com.google.common.graph.MutableGraph;
+
 import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
@@ -31,7 +27,7 @@ import fr.inrialpes.exmo.align.impl.ObjectAlignment;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.ontowrap.OntowrapException;
-import graph.Graph;
+import graph.SimpleGraph;
 import utilities.ISub;
 import utilities.Sigmoid;
 import utilities.StringUtilities;
@@ -60,21 +56,8 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 	OWLOntology sourceOntology;
 	OWLOntology targetOntology;
 	
-	/**
-	 * The key used for retrieving property values from the Neo4J DB
-	 */
-	final static String KEY = "classname";
-
-	/**
-	 * This label represents the graph/ontology to process
-	 */
-	static Label labelOnto1;
-	/**
-	 * This label represents the graph/ontology to process
-	 */
-	static Label labelOnto2;
-
-	static GraphDatabaseService db;
+	static MutableGraph<String> onto1Graph = null;
+	static MutableGraph<String> onto2Graph = null;
 
 	ISub iSubMatcher = new ISub();
 	
@@ -84,67 +67,30 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 	private static final double THRESHOLD = 0.9;
 
 
-	public GraphEquivalenceMatcherSigmoid(String ontology1Name, String ontology2Name, GraphDatabaseService database, double profileScore, int slope, double rangeMin, double rangeMax) {
-		labelOnto1 = DynamicLabel.label(ontology1Name);
-		labelOnto2 = DynamicLabel.label(ontology2Name);
-		db = database;
+	public GraphEquivalenceMatcherSigmoid(OWLOntology sourceOntology, OWLOntology targetOntology, double profileScore, int slope, double rangeMin, double rangeMax) {
+
 		this.profileScore = profileScore;
 		this.slope = slope;
 		this.rangeMin = rangeMin;
 		this.rangeMax = rangeMax;
+		this.sourceOntology = sourceOntology;
+		this.targetOntology = targetOntology;
 	}
-
-	public GraphEquivalenceMatcherSigmoid() {
-
-	}
+	
 
 	public static void main(String[] args) throws OWLOntologyCreationException, AlignmentException, URISyntaxException, IOException {
 
-		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-		
-//		File ontoFile1 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-301.rdf");
-//		File ontoFile2 = new File("./files/_PHD_EVALUATION/OAEI2011/ONTOLOGIES/301303/301303-303.rdf");
-//		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/301303/301-303-EQ_SUB.rdf";
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
 
-		//create a new instance of the neo4j database in each run
-		String ontologyParameter1 = null;
-		String ontologyParameter2 = null;	
-		Graph creator = null;
-		OWLOntologyManager manager = null;
-		OWLOntology o1 = null;
-		OWLOntology o2 = null;
-		Label labelO1 = null;
-		Label labelO2 = null;
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		String dbName = String.valueOf(timestamp.getTime());
-		File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
-		//System.out.println("Creating a new NEO4J database");
-		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-		//System.out.println("Database created");
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
+		OWLOntology targetOntology = manager.loadOntologyFromOntologyDocument(ontoFile2);
 
-		ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
-		ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
+		double testProfileScore = 1.0;
 
-		//create new graphs
-		manager = OWLManager.createOWLOntologyManager();
-		o1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-		o2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-
-		labelO1 = DynamicLabel.label( ontologyParameter1 );
-		labelO2 = DynamicLabel.label( ontologyParameter2 );
-
-		//System.out.println("Creating ontology graphs");
-		creator = new Graph(db);
-
-		creator.createOntologyGraph(o1, labelO1);
-		creator.createOntologyGraph(o2, labelO2);
-
-
-		double testWeight = 1.0;
-
-		AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(ontologyParameter1, ontologyParameter2, db, testWeight, 3, 0.5, 0.7);
+		AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(sourceOntology, targetOntology, testProfileScore, 3, 0.5, 0.7);
 		a.init(ontoFile1.toURI(), ontoFile2.toURI());
 		Properties params = new Properties();
 		params.setProperty("", "");
@@ -155,106 +101,31 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 		graphMatcherAlignment.normalise();
 
-		System.out.println("\nThe alignment contains " + graphMatcherAlignment.nbCells() + " relations");
-
-		System.out.println("Evaluation with no cut threshold:");
-		Evaluator.evaluateSingleAlignment(graphMatcherAlignment, referenceAlignment);
+		
 
 		System.out.println("Evaluation with threshold 0.2:");
 		graphMatcherAlignment.cut(0.2);
+		System.out.println("\nThe alignment contains " + graphMatcherAlignment.nbCells() + " relations");
 		Evaluator.evaluateSingleAlignment(graphMatcherAlignment, referenceAlignment);
-
-		System.out.println("Evaluation with threshold 0.4:");
-		graphMatcherAlignment.cut(0.4);
-		Evaluator.evaluateSingleAlignment(graphMatcherAlignment, referenceAlignment);
-
-		System.out.println("Evaluation with threshold 0.6:");
-		graphMatcherAlignment.cut(0.6);
-		Evaluator.evaluateSingleAlignment(graphMatcherAlignment, referenceAlignment);
-
-		System.out.println("Printing relations at 0.6:");
+		
+		System.out.println("Printing relations at 0.2:");
 		for (Cell c : graphMatcherAlignment) {
 			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
 		}
 
-		System.out.println("Evaluation with threshold 0.9:");
-		graphMatcherAlignment.cut(0.9);
-		Evaluator.evaluateSingleAlignment(graphMatcherAlignment, referenceAlignment);
-
 	}
 
-	/**
-	 * Returns an alignment object holding equivalence relations computed by the Graph Equivalence Matcher.
-	 * @param ontoFile1 source ontology
-	 * @param ontoFile2 target ontology
-	 * @param weight a weight on the confidence value (default 1.0)
-	 * @return An URIAlignment with equivalence relations computed by structural proximity. 
-	 * @throws OWLOntologyCreationException
-	 * @throws AlignmentException
-	   Jul 14, 2019
-	 */
-	public static URIAlignment returnGEMAlignment (File ontoFile1, File ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) throws OWLOntologyCreationException, AlignmentException {
-
-		URIAlignment GEMAlignment = new URIAlignment();
-
-		//create a new instance of the neo4j database in each run
-		String ontologyParameter1 = null;
-		String ontologyParameter2 = null;	
-		Graph creator = null;
-		OWLOntologyManager manager = null;
-		OWLOntology o1 = null;
-		OWLOntology o2 = null;
-		Label labelO1 = null;
-		Label labelO2 = null;
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		String dbName = String.valueOf(timestamp.getTime());
-		File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
-		//System.out.println("Creating a new NEO4J database ( " + dbFile.getPath() + " )");
-		GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-		//System.out.println("Database created");		
-
-		ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
-		ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
-
-		//create new graphs
-		manager = OWLManager.createOWLOntologyManager();
-		o1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-		o2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-
-		labelO1 = DynamicLabel.label( ontologyParameter1 );
-		labelO2 = DynamicLabel.label( ontologyParameter2 );
-
-		//System.out.println("Creating ontology graphs");
-		creator = new Graph(db);
-
-		creator.createOntologyGraph(o1, labelO1);
-		creator.createOntologyGraph(o2, labelO2);
-
-		AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(StringUtilities.stripPath(ontoFile1.toString()), StringUtilities.stripPath(ontoFile2.toString()), db, profileScore, slope, rangeMin, rangeMax);
-		a.init(ontoFile1.toURI(), ontoFile2.toURI());
-		Properties params = new Properties();
-		params.setProperty("", "");
-		a.align((Alignment)null, params);	
-
-		BasicAlignment GraphEquivalenceMatcherSigmoidAlignment = new BasicAlignment();
-
-		GraphEquivalenceMatcherSigmoidAlignment = (BasicAlignment) (a.clone());
-
-		GraphEquivalenceMatcherSigmoidAlignment.normalise();
-
-		GEMAlignment = GraphEquivalenceMatcherSigmoidAlignment.toURIAlignment();
-
-		GEMAlignment.init( o1.getOntologyID().getOntologyIRI().toURI(), o2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-
-		return GEMAlignment;
-
-	}	
+	
 
 
 	/**
 	 * Computes an alignment of semantic relations from the computeStrucProx() method
 	 */
 	public void align( Alignment alignment, Properties param ) throws AlignmentException {
+		
+		MutableGraph<String> onto1Graph = SimpleGraph.createGraph(sourceOntology);
+		MutableGraph<String> onto2Graph = SimpleGraph.createGraph(targetOntology);
+		
 
 		int idCounter = 0;
 		try {
@@ -264,9 +135,8 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 					idCounter++; 
 
-					//using sigmoid function to compute confidence
 					addAlignCell("GraphMatcher" + idCounter, cl1,cl2, "=", 
-							Sigmoid.weightedSigmoid(slope, computeStructProx(cl1,cl2), Sigmoid.transformProfileWeight(profileScore, rangeMin, rangeMax))); 
+							Sigmoid.weightedSigmoid(slope, computeStructProx(cl1,cl2, onto1Graph, onto2Graph), Sigmoid.transformProfileWeight(profileScore, rangeMin, rangeMax))); 
 				}
 
 			}
@@ -290,47 +160,36 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 	 * @throws OntowrapException
 	 * @throws IOException
 	 */
-	public double computeStructProx(Object o1, Object o2) throws OWLOntologyCreationException, OntowrapException, IOException {
+	public double computeStructProx(Object o1, Object o2, MutableGraph<String> onto1Graph, MutableGraph<String> onto2Graph) throws OWLOntologyCreationException, OntowrapException, IOException {
 
-		Graph.registerShutdownHook(db);		
-
-		String s1 = ontology1().getEntityName(o1);
-		String s2 = ontology2().getEntityName(o2);
-
-		//get the s1 node from ontology 1
-		Node s1Node = Graph.getNode(s1, labelOnto1);
-
-
-		//get the s2 node from ontology 2
-		Node s2Node = Graph.getNode(s2, labelOnto2);
+		String s1 = ontology1().getEntityName(o1).toLowerCase();
+		String s2 = ontology2().getEntityName(o2).toLowerCase();
 
 		//get the parent nodes of a class from ontology 1
-		ArrayList<Object> onto1Parents = Graph.getAllParentNodes(s1Node, labelOnto1);
-
+		List<String> onto1Parents = SimpleGraph.getParents(s1, onto1Graph);
 
 		//get the parent nodes of a class from ontology 2
-		ArrayList<Object> onto2Parents = Graph.getAllParentNodes(s2Node,labelOnto2);
-
+		List<String> onto2Parents = SimpleGraph.getParents(s2, onto2Graph);
 
 		//find distance from s1 node to owl:Thing
-		int distanceC1ToRoot = Graph.findDistanceToRoot(s1Node);
+		int distanceC1ToRoot = SimpleGraph.getNodeDepth(s1, onto1Graph);
 
 		//find distance from s2 to owl:Thing
-		int distanceC2ToRoot = Graph.findDistanceToRoot(s2Node);
+		int distanceC2ToRoot = SimpleGraph.getNodeDepth(s2, onto2Graph);
 
 		double iSubSimScore = 0;
 		ISub iSubMatcher = new ISub();
 
 		//map to keep the pair of ancestors matching above the threshold
-		Map<Object,Object> matchingMap = new HashMap<Object,Object>();
+		Map<String,String> matchingMap = new HashMap<String,String>();
 
 		//matching the parentnodes
 		for (int i = 0; i < onto1Parents.size(); i++) {
 			for (int j = 0; j < onto2Parents.size(); j++) {
+				
 				iSubSimScore = iSubMatcher.score(onto1Parents.get(i).toString(), onto2Parents.get(j).toString());
 
 				if (iSubSimScore >= THRESHOLD) {
-
 					matchingMap.put(onto1Parents.get(i) , onto2Parents.get(j));
 				}	
 			}
@@ -342,12 +201,13 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 
 
 		//loop through the matchingMap containing key-value pairs of ancestors from O1 and O2 being similar over the given threshold
-		for (Entry<Object, Object> entry : matchingMap.entrySet()) {
-			Node anc1 = Graph.getNode(entry.getKey().toString(), labelOnto1);
-			Node anc2 = Graph.getNode(entry.getValue().toString(), labelOnto2);
-
-			avgAncestorDistanceToRoot = (Graph.findDistanceToRoot(anc1) + Graph.findDistanceToRoot(anc2)) / 2;
-
+		for (Entry<String, String> entry : matchingMap.entrySet()) {
+			
+			String anc1 = entry.getKey();
+			String anc2 = entry.getValue();
+			
+			avgAncestorDistanceToRoot = SimpleGraph.getNodeDepth(anc1, onto1Graph) + SimpleGraph.getNodeDepth(anc2, onto2Graph);
+			
 			currentStructProx = (2 * avgAncestorDistanceToRoot) / (distanceC1ToRoot + distanceC2ToRoot);
 
 			if (currentStructProx > structProx) {
@@ -356,9 +216,47 @@ public class GraphEquivalenceMatcherSigmoid extends ObjectAlignment implements A
 			}
 
 		}
-
+		
 		return structProx;
 	}
+	
+	/**
+	 * Returns an alignment object holding equivalence relations computed by the Graph Equivalence Matcher.
+	 * @param ontoFile1 source ontology
+	 * @param ontoFile2 target ontology
+	 * @param weight a weight on the confidence value (default 1.0)
+	 * @return An URIAlignment with equivalence relations computed by structural proximity. 
+	 * @throws OWLOntologyCreationException
+	 * @throws AlignmentException
+	   Jul 14, 2019
+	 */
+	public static URIAlignment returnGEMAlignment (File ontoFile1, File ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) throws OWLOntologyCreationException, AlignmentException {
+
+		URIAlignment GEMAlignment = new URIAlignment();
+
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
+		OWLOntology targetOntology = manager.loadOntologyFromOntologyDocument(ontoFile2);
+
+		AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(sourceOntology, targetOntology, profileScore, 3, 0.5, 0.7);
+		a.init(ontoFile1.toURI(), ontoFile2.toURI());
+		Properties params = new Properties();
+		params.setProperty("", "");
+		a.align((Alignment)null, params);	
+
+		BasicAlignment GraphEquivalenceMatcherSigmoidAlignment = new BasicAlignment();
+
+		GraphEquivalenceMatcherSigmoidAlignment = (BasicAlignment) (a.clone());
+
+		GraphEquivalenceMatcherSigmoidAlignment.normalise();
+
+		GEMAlignment = GraphEquivalenceMatcherSigmoidAlignment.toURIAlignment();
+
+		GEMAlignment.init( sourceOntology.getOntologyID().getOntologyIRI().toURI(), targetOntology.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+
+		return GEMAlignment;
+
+	}	
 
 
 
