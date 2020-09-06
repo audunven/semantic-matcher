@@ -323,7 +323,7 @@ public class EvalAllMatchersSigmoid {
 										
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 					
 					//perform the evaluation here...				
@@ -394,7 +394,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -517,7 +517,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -584,7 +584,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -705,7 +705,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -772,7 +772,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -924,7 +924,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				
@@ -992,7 +992,7 @@ public class EvalAllMatchersSigmoid {
 					
 					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
 					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().get().toURI(), onto2.getOntologyID().getOntologyIRI().get().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
 					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
 
 					//perform the evaluation here...				

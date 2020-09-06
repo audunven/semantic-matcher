@@ -19,7 +19,7 @@ import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 import org.semanticweb.owlapi.reasoner.OWLReasonerFactory;
 import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
-import org.semanticweb.owlapi.search.EntitySearcher;
+//import org.semanticweb.owlapi.search.EntitySearcher;
 
 import utilities.MathUtils;
 import utilities.StringUtilities;
@@ -74,21 +74,21 @@ public class VectorExtractor {
 		String comment = null;
 		String commentWOStopWords = null;
 
-//		for(OWLAnnotation a : cls.getAnnotations(onto, factory.getRDFSComment())) {
-//			OWLAnnotationValue value = a.getValue();
-//			if(value instanceof OWLLiteral) {
-//				comment = ((OWLLiteral) value).getLiteral().toString();
-//				commentWOStopWords = StringUtilities.removeStopWords(comment);
-//			}
-//		}
-		
-		for(OWLAnnotation a : EntitySearcher.getAnnotations(cls, onto, factory.getRDFSComment())) {
+		for(OWLAnnotation a : cls.getAnnotations(onto, factory.getRDFSComment())) {
 			OWLAnnotationValue value = a.getValue();
 			if(value instanceof OWLLiteral) {
 				comment = ((OWLLiteral) value).getLiteral().toString();
 				commentWOStopWords = StringUtilities.removeStopWords(comment);
 			}
 		}
+		
+//		for(OWLAnnotation a : EntitySearcher.getAnnotations(cls, onto, factory.getRDFSComment())) {
+//			OWLAnnotationValue value = a.getValue();
+//			if(value instanceof OWLLiteral) {
+//				comment = ((OWLLiteral) value).getLiteral().toString();
+//				commentWOStopWords = StringUtilities.removeStopWords(comment);
+//			}
+//		}
 
 		return commentWOStopWords;
 

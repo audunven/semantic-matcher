@@ -37,7 +37,6 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyDomainAxiom;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.search.EntitySearcher;
 
 import evaluation.general.EvaluationScore;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
@@ -650,7 +649,7 @@ public class AlignmentOperations {
 			
 			//get the range classes from the object properties 
 			for (OWLObjectProperty oop : ops) {
-				Set<OWLClassExpression> rangeCls = (Set<OWLClassExpression>) EntitySearcher.getRanges(oop, onto);
+				Set<OWLClassExpression> rangeCls = oop.getRanges(onto);
 				for (OWLClassExpression oce : rangeCls) {
 					if (!oce.isAnonymous()) {
 						range.add(oce.asOWLClass().getIRI().getFragment());
@@ -850,8 +849,8 @@ public class AlignmentOperations {
 		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
 		URIAlignment alignment = new URIAlignment();
 		
-		URI onto1URI = onto1.getOntologyID().getOntologyIRI().get().toURI();
-		URI onto2URI = onto2.getOntologyID().getOntologyIRI().get().toURI();
+		URI onto1URI = onto1.getOntologyID().getOntologyIRI().toURI();
+		URI onto2URI = onto2.getOntologyID().getOntologyIRI().toURI();
 		System.out.println("Test: The URIs are " + onto1URI.toString() + " and " + onto2URI.toString());
 
 		//need to initialise the alignment with ontology URIs and the type of relation (e.g. A5AlgebraRelation) otherwise exceptions are thrown
@@ -883,8 +882,8 @@ public class AlignmentOperations {
 	private static URIAlignment convertFromComaToAlignmentAPI (String comaTextFilePath, OWLOntology onto1, OWLOntology onto2) throws AlignmentException, FileNotFoundException, IOException {
 		
 		URIAlignment convertedAlignment = new URIAlignment();
-		URI onto1URI = onto1.getOntologyID().getOntologyIRI().get().toURI();
-		URI onto2URI = onto2.getOntologyID().getOntologyIRI().get().toURI();
+		URI onto1URI = onto1.getOntologyID().getOntologyIRI().toURI();
+		URI onto2URI = onto2.getOntologyID().getOntologyIRI().toURI();
 		
 		System.out.println("onto1URI: " + onto1URI);
 		System.out.println("onto2URI: " + onto2URI);
