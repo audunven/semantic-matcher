@@ -6,23 +6,13 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
@@ -33,11 +23,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/rita.jar"/>
-	<classpathentry kind="lib" path="lib/owlapi-bin.jar"/>
 	<classpathentry kind="lib" path="lib/rita.support.jar"/>
 	<classpathentry kind="lib" path="lib/procalign.jar"/>
 	<classpathentry kind="lib" path="lib/ontosim.jar"/>
 	<classpathentry kind="lib" path="lib/ws4j-1.0.1.jar"/>
-	<classpathentry kind="lib" path="lib/owlapi-3.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/ontowrap.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
