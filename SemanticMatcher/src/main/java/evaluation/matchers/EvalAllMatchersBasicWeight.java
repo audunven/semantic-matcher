@@ -7,16 +7,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.Timestamp;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.TreeMap;
 
-import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
@@ -25,11 +21,10 @@ import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
-import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import alignmentcombination.NaiveDescendingExtraction;
 import equivalencematching.DefinitionEquivalenceMatcher;
-import equivalencematching.GraphEquivalenceMatcher;
+//import equivalencematching.GraphEquivalenceMatcher;
 import equivalencematching.LexicalEquivalenceMatcher;
 import equivalencematching.PropertyEquivalenceMatcher;
 import equivalencematching.WordEmbeddingMatcher;
@@ -42,9 +37,8 @@ import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
-import graph.Graph;
-import rita.wordnet.jwnl.JWNLException;
 import ontologyprofiling.OntologyProfiler;
+import rita.wordnet.jwnl.JWNLException;
 import subsumptionmatching.CompoundMatcher;
 import subsumptionmatching.ContextSubsumptionMatcher;
 import subsumptionmatching.DefinitionSubsumptionMatcher;
@@ -153,8 +147,9 @@ public class EvalAllMatchersBasicWeight {
 			System.out.println("\nRunning Property Matcher (PM)");
 			runPropertyEquivalenceMatcher(ontologyProfilingScores.get("pf"), weighted);
 
-			System.out.println("\nRunning Graph Matcher (GM)");
-			runGraphEquivalenceMatcher(ontologyProfilingScores.get("sp"), weighted);
+			//NOTE: NOT USING GRAPH MATCHER WITH NEO4J ANYMORE
+//			System.out.println("\nRunning Graph Matcher (GM)");
+//			runGraphEquivalenceMatcher(ontologyProfilingScores.get("sp"), weighted);
 
 			System.out.println("\nRunning Lexical Matcher (LM)");
 			runLexicalEquivalenceMatcher(ontologyProfilingScores.get("lcw"), weighted);
@@ -203,8 +198,9 @@ public class EvalAllMatchersBasicWeight {
 			System.out.println("\nRunning Property Matcher (PM)");
 			runPropertyEquivalenceMatcher(1.0, weighted);
 
-			System.out.println("\nRunning Graph Matcher (GM)");
-			runGraphEquivalenceMatcher(1.0, weighted);
+			//NOTE: NOT USING GRAPH MATCHER WITH NEO4J ANYMORE
+//			System.out.println("\nRunning Graph Matcher (GM)");
+//			runGraphEquivalenceMatcher(1.0, weighted);
 
 			System.out.println("\nRunning Lexical Matcher (LM)");
 			runLexicalEquivalenceMatcher(1.0, weighted);
@@ -801,210 +797,210 @@ public class EvalAllMatchersBasicWeight {
 		 * @throws OWLOntologyCreationException
 		   Jul 16, 2019
 		 */
-		private static void runGraphEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
-			
-			System.out.println("\nRunning the GEM matcher");
-
-			//create a new instance of the neo4j database in each run
-			String ontologyParameter1 = null;
-			String ontologyParameter2 = null;	
-			Graph creator = null;
-			OWLOntologyManager manager = null;
-			OWLOntology onto1 = null;
-			OWLOntology onto2 = null;
-			Label labelO1 = null;
-			Label labelO2 = null;
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			String dbName = String.valueOf(timestamp.getTime());
-			File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
-			System.out.println("Creating a new database");
-			GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-			System.out.println("Database created");
-			//registerShutdownHook(db);
-
-			ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
-			ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
-
-			//create new graphs
-			manager = OWLManager.createOWLOntologyManager();
-			onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-			onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-
-			labelO1 = DynamicLabel.label( ontologyParameter1 );
-			labelO2 = DynamicLabel.label( ontologyParameter2 );
-
-			System.out.println("Creating ontology graphs");
-			creator = new Graph(db);
-
-			creator.createOntologyGraph(onto1, labelO1);
-			creator.createOntologyGraph(onto2, labelO2);
-
-
-			AlignmentParser aparser = new AlignmentParser(0);
-			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
-
-			AlignmentProcess a = new GraphEquivalenceMatcher(ontologyParameter1, ontologyParameter2, db, weight);
-
-			a.init(ontoFile1.toURI(), ontoFile2.toURI());
-			Properties params = new Properties();
-			params.setProperty("", "");
-			a.align((Alignment)null, params);	
-			AlignmentVisitor renderer = null; 
-			File outputAlignment = null;
-			BasicAlignment evaluatedAlignment = null;
-			PrintWriter writer = null;
-
-			String alignmentFileName = null;
-
-			double[] confidences = {0.0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
-			double precision = 0;
-			double recall = 0;
-			double fMeasure = 0;
-			PRecEvaluator eval = null;
-			Properties p = new Properties();
-			Map<String, EvaluationScore> evaluationMap = new TreeMap<String, EvaluationScore>();
-
-			BasicAlignment clonedAlignment = null;
-			URIAlignment tempAlignment = null;
-			URIAlignment one2oneAlignment = null;
-
-			if (weighted == true) {
-				
-				//store the cardesian product alignment (basically all possible relations) since this is used for the HADAPT and ProfileWeight approaches
-				BasicAlignment cartesianProductAlignment = (BasicAlignment)(a.clone());
-				alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
-						"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_WEIGHT"+0.0+".rdf";
-				
-				outputAlignment = new File(alignmentFileName);
-
-				writer = new PrintWriter(
-						new BufferedWriter(
-								new FileWriter(outputAlignment)), true); 
-				renderer = new RDFRendererVisitor(writer);
-				cartesianProductAlignment.render(renderer);
-				writer.flush();
-				writer.close();
-				
-
-				for (int i = 0; i < confidences.length; i++) {
-					EvaluationScore evalScore = new EvaluationScore();
-
-					alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
-							"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_WEIGHT"+confidences[i]+".rdf";
-
-					outputAlignment = new File(alignmentFileName);
-
-
-					writer = new PrintWriter(
-							new BufferedWriter(
-									new FileWriter(outputAlignment)), true); 
-					renderer = new RDFRendererVisitor(writer);
-
-					evaluatedAlignment = (BasicAlignment)(a.clone());
-					evaluatedAlignment.toURIAlignment();
-					//no normalisation needed as long as the naive descending extraction is applied further down
-					//evaluatedAlignment.normalise();
-					evaluatedAlignment.cut(confidences[i]);
-					
-					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
-					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
-
-					//perform the evaluation here...				
-					eval = new PRecEvaluator(refalign, one2oneAlignment);
-
-					eval.eval(p);
-
-					precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-					recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-					fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-
-					evalScore.setPrecision(precision);
-					evalScore.setRecall(recall);
-					evalScore.setfMeasure(fMeasure);
-					evaluationMap.put(String.valueOf(confidences[i]), evalScore);
-
-					one2oneAlignment.render(renderer);
-
-					writer.flush();
-					writer.close();
-					
-					Evaluator.evaluateSingleAlignment("GEM with confidence " + confidences[i], one2oneAlignment, referenceAlignment, evalPath+"/GraphMatcher_WEIGHT" + confidences[i] + ".txt");
-
-				}
-
-				Evaluator.evaluateSingleMatcherThresholds(evaluationMap, evalPath+"/GraphMatcher_WEIGHT");
-				
-			} else {
-				
-				//store the cardesian product alignment (basically all possible relations) since this is used for the HADAPT and ProfileWeight approaches
-				BasicAlignment cartesianProductAlignment = (BasicAlignment)(a.clone());
-				alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
-						"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_NOWEIGHT"+0.0+".rdf";
-				
-				outputAlignment = new File(alignmentFileName);
-
-				writer = new PrintWriter(
-						new BufferedWriter(
-								new FileWriter(outputAlignment)), true); 
-				renderer = new RDFRendererVisitor(writer);
-				cartesianProductAlignment.render(renderer);
-				writer.flush();
-				writer.close();
-				
-
-				for (int i = 0; i < confidences.length; i++) {
-					EvaluationScore evalScore = new EvaluationScore();
-
-					alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
-							"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_NOWEIGHT"+confidences[i]+".rdf";
-
-					outputAlignment = new File(alignmentFileName);
-
-
-					writer = new PrintWriter(
-							new BufferedWriter(
-									new FileWriter(outputAlignment)), true); 
-					renderer = new RDFRendererVisitor(writer);
-
-					evaluatedAlignment = (BasicAlignment)(a.clone());
-					evaluatedAlignment.toURIAlignment();
-					//no normalisation needed as long as the naive descending extraction is applied further down
-					//evaluatedAlignment.normalise();
-					evaluatedAlignment.cut(confidences[i]);
-					
-					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
-					tempAlignment = clonedAlignment.toURIAlignment();
-					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
-
-					//perform the evaluation here...				
-					eval = new PRecEvaluator(refalign, one2oneAlignment);
-
-					eval.eval(p);
-
-					precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-					recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-					fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-
-					evalScore.setPrecision(precision);
-					evalScore.setRecall(recall);
-					evalScore.setfMeasure(fMeasure);
-					evaluationMap.put(String.valueOf(confidences[i]), evalScore);
-
-					one2oneAlignment.render(renderer);
-
-					writer.flush();
-					writer.close();
-					
-					Evaluator.evaluateSingleAlignment("GEM with confidence " + confidences[i], one2oneAlignment, referenceAlignment, evalPath+"/GraphMatcher_NOWEIGHT" + confidences[i] + ".txt");
-				}
-
-				Evaluator.evaluateSingleMatcherThresholds(evaluationMap, evalPath+"/GraphMatcher_NOWEIGHT");
-			}
-
-		}
+//		private static void runGraphEquivalenceMatcher(double weight, boolean weighted) throws AlignmentException, URISyntaxException, IOException, OWLOntologyCreationException {
+//			
+//			System.out.println("\nRunning the GEM matcher");
+//
+//			//create a new instance of the neo4j database in each run
+//			String ontologyParameter1 = null;
+//			String ontologyParameter2 = null;	
+//			Graph creator = null;
+//			OWLOntologyManager manager = null;
+//			OWLOntology onto1 = null;
+//			OWLOntology onto2 = null;
+//			Label labelO1 = null;
+//			Label labelO2 = null;
+//			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+//			String dbName = String.valueOf(timestamp.getTime());
+//			File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
+//			System.out.println("Creating a new database");
+//			GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
+//			System.out.println("Database created");
+//			//registerShutdownHook(db);
+//
+//			ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
+//			ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
+//
+//			//create new graphs
+//			manager = OWLManager.createOWLOntologyManager();
+//			onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
+//			onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
+//
+//			labelO1 = DynamicLabel.label( ontologyParameter1 );
+//			labelO2 = DynamicLabel.label( ontologyParameter2 );
+//
+//			System.out.println("Creating ontology graphs");
+//			creator = new Graph(db);
+//
+//			creator.createOntologyGraph(onto1, labelO1);
+//			creator.createOntologyGraph(onto2, labelO2);
+//
+//
+//			AlignmentParser aparser = new AlignmentParser(0);
+//			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
+//
+//			AlignmentProcess a = new GraphEquivalenceMatcher(ontologyParameter1, ontologyParameter2, db, weight);
+//
+//			a.init(ontoFile1.toURI(), ontoFile2.toURI());
+//			Properties params = new Properties();
+//			params.setProperty("", "");
+//			a.align((Alignment)null, params);	
+//			AlignmentVisitor renderer = null; 
+//			File outputAlignment = null;
+//			BasicAlignment evaluatedAlignment = null;
+//			PrintWriter writer = null;
+//
+//			String alignmentFileName = null;
+//
+//			double[] confidences = {0.0,0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+//			double precision = 0;
+//			double recall = 0;
+//			double fMeasure = 0;
+//			PRecEvaluator eval = null;
+//			Properties p = new Properties();
+//			Map<String, EvaluationScore> evaluationMap = new TreeMap<String, EvaluationScore>();
+//
+//			BasicAlignment clonedAlignment = null;
+//			URIAlignment tempAlignment = null;
+//			URIAlignment one2oneAlignment = null;
+//
+//			if (weighted == true) {
+//				
+//				//store the cardesian product alignment (basically all possible relations) since this is used for the HADAPT and ProfileWeight approaches
+//				BasicAlignment cartesianProductAlignment = (BasicAlignment)(a.clone());
+//				alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
+//						"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_WEIGHT"+0.0+".rdf";
+//				
+//				outputAlignment = new File(alignmentFileName);
+//
+//				writer = new PrintWriter(
+//						new BufferedWriter(
+//								new FileWriter(outputAlignment)), true); 
+//				renderer = new RDFRendererVisitor(writer);
+//				cartesianProductAlignment.render(renderer);
+//				writer.flush();
+//				writer.close();
+//				
+//
+//				for (int i = 0; i < confidences.length; i++) {
+//					EvaluationScore evalScore = new EvaluationScore();
+//
+//					alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
+//							"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_WEIGHT"+confidences[i]+".rdf";
+//
+//					outputAlignment = new File(alignmentFileName);
+//
+//
+//					writer = new PrintWriter(
+//							new BufferedWriter(
+//									new FileWriter(outputAlignment)), true); 
+//					renderer = new RDFRendererVisitor(writer);
+//
+//					evaluatedAlignment = (BasicAlignment)(a.clone());
+//					evaluatedAlignment.toURIAlignment();
+//					//no normalisation needed as long as the naive descending extraction is applied further down
+//					//evaluatedAlignment.normalise();
+//					evaluatedAlignment.cut(confidences[i]);
+//					
+//					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
+//					tempAlignment = clonedAlignment.toURIAlignment();
+//					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+//					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
+//
+//					//perform the evaluation here...				
+//					eval = new PRecEvaluator(refalign, one2oneAlignment);
+//
+//					eval.eval(p);
+//
+//					precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//					recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//					fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//
+//					evalScore.setPrecision(precision);
+//					evalScore.setRecall(recall);
+//					evalScore.setfMeasure(fMeasure);
+//					evaluationMap.put(String.valueOf(confidences[i]), evalScore);
+//
+//					one2oneAlignment.render(renderer);
+//
+//					writer.flush();
+//					writer.close();
+//					
+//					Evaluator.evaluateSingleAlignment("GEM with confidence " + confidences[i], one2oneAlignment, referenceAlignment, evalPath+"/GraphMatcher_WEIGHT" + confidences[i] + ".txt");
+//
+//				}
+//
+//				Evaluator.evaluateSingleMatcherThresholds(evaluationMap, evalPath+"/GraphMatcher_WEIGHT");
+//				
+//			} else {
+//				
+//				//store the cardesian product alignment (basically all possible relations) since this is used for the HADAPT and ProfileWeight approaches
+//				BasicAlignment cartesianProductAlignment = (BasicAlignment)(a.clone());
+//				alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
+//						"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_NOWEIGHT"+0.0+".rdf";
+//				
+//				outputAlignment = new File(alignmentFileName);
+//
+//				writer = new PrintWriter(
+//						new BufferedWriter(
+//								new FileWriter(outputAlignment)), true); 
+//				renderer = new RDFRendererVisitor(writer);
+//				cartesianProductAlignment.render(renderer);
+//				writer.flush();
+//				writer.close();
+//				
+//
+//				for (int i = 0; i < confidences.length; i++) {
+//					EvaluationScore evalScore = new EvaluationScore();
+//
+//					alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
+//							"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_NOWEIGHT"+confidences[i]+".rdf";
+//
+//					outputAlignment = new File(alignmentFileName);
+//
+//
+//					writer = new PrintWriter(
+//							new BufferedWriter(
+//									new FileWriter(outputAlignment)), true); 
+//					renderer = new RDFRendererVisitor(writer);
+//
+//					evaluatedAlignment = (BasicAlignment)(a.clone());
+//					evaluatedAlignment.toURIAlignment();
+//					//no normalisation needed as long as the naive descending extraction is applied further down
+//					//evaluatedAlignment.normalise();
+//					evaluatedAlignment.cut(confidences[i]);
+//					
+//					clonedAlignment = (BasicAlignment)(evaluatedAlignment.clone());
+//					tempAlignment = clonedAlignment.toURIAlignment();
+//					tempAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+//					one2oneAlignment = NaiveDescendingExtraction.extractOneToOneRelations(tempAlignment);
+//
+//					//perform the evaluation here...				
+//					eval = new PRecEvaluator(refalign, one2oneAlignment);
+//
+//					eval.eval(p);
+//
+//					precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
+//					recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
+//					fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
+//
+//					evalScore.setPrecision(precision);
+//					evalScore.setRecall(recall);
+//					evalScore.setfMeasure(fMeasure);
+//					evaluationMap.put(String.valueOf(confidences[i]), evalScore);
+//
+//					one2oneAlignment.render(renderer);
+//
+//					writer.flush();
+//					writer.close();
+//					
+//					Evaluator.evaluateSingleAlignment("GEM with confidence " + confidences[i], one2oneAlignment, referenceAlignment, evalPath+"/GraphMatcher_NOWEIGHT" + confidences[i] + ".txt");
+//				}
+//
+//				Evaluator.evaluateSingleMatcherThresholds(evaluationMap, evalPath+"/GraphMatcher_NOWEIGHT");
+//			}
+//
+//		}
 
 
 		/**

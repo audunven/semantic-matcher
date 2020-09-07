@@ -821,45 +821,24 @@ public class EvalAllMatchersSigmoid {
 			
 			System.out.println("\nRunning the GEM matcher");
 
-			//create a new instance of the neo4j database in each run
-			String ontologyParameter1 = null;
-			String ontologyParameter2 = null;	
-			Graph creator = null;
+
 			OWLOntologyManager manager = null;
 			OWLOntology onto1 = null;
 			OWLOntology onto2 = null;
-			Label labelO1 = null;
-			Label labelO2 = null;
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			String dbName = String.valueOf(timestamp.getTime());
-			File dbFile = new File("/Users/audunvennesland/Documents/phd/development/Neo4J_new/" + dbName);	
-			System.out.println("Creating a new database");
-			GraphDatabaseService db = new GraphDatabaseFactory().newEmbeddedDatabase(dbFile);
-			System.out.println("Database created");
-			//registerShutdownHook(db);
 
-			ontologyParameter1 = StringUtilities.stripPath(ontoFile1.toString());
-			ontologyParameter2 = StringUtilities.stripPath(ontoFile2.toString());
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
 
 			//create new graphs
 			manager = OWLManager.createOWLOntologyManager();
 			onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
 			onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
 
-			labelO1 = DynamicLabel.label( ontologyParameter1 );
-			labelO2 = DynamicLabel.label( ontologyParameter2 );
-
-			System.out.println("Creating ontology graphs");
-			creator = new Graph(db);
-
-			creator.createOntologyGraph(onto1, labelO1);
-			creator.createOntologyGraph(onto2, labelO2);
-
 
 			AlignmentParser aparser = new AlignmentParser(0);
 			Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
 
-			AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(ontologyParameter1, ontologyParameter2, db, profileScore, slope, rangeMin, rangeMax);
+			AlignmentProcess a = new GraphEquivalenceMatcherSigmoid(onto1, onto2, profileScore, slope, rangeMin, rangeMax);
 
 			a.init(ontoFile1.toURI(), ontoFile2.toURI());
 			Properties params = new Properties();
@@ -886,7 +865,7 @@ public class EvalAllMatchersSigmoid {
 
 			if (weighted == true) {
 				
-				//store the cardesian product alignment (basically all possible relations) since this is used for the HADAPT and ProfileWeight approaches
+				//store the cardesian product alignment (basically all possible relations) since this is used for the ProfileWeight approach
 				BasicAlignment cartesianProductAlignment = (BasicAlignment)(a.clone());
 				alignmentFileName = storePath + "/" + StringUtilities.stripOntologyName(ontoFile1.toString()) + 
 						"-" + StringUtilities.stripOntologyName(ontoFile2.toString()) + "-GraphMatcher_WEIGHT"+0.0+".rdf";
