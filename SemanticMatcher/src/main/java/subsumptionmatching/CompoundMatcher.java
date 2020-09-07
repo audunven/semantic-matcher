@@ -65,10 +65,6 @@ public class CompoundMatcher extends ObjectAlignment implements AlignmentProcess
 		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
 		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
 
-		//		File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-		//		File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-		//		String referenceAlignment = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
-
 		double testProfileScore = 0.93;
 		int testSlope = 12;
 		double testRangeMin = 0.5;
@@ -82,65 +78,21 @@ public class CompoundMatcher extends ObjectAlignment implements AlignmentProcess
 		BasicAlignment compoundMatcherAlignment = new BasicAlignment();
 
 		compoundMatcherAlignment = (BasicAlignment) (a.clone());
-
-		System.out.println("The 0.0 alignment contains " + compoundMatcherAlignment.nbCells() + " relations");
-
-		System.out.println("\nThe alignment contains " + compoundMatcherAlignment.nbCells() + " relations");
-
-		System.out.println("Evaluation with no cut threshold:");
-		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);
-
-		System.out.println("Evaluation with threshold 0.2:");
-		compoundMatcherAlignment.cut(0.2);
-		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);
-
-		System.out.println("Evaluation with threshold 0.4:");
-		compoundMatcherAlignment.cut(0.4);
-		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);
-
-		System.out.println("Evaluation with threshold 0.5:");
-		compoundMatcherAlignment.cut(0.5);
-		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);
-
-		System.out.println("Evaluation with threshold 0.6:");
+		
 		compoundMatcherAlignment.cut(0.6);
-		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);
 
 		System.out.println("Printing relations at 0.6:");
 		for (Cell c : compoundMatcherAlignment) {
 			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
 		}
 
-		System.out.println("Evaluation with threshold 0.9:");
-		compoundMatcherAlignment.cut(0.9);
+		System.out.println("Evaluation with threshold 0.6:");
+		
 		Evaluator.evaluateSingleAlignment(compoundMatcherAlignment, referenceAlignment);
 
 	}
 
-	public static URIAlignment returnCMAlignment (File ontoFile1, File ontoFile2, double weight) throws OWLOntologyCreationException, AlignmentException {
-
-		URIAlignment CMAlignment = new URIAlignment();
-
-		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
-		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
-		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
-
-		AlignmentProcess a = new CompoundMatcher(onto1, onto2, weight);
-		a.init(ontoFile1.toURI(), ontoFile2.toURI());
-		Properties params = new Properties();
-		params.setProperty("", "");
-		a.align((Alignment)null, params);	
-		BasicAlignment compoundMatcherAlignment = new BasicAlignment();
-
-		compoundMatcherAlignment = (BasicAlignment) (a.clone());
-
-		CMAlignment = compoundMatcherAlignment.toURIAlignment();
-
-		CMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
-
-		return CMAlignment;
-
-	}
+	
 
 	public void align( Alignment alignment, Properties param ) throws AlignmentException {
 
@@ -308,7 +260,31 @@ public class CompoundMatcher extends ObjectAlignment implements AlignmentProcess
 		return test;
 	}
 
+	
+	public static URIAlignment returnCMAlignment (File ontoFile1, File ontoFile2, double weight) throws OWLOntologyCreationException, AlignmentException {
 
+		URIAlignment CMAlignment = new URIAlignment();
+
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology onto1 = manager.loadOntologyFromOntologyDocument(ontoFile1);
+		OWLOntology onto2 = manager.loadOntologyFromOntologyDocument(ontoFile2);
+
+		AlignmentProcess a = new CompoundMatcher(onto1, onto2, weight);
+		a.init(ontoFile1.toURI(), ontoFile2.toURI());
+		Properties params = new Properties();
+		params.setProperty("", "");
+		a.align((Alignment)null, params);	
+		BasicAlignment compoundMatcherAlignment = new BasicAlignment();
+
+		compoundMatcherAlignment = (BasicAlignment) (a.clone());
+
+		CMAlignment = compoundMatcherAlignment.toURIAlignment();
+
+		CMAlignment.init( onto1.getOntologyID().getOntologyIRI().toURI(), onto2.getOntologyID().getOntologyIRI().toURI(), A5AlgebraRelation.class, BasicConfidence.class );
+
+		return CMAlignment;
+
+	}
 
 
 

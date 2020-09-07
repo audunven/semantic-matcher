@@ -1,6 +1,8 @@
 package subsumptionmatching;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,11 +12,13 @@ import java.util.Set;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentProcess;
+import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
 
+import evaluation.general.Evaluator;
 import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.BasicConfidence;
 import fr.inrialpes.exmo.align.impl.ObjectAlignment;
@@ -22,7 +26,6 @@ import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.rel.A5AlgebraRelation;
 import utilities.OntologyOperations;
 import utilities.Sigmoid;
-import utilities.StringUtilities;
 
 public class ContextSubsumptionMatcherSigmoid extends ObjectAlignment implements AlignmentProcess {
 
@@ -41,8 +44,6 @@ public class ContextSubsumptionMatcherSigmoid extends ObjectAlignment implements
 	static Map<String, Set<String>> classesAndSuperclassesMapOnto1 = new HashMap<String, Set<String>>();
 	static Map<String, Set<String>> classesAndSuperclassesMapOnto2 = new HashMap<String, Set<String>>();
 
-
-	
 	public ContextSubsumptionMatcherSigmoid(OWLOntology onto1, OWLOntology onto2, double profileScore, int slope, double rangeMin, double rangeMax) {
 		this.sourceOntology = onto1;
 		this.targetOntology = onto2;
@@ -51,8 +52,44 @@ public class ContextSubsumptionMatcherSigmoid extends ObjectAlignment implements
 		this.rangeMin = rangeMin;
 		this.rangeMax = rangeMax;
 	}
-
 	
+	public static void main(String[] args) throws AlignmentException, IOException, URISyntaxException, OWLOntologyCreationException {
+
+		File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+		File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+		String referenceAlignment = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
+
+		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
+		OWLOntology sourceOntology = manager.loadOntologyFromOntologyDocument(ontoFile1);
+		OWLOntology targetOntology = manager.loadOntologyFromOntologyDocument(ontoFile2);
+
+		double testProfileScore = 0.58;
+		int testSlope = 3;
+		double testRangeMin = 0.5;
+		double testRangeMax = 0.7;
+
+		AlignmentProcess a = new ContextSubsumptionMatcherSigmoid(sourceOntology, targetOntology, testProfileScore, testSlope, testRangeMin, testRangeMax);
+		a.init(ontoFile1.toURI(), ontoFile2.toURI());
+		Properties params = new Properties();
+		params.setProperty("", "");
+		a.align((Alignment)null, params);	
+		BasicAlignment contextSubsumptionMatcherAlignment = new BasicAlignment();
+
+		contextSubsumptionMatcherAlignment = (BasicAlignment) (a.clone());
+
+		System.out.println("Evaluation with threshold 0.6:");
+		contextSubsumptionMatcherAlignment.cut(0.6);
+		System.out.println("\nThe alignment contains " + contextSubsumptionMatcherAlignment.nbCells() + " relations");
+		Evaluator.evaluateSingleAlignment(contextSubsumptionMatcherAlignment, referenceAlignment);
+		
+		
+		System.out.println("Printing relations at 0.6:");
+		for (Cell c : contextSubsumptionMatcherAlignment) {
+			System.out.println(c.getObject1() + " " + c.getObject2() + " " + c.getRelation().getRelation() + " " + c.getStrength());
+		}
+
+	}
+
 	
 	public static URIAlignment returnCSMAlignment (File ontoFile1, File ontoFile2, double profileScore, int slope, double rangeMin, double rangeMax) throws OWLOntologyCreationException, AlignmentException {
 
@@ -172,79 +209,5 @@ public class ContextSubsumptionMatcherSigmoid extends ObjectAlignment implements
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 
-
-
-	public static boolean synonymMatch(Set<String> synonyms, Set<String> concepts) {
-
-		//lowercase all concepts in the concepts set
-		Set<String> lowerCasedConcepts = new HashSet<String>();
-		for (String s : concepts) {
-			lowerCasedConcepts.add(s.toLowerCase());
-		}
-
-		boolean match = false;
-
-		for (String syn : synonyms) {
-			if (lowerCasedConcepts.contains(syn.toLowerCase())) {
-				match = true;
-			}
-		}
-
-		return match;
-
-	}
-
-	public static boolean compoundRatioMatch(String source, Set<String> target) {
-
-		int max = 0;
-		boolean match = false;
-
-		String[] sourceArray = source.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-		String[] targetArray = null;
-
-		for (String t : target) {
-
-			targetArray = t.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
-
-			max = Math.max(sourceArray.length, targetArray.length);
-			int equal = 0;
-
-			for (int j = 0; j < targetArray.length; j++) {
-
-				double ratio = 0;
-
-				for (int i = 0; i < sourceArray.length; i++) {
-
-					if (sourceArray[i].equalsIgnoreCase(targetArray[j])) {
-
-						equal++;
-					}
-
-				}
-				ratio = (double) equal / (double) max;
-				if (ratio >= 0.6) {
-					match = true;
-				}
-
-			}
-
-		}
-
-		return match;
-
-	}
-
-	public static boolean isCompoundWordInSet (Set<String> set) {
-		boolean compound = false;
-
-		for (String s : set) {
-			if (StringUtilities.isCompoundWord(s)) {
-				compound = true;
-			}
-		}
-
-		return compound;
-
-	}
 
 }
