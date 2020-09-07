@@ -38,11 +38,11 @@ import rita.wordnet.jwnl.JWNLException;
 public class SemanticMatcher {
 	
 	
-	static File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-	static File ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-	static String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
-	static String mismatchStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/MISMATCHES";
-	static String finalAlignmentStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/FINAL_ALIGNMENT/";
+	static File ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+	static File ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+	static String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+	static String mismatchStorePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/MISMATCHES";
+	static String finalAlignmentStorePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/FINAL_ALIGNMENT/";
 
 	//these parameters are used for the sigmoid weight configuration
 	final static int slope = 3;
@@ -193,7 +193,7 @@ public class SemanticMatcher {
 		if (lc >= 0.5) {
 		System.out.print("Computing LEM alignment");
 		long startTimeLEM = System.currentTimeMillis();
-		URIAlignment LEMAlignment = LexicalEquivalenceMatcherSigmoid.returnLEMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc") * ontologyProfilingScores.get("sr")), slope, rangeMin, rangeMax);
+		URIAlignment LEMAlignment = LexicalEquivalenceMatcherSigmoid.returnLEMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("lc"), slope, rangeMin, rangeMax);
 		eqAlignments.add(LEMAlignment);
 		long endTimeLEM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeLEM - startTimeLEM)  / 1000 + " seconds.\n");
@@ -273,7 +273,7 @@ public class SemanticMatcher {
 		if (lc >= 0.5) {
 		System.out.print("Computing LSM alignment");
 		long startTimeLSM = System.currentTimeMillis();
-		URIAlignment LSMAlignment = LexicalSubsumptionMatcherSigmoid.returnLSMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc") * ontologyProfilingScores.get("hr")), slope, rangeMin, rangeMax);		
+		URIAlignment LSMAlignment = LexicalSubsumptionMatcherSigmoid.returnLSMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("lc"), slope, rangeMin, rangeMax);		
 		subAlignments.add(LSMAlignment);
 		long endTimeLSM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeLSM - startTimeLSM)  / 1000 + " seconds.\n");
@@ -348,7 +348,6 @@ private static URIAlignment removeMismatches (URIAlignment combinedEQAlignment, 
 	writer.close();
 
 	URIAlignment conceptScopeMismatchDetection = ConceptScopeMismatch.detectConceptScopeMismatch(combinedEQAlignment);
-	//System.out.println("Concept Scope Mismatch Detection removed " + ( combinedEQAlignment.nbCells() - conceptScopeMismatchDetection.nbCells() ) + " relations");
 	
 	writer = new PrintWriter(
 			new BufferedWriter(
@@ -361,7 +360,6 @@ private static URIAlignment removeMismatches (URIAlignment combinedEQAlignment, 
 	writer.close();
 
 	URIAlignment domainMismatchDetection = DomainMismatch.filterAlignment(conceptScopeMismatchDetection);
-	//System.out.println("Domain Mismatch Detection removed " + ( conceptScopeMismatchDetection.nbCells() - domainMismatchDetection.nbCells() ) + " relations");
 	
 	writer = new PrintWriter(
 			new BufferedWriter(
