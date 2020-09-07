@@ -405,7 +405,7 @@ public class AlignmentOperations {
 		for (Cell c : inputAlignment) {
 			if (c.getStrength() != 0.0) {
 				
-				alignmentWithNonZeroRelations.addAlignCell(c.getId(), c.getObject1AsURI(), c.getObject2AsURI(), c.getRelation(), c.getStrength());
+				alignmentWithNonZeroRelations.addAlignCell(c.getId(), c.getObject1AsURI(), c.getObject2AsURI(), c.getRelation().getRelation(), c.getStrength());
 				
 			} 
 		}
@@ -461,9 +461,8 @@ public class AlignmentOperations {
 		
 		for (Cell subCell : subAlignment) {
 			//need to transform the less-than symbol '<' to &lt;
-			if (subCell.getRelation().toString().equals("<")) {
-				BasicRelation subBy = new BasicRelation("<");
-				combinedAlignment.addAlignCell(subCell.getId(), subCell.getObject1(), subCell.getObject2(),  subBy.toString(), subCell.getStrength());
+			if (subCell.getRelation().getRelation().equals("<")) {
+				combinedAlignment.addAlignCell(subCell.getId(), subCell.getObject1(), subCell.getObject2(),  "&lt;", subCell.getStrength());
 			} else {
 			combinedAlignment.addAlignCell(subCell.getId(), subCell.getObject1(), subCell.getObject2(),  subCell.getRelation().getRelation(), subCell.getStrength());
 			}
