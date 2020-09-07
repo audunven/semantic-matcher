@@ -20,147 +20,875 @@
     </Ontology>
   </onto2>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid92065">
+    <Cell rdf:about="BasicSubsumptionMatcher84738">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GeographicCoverage'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher84831">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GeographicCoverage'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher40282">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicInstrument'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher5182">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Title'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher57256">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#SoundContent'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher103196">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ProjectionSpeed'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher96051">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#AudioTake'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher84181">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ShelfMarkLcc'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher84088">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ShelfMarkLcc'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher42816">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#QualitativeValue'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher42815">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#WPHeader'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher42814">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Residence'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher42371">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
+      <entity2 rdf:resource='http://schema.org#Role'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher92523">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TableOfContents'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher92715">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TableOfContents'/>
+      <entity2 rdf:resource='http://schema.org#Periodical'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher6482">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Iso'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher68057">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#PlayingSpeed'/>
+      <entity2 rdf:resource='http://schema.org#Property'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher67750">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#PlayingSpeed'/>
+      <entity2 rdf:resource='http://schema.org#Vehicle'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher82231">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Instance'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher82138">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Instance'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher5832">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#DigitalCharacteristic'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher99381">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Coden'/>
+      <entity2 rdf:resource='http://schema.org#Library'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher99016">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Coden'/>
+      <entity2 rdf:resource='http://schema.org#Mass'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher99023">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Coden'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher99378">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Coden'/>
+      <entity2 rdf:resource='http://schema.org#Class'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher93173">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicDistributorNumber'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher93365">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicDistributorNumber'/>
+      <entity2 rdf:resource='http://schema.org#Periodical'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher41582">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#PlaybackCharacteristic'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher40932">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Electronic'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher104496">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ProvisionActivity'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher105146">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Carrier'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher4532">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher103846">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#RegionalEncoding'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher42232">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Layout'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher54825">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
+      <entity2 rdf:resource='http://schema.org#BusTrip'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher54824">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
+      <entity2 rdf:resource='http://schema.org#VeterinaryCare'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher54823">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher54656">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher100596">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Extent'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher86038">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TapeConfig'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher86131">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TapeConfig'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher101896">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Doi'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher83438">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GenerationProcess'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher83531">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#GenerationProcess'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher39632">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Item'/>
+      <entity2 rdf:resource='http://schema.org#Place'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher92065">
       <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Publication'/>
       <entity2 rdf:resource='http://schema.org#Periodical'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6044618691283978</measure>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid42882">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Place'/>
-      <entity2 rdf:resource='http://schema.org#Place'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher91873">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Publication'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid50488">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Event'/>
-      <entity2 rdf:resource='http://schema.org#Event'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher99946">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Topic'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid90856">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Distribution'/>
-      <entity2 rdf:resource='http://schema.org#Distribution'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher97351">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ImmediateAcquisition'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid34972">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Dataset'/>
-      <entity2 rdf:resource='http://schema.org#Dataset'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
-    </Cell>
-  </map>
-  <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid55243">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Text'/>
-      <entity2 rdf:resource='http://schema.org#Text'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
-    </Cell>
-  </map>
-  <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid76756">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
-      <entity2 rdf:resource='http://schema.org#Language'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
-    </Cell>
-  </map>
-  <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid94147">
+    <Cell rdf:about="BasicSubsumptionMatcher94101">
       <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Person'/>
-      <entity2 rdf:resource='http://schema.org#Person'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid58852">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#CartographicObjectType'/>
-      <entity2 rdf:resource='http://schema.org#BusinessEntityType'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6635073720970247</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher106446">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Nbn'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid51523">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Enumeration'/>
-      <entity2 rdf:resource='http://schema.org#Enumeration'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher56606">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#DissertationIdentifier'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid44586">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Mount'/>
-      <entity2 rdf:resource='http://schema.org#Mountain'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.5251823178600012</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher94751">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#TrackConfig'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid4021">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Role'/>
-      <entity2 rdf:resource='http://schema.org#Role'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher96701">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#SupplementaryContent'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid48065">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Organization'/>
+    <Cell rdf:about="BasicSubsumptionMatcher60732">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Print'/>
+      <entity2 rdf:resource='http://schema.org#BusinessAudience'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher60731">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Print'/>
+      <entity2 rdf:resource='http://schema.org#MedicalDevice'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher60730">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Print'/>
+      <entity2 rdf:resource='http://schema.org#Photograph'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher95401">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#DescriptionConventions'/>
+      <entity2 rdf:resource='http://schema.org#Image'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77344">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#MarryAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76708">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#MedicalTherapy'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77350">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#InfectiousDisease'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77347">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#LakeBodyOfWater'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76706">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#BookSeries'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77345">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#GameServer'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76705">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Recipe'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76707">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#DeliveryEvent'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77343">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Text'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77348">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#AlignmentObject'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76704">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#Airline'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77349">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#BusReservation'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76701">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#FindAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher77346">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#UserPlays'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76702">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#MedicalProcedureType'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher76703">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Language'/>
+      <entity2 rdf:resource='http://schema.org#AboutPage'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher98366">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Mass'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher98373">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher98728">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Class'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher98731">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StockNumber'/>
+      <entity2 rdf:resource='http://schema.org#Library'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher67100">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StillImage'/>
+      <entity2 rdf:resource='http://schema.org#Vehicle'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher67407">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#StillImage'/>
+      <entity2 rdf:resource='http://schema.org#Property'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher98078">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Collection'/>
+      <entity2 rdf:resource='http://schema.org#Class'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher97716">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Collection'/>
+      <entity2 rdf:resource='http://schema.org#Mass'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher98081">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Collection'/>
+      <entity2 rdf:resource='http://schema.org#Library'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher97723">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Collection'/>
+      <entity2 rdf:resource='http://schema.org#Book'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher43361">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#SomeProducts'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher43359">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#TVSeason'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher43358">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Energy'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher43114">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Service'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher43295">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Work'/>
+      <entity2 rdf:resource='http://schema.org#Action'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher82881">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Issn'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher82788">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Issn'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher55956">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Audio'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher102546">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#VideoCharacteristic'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher66450">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#Vehicle'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher66757">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Object'/>
+      <entity2 rdf:resource='http://schema.org#Property'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher12316">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Unit'/>
+      <entity2 rdf:resource='http://schema.org#AutomatedTeller'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher12315">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Unit'/>
       <entity2 rdf:resource='http://schema.org#Organization'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid81214">
+    <Cell rdf:about="BasicSubsumptionMatcher12317">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Unit'/>
+      <entity2 rdf:resource='http://schema.org#BuyAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher65292">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Status'/>
+      <entity2 rdf:resource='http://schema.org#Order'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher105796">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#ClassificationNlm'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher55306">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#VideoRecordingNumber'/>
+      <entity2 rdf:resource='http://schema.org#Language'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher101246">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Sublocation'/>
+      <entity2 rdf:resource='http://schema.org#Question'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher85481">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#FileSize'/>
+      <entity2 rdf:resource='http://schema.org#Clip'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher85388">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#FileSize'/>
+      <entity2 rdf:resource='http://schema.org#Time'/>
+      <relation>></relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
+    </Cell>
+  </map>
+  <map>
+    <Cell rdf:about="BasicSubsumptionMatcher81016">
       <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
-      <entity2 rdf:resource='http://schema.org#Review'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326437</measure>
+      <entity2 rdf:resource='http://schema.org#PropertyValue'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="WordEmbeddingMatcherSigmoid78203">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Barcode'/>
-      <entity2 rdf:resource='http://schema.org#Barcode'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.8016515641326436</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher81015">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#Periodical'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid62338">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#BroadcastStandard'/>
-      <entity2 rdf:resource='http://schema.org#BroadcastEvent'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.35489523750884</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher81018">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#CableOrSatelliteService'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid50829">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#CartographicDataType'/>
-      <entity2 rdf:resource='http://schema.org#DataType'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.7919932918312929</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher81017">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#AcceptAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
   <map>
-    <Cell rdf:about="LexicalEquivalenceMatcherSigmoid49938">
-      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#MusicMedium'/>
-      <entity2 rdf:resource='http://schema.org#MusicAlbum'/>
-      <relation>=</relation>
-      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.40345916419422256</measure>
+    <Cell rdf:about="BasicSubsumptionMatcher81019">
+      <entity1 rdf:resource='http://id.loc.gov/ontologies/bibframe#Review'/>
+      <entity2 rdf:resource='http://schema.org#AssessAction'/>
+      <relation><</relation>
+      <measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>0.6</measure>
     </Cell>
   </map>
 </Alignment>
