@@ -25,71 +25,16 @@ import utilities.RelationComparatorConfidence;
 
 public class ProfileWeightSubsumption {
 
-	public static void main(String[] args) throws AlignmentException, IOException, URISyntaxException {
-		
-		String onto1 = "301";
-		String onto2 = "302";
-		String relationType = "SUBSUMPTION";
-		String folder = "./files/_PHD_EVALUATION/MATCHERTESTING/SIGMOID/ATM_SUB";
-		
-		URIAlignment pfAlignment = computeProfileWeightingSubsumption(folder);
-		
-		for (Cell c : pfAlignment) {
-			System.out.println(c.getObject1AsURI() + " " + c.getObject2AsURI() + " " + c.getRelation() + " " + c.getStrength());
-		}
-		
-		//storing the alignment
-//		File outputAlignment = null;
-//		PrintWriter writer = null;
-//		AlignmentVisitor renderer = null;
-//		
-//		//store the alignment file for this confidence value
-//		outputAlignment = new File("./files/_PHD_EVALUATION/MATCHERTESTING/pfOutput.rdf");
-//
-//		writer = new PrintWriter(
-//				new BufferedWriter(
-//						new FileWriter(outputAlignment)), true); 
-//		renderer = new RDFRendererVisitor(writer);
-//
-//		pfAlignment.render(renderer);
-//		writer.flush();
-//		writer.close();
-//		
-//		//URIAlignment evalAlignment = new URIAlignment();
-		
-		//parse the reference alignment
-//		AlignmentParser parser = new AlignmentParser();
-//		String referenceAlignment = "./files/_PHD_EVALUATION/OAEI2011/REFALIGN/" + onto1+onto2 + "/" + onto1 + "-" + onto2 + "-" +relationType+".rdf";
-//		URIAlignment refalign = (URIAlignment) parser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
-//
-//		String alignmentFile = "./files/ProfileWeightTest.rdf";
-//
-//		AlignmentParser aparser = new AlignmentParser(0);
-//		URIAlignment alignment = (URIAlignment) aparser.parse(new URI(StringUtilities.convertToFileURL(alignmentFile)));
-//
-//		URIAlignment highestCells = getHighestCells(alignment);
-//
-//
-//		System.out.println("Highest relations: ");
-//		for (Cell c : highestCells) {
-//
-//			System.out.println(c.getObject1AsURI().getFragment() + " - " + c.getObject2AsURI().getFragment() + " - " + c.getRelation().getRelation() + " - " + c.getStrength());
-//		}
-
-
-	}
 	
 	//used for evaluation of sigmoid parameters
 		public static URIAlignment computeProfileWeightingSubsumption(ArrayList<URIAlignment> inputAlignments) throws AlignmentException, IOException, URISyntaxException {
 			Set<URIAlignment> alignmentSet = new HashSet<URIAlignment>();
 			URIAlignment highestCellAlignment = new URIAlignment();
-			URIAlignment profileWeightingSubsumptionAlignment = new URIAlignment();
-						
+			URIAlignment profileWeightingSubsumptionAlignment = new URIAlignment();						
 
 			//for each alignment produced by an individual matcher
 			for (URIAlignment a : inputAlignments) {
-				
-				
+								
 				highestCellAlignment.init( a.getOntology1URI(), a.getOntology2URI(), A5AlgebraRelation.class, BasicConfidence.class );	
 
 				highestCellAlignment = getHighestCells(a);
@@ -110,9 +55,7 @@ public class ProfileWeightSubsumption {
 					profileWeightingSubsumptionAlignment.addAlignCell(c.getId(), c.getObject1(), c.getObject2(), c.getRelation(), c.getStrength());
 				}
 			}
-			
-			//System.out.println("onto1URI: " + onto1URI + " , onto2URI: " + onto2URI);
-			
+						
 			profileWeightingSubsumptionAlignment.init(onto1URI, onto2URI, A5AlgebraRelation.class, BasicConfidence.class );
 
 			return profileWeightingSubsumptionAlignment;
@@ -133,8 +76,6 @@ public class ProfileWeightSubsumption {
 		int counter = 0;
 		for (int i = 0; i < filesInDir.length; i++) {
 			
-			//System.out.println("Processing file " + counter + " of " + filesInDir.length + " files");
-
 			//only the 0.0 cut threshold files should be considered
 			if (filesInDir[i].getName().endsWith("0.0.rdf")) {
 
@@ -143,12 +84,9 @@ public class ProfileWeightSubsumption {
 
 				highestCellAlignment.init( inputAlignment.getOntology1URI(), inputAlignment.getOntology2URI(), A5AlgebraRelation.class, BasicConfidence.class );		
 				
-				//System.err.println("Extracting the highest cells");
-
 				highestCellAlignment = getHighestCells(inputAlignment);
 
 				//remove relations that have 0 confidence				
-				//System.err.println("Removing zero-confidence relations");
 				AlignmentOperations.removeZeroConfidenceRelations(highestCellAlignment);
 				alignmentSet.add(highestCellAlignment);
 
@@ -157,8 +95,6 @@ public class ProfileWeightSubsumption {
 			counter++;
 
 		}
-
-		//System.err.println("Adding all relations in the final Profile Weight alignment");
 		
 		URI onto1URI = null;
 		URI onto2URI = null;
@@ -175,8 +111,6 @@ public class ProfileWeightSubsumption {
 			}
 		}
 		
-		//System.out.println(onto1URI + " and " + onto2URI);
-
 		profileWeightingSubsumptionAlignment.init( inputAlignment.getOntology1URI(), inputAlignment.getOntology2URI(), A5AlgebraRelation.class, BasicConfidence.class );
 
 		return profileWeightingSubsumptionAlignment;
@@ -198,25 +132,16 @@ public class ProfileWeightSubsumption {
 		highestCellsAlignment.init( inputAlignment.getOntology1URI(), inputAlignment.getOntology2URI(), A5AlgebraRelation.class, BasicConfidence.class );
 		
 		//create similarity matrix
-		//System.err.println("Creating similarity matrix");
 		Relation[][] similarityMatrix = createSimMatrix(inputAlignment);
-
-		//ArrayList<Relation> harmonyRelations = new ArrayList<Relation>();
 		
 		ArrayList<Relation> rowMax = getRowMax(similarityMatrix);
-		//System.err.println("Getting rowMax (" + rowMax.size() + ") relations");
 
 		ArrayList<Relation> colMax = getColMax(similarityMatrix);
-		//System.err.println("Getting colMax (" + colMax.size() + ") relations");
 		
 		//remove the relations with zero confidence, they are not needed and slows the process significantly 
 		removeZeroConfidenceRelations(rowMax);
 		removeZeroConfidenceRelations(colMax);
-		
-		//System.err.println("rowMax is now: " + rowMax.size());
-		//System.err.println("colMax is now: " + colMax.size());
 
-		//System.err.println("Adding highest cells to alignment");
 		for (Relation r : rowMax) {
 			for (Relation c : colMax) {
 
@@ -225,7 +150,6 @@ public class ProfileWeightSubsumption {
 						r.getRelationType().equals(c.getRelationType()) && 
 						r.getConfidence() == c.getConfidence()) {
 					highestCellsAlignment.addAlignCell(r.getId(), URI.create(r.getConcept1().replaceAll("[<|>]", "")), URI.create(r.getConcept2().replaceAll("[<|>]", "")), r.getRelationType(), r.getConfidence());
-					//harmonyRelations.add(r);
 				}
 			}
 		}
@@ -315,13 +239,11 @@ public class ProfileWeightSubsumption {
 
 		//each row
 		for (int row = 0; row < matrix.length; row++) {
-			//System.out.println("\nRow : " + row);
 			ArrayList<Relation> allRels = new ArrayList<Relation>();
 			ArrayList<Relation> rowMaxPerCol = new ArrayList<Relation>();	
 
 			//each cell in row
 			for (int col = 0; col < matrix[row].length; col++) {
-				//System.out.println("Column: " + col);
 				
 				allRels.add(matrix[row][col]);
 
@@ -351,13 +273,11 @@ public class ProfileWeightSubsumption {
 		
 		//each column
 		for (int col = 0; col < matrix[0].length; col++) {
-			//System.out.println("\nColumn: " + col);
 			ArrayList<Relation> allRels = new ArrayList<Relation>();
 			ArrayList<Relation> colMaxPerRow = new ArrayList<Relation>();			
 			
 			//each cell (row) in column
 			for (int row = 0; row < matrix.length; row++) {
-				//System.out.println("Row: " + row);
 
 				//add all relations from the matrix in a map
 				allRels.add(matrix[row][col]);
@@ -382,7 +302,6 @@ public class ProfileWeightSubsumption {
 		Collections.sort(allRelations, new RelationComparatorConfidence());
 		
 		double max = allRelations.get(0).getConfidence();
-		//System.out.println("Getting max from " + allRelations.get(0).getConcept1Fragment() + " " + allRelations.get(0).getConcept2Fragment() + " " + allRelations.get(0).getRelationType() + " " + allRelations.get(0).getConfidence());
 		
 		for (int i = 0; i < allRelations.size(); i++) {
 			
