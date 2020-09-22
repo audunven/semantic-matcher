@@ -83,22 +83,22 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 	public static void main(String[] args) throws OWLOntologyCreationException, JWNLException, IOException, AlignmentException, URISyntaxException {
 
 		if (DATASET.equalsIgnoreCase("ATMONTO-AIRM")) {
-			ontoFile1 = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
-			ontoFile2 = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
-			referenceAlignmentEQ = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
-			referenceAlignmentSUB = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
-			referenceAlignmentEQAndSUB = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
-			vectorFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/EMBEDDINGS/skybrary_embeddings.txt";
-			mismatchStorePath = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/MISMATCHES/MISMATCHES_WITH_MATCHER_SELECTION";
+			ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
+			ontoFile2 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/airm-mono.owl");
+			referenceAlignmentEQ = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQUIVALENCE.rdf";
+			referenceAlignmentSUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
+			referenceAlignmentEQAndSUB = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
+			vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
+			mismatchStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/MISMATCHES/MISMATCHES_WITH_MATCHER_SELECTION";
 
 		} else if (DATASET.equalsIgnoreCase("BIBFRAME-SCHEMAORG")) {
-			ontoFile1 = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
-			ontoFile2 = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
-			referenceAlignmentEQ = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
-			referenceAlignmentSUB = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
-			referenceAlignmentEQAndSUB = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
-			vectorFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/EMBEDDINGS/wikipedia_embeddings.txt";
-			mismatchStorePath = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/BIBFRAME-SCHEMAORG/MISMATCHES/MISMATCHES_WITH_MATCHER_SELECTION";
+			ontoFile1 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/bibframe.rdf");
+			ontoFile2 = new File("./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/ONTOLOGIES/schema-org.owl");
+			referenceAlignmentEQ = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQUIVALENCE.rdf";
+			referenceAlignmentSUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-SUBSUMPTION.rdf";
+			referenceAlignmentEQAndSUB = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
+			vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/wikipedia_embeddings.txt";
+			mismatchStorePath = "./files/_PHD_EVALUATION/BIBFRAME-SCHEMAORG/MISMATCHES/MISMATCHES_WITH_MATCHER_SELECTION";
 		}
 
 		//compute profile scores
@@ -136,6 +136,18 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 		//evaluate SUB only (after having resolved any conflicts)
 		URIAlignment nonConflictedSUBAlignment = AlignmentConflictResolution.resolveAlignmentConflict(combinedSUBAlignment);
 		Evaluator.evaluateSingleAlignment("Evaluation Profile Weight SUB", nonConflictedSUBAlignment, referenceAlignmentSUB);
+		
+		//DELETE: print subsumption alignment to disk
+		File outputSubAlignment = new File("./files/_PHD_EVALUATION/EVALUATION_DOMAIN_MISMATCH_DETECTION/SUB/ATM/SUB_ATM.rdf");
+		PrintWriter writer = new PrintWriter(
+				new BufferedWriter(
+						new FileWriter(outputSubAlignment)), true); 
+		AlignmentVisitor renderer = new RDFRendererVisitor(writer);
+
+		nonConflictedSUBAlignment.render(renderer);
+
+		writer.flush();
+		writer.close();
 
 		//merge final EQ and final SUB alignment
 		URIAlignment mergedEQAndSubAlignment = mergeEQAndSubAlignments(combinedEQAlignmentWithoutMismatches, combinedSUBAlignment);
@@ -145,35 +157,21 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 
 		double[] confidence = {0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
 
-//		double precision = 0;
-//		double recall = 0;
-//		double fMeasure = 0;
-//		PRecEvaluator eval = null;
-//		Properties p = new Properties();
-
 		//isolate the equivalence relations and evaluate the equivalence alignment only
 		URIAlignment eqOnly = AlignmentOperations.extractEquivalenceRelations(nonConflictedMergedAlignment);
 
 		Map<String, EvaluationScore> eqEvaluationMap = new TreeMap<String, EvaluationScore>();
 
 		for (double conf : confidence) {
-			//EvaluationScore evalScore = new EvaluationScore();
 			eqOnly.cut(conf);
-//			eval = new PRecEvaluator(refalign_EQ, eqOnly);
-//			eval.eval(p);
-//			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-//			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-//			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-//			evalScore.setPrecision(precision);
-//			evalScore.setRecall(recall);
-//			evalScore.setfMeasure(fMeasure);
+
 			EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(eqOnly, refalign_EQ);
 			//put the evalation score according to each confidence value in the map
 			eqEvaluationMap.put(String.valueOf(conf), evalScore);			
 
 		}
 
-		Evaluator.evaluateSingleMatcherThresholds(eqEvaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_EQ_ONLY_"+date);
+		Evaluator.evaluateSingleMatcherThresholds(eqEvaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_EQ_ONLY_"+date);
 
 
 		//isolate the subsumption relations and evaluate the subsumption alignment only
@@ -182,33 +180,25 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 		Map<String, EvaluationScore> subEvaluationMap = new TreeMap<String, EvaluationScore>();
 
 		for (double conf : confidence) {
-			//EvaluationScore evalScore = new EvaluationScore();
 			subOnly.cut(conf);
-//			eval = new PRecEvaluator(refalign_SUB, subOnly);
-//			eval.eval(p);
-//			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-//			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-//			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-//			evalScore.setPrecision(precision);
-//			evalScore.setRecall(recall);
-//			evalScore.setfMeasure(fMeasure);
+
 			EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(subOnly, refalign_SUB);
 			//put the evalation score according to each confidence value in the map
 			subEvaluationMap.put(String.valueOf(conf), evalScore);			
 		}
 
-		Evaluator.evaluateSingleMatcherThresholds(subEvaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_SUB_ONLY_"+date);
+		Evaluator.evaluateSingleMatcherThresholds(subEvaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_SUB_ONLY_"+date);
 
 
 		System.err.println("\nThe merged EQ and SUB alignment contains " + nonConflictedMergedAlignment.nbCells() + " relations");
 
 		//store the merged alignment
-		File outputAlignment = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_MERGED_SIGMOID"+DATASET+".rdf");
+		File outputAlignment = new File("./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_MERGED_SIGMOID"+DATASET+".rdf");
 
-		PrintWriter writer = new PrintWriter(
+		 writer = new PrintWriter(
 				new BufferedWriter(
 						new FileWriter(outputAlignment)), true); 
-		AlignmentVisitor renderer = new RDFRendererVisitor(writer);
+		 renderer = new RDFRendererVisitor(writer);
 
 		nonConflictedMergedAlignment.render(renderer);
 
@@ -225,20 +215,12 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 		Map<String, EvaluationScore> evaluationMap = new TreeMap<String, EvaluationScore>();
 
 		for (double conf : confidence) {
-			//EvaluationScore evalScore = new EvaluationScore();
 			nonConflictedMergedAlignment.cut(conf);
-//			eval = new PRecEvaluator(refalign, nonConflictedMergedAlignment);
-//			eval.eval(p);
-//			precision = Double.valueOf(eval.getResults().getProperty("precision").toString());
-//			recall = Double.valueOf(eval.getResults().getProperty("recall").toString());
-//			fMeasure = Double.valueOf(eval.getResults().getProperty("fmeasure").toString());
-//			evalScore.setPrecision(precision);
-//			evalScore.setRecall(recall);
-//			evalScore.setfMeasure(fMeasure);
+
 			EvaluationScore evalScore = ComputeSyntacticEvaluationScores.getSyntacticEvaluationScore(nonConflictedMergedAlignment, refalign_EQ_AND_SUB);
 			//put the evalation score according to each confidence value in the map
 			evaluationMap.put(String.valueOf(conf), evalScore);			
-			outputAlignment = new File("./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_MERGED_SIGMOID"+DATASET+"_"+conf+".rdf");
+			outputAlignment = new File("./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_MERGED_SIGMOID"+DATASET+"_"+conf+".rdf");
 			writer = new PrintWriter(
 					new BufferedWriter(
 							new FileWriter(outputAlignment)), true); 
@@ -251,7 +233,7 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 			Evaluator.evaluateSingleAlignment("Profile Weight " + conf, nonConflictedMergedAlignment, referenceAlignmentEQAndSUB);
 		}
 
-		Evaluator.evaluateSingleMatcherThresholds(evaluationMap, "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_"+date);
+		Evaluator.evaluateSingleMatcherThresholds(evaluationMap, "./files/_PHD_EVALUATION/"+DATASET+"/ALIGNMENTS/PROFILEWEIGHT_MATCHER_SELECTION/PROFILEWEIGHT_"+date);
 
 	}
 
@@ -288,7 +270,7 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 //		eqAlignments.add(PEMAlignment);
 
 		System.err.println("Computing LEM alignment");
-		URIAlignment LEMAlignment = LexicalEquivalenceMatcherSigmoid.returnLEMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc") * ontologyProfilingScores.get("sr")), slope, rangeMin, rangeMax);
+		URIAlignment LEMAlignment = LexicalEquivalenceMatcherSigmoid.returnLEMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc")), slope, rangeMin, rangeMax);
 		eqAlignments.add(LEMAlignment);
 
 		System.out.println("The arraylist eqAlignments contains " + eqAlignments.size() + " alignments");		
@@ -342,7 +324,7 @@ public class EvaluateProfileWeightCombination_matcher_selection {
 //		subAlignments.add(DSMAlignment);
 
 		System.err.println("Computing LSM alignment");
-		URIAlignment LSMAlignment = LexicalSubsumptionMatcherSigmoid.returnLSMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc") * ontologyProfilingScores.get("hr")), slope, rangeMin, rangeMax);		
+		URIAlignment LSMAlignment = LexicalSubsumptionMatcherSigmoid.returnLSMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc")), slope, rangeMin, rangeMax);		
 		subAlignments.add(LSMAlignment);
 
 		return subAlignments;

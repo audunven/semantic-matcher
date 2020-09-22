@@ -38,7 +38,7 @@ public class NaiveDescendingExtraction {
 		alignment.normalise();
 
 		System.out.println("\nPrinting ndeAlignment");
-		for (Cell c : alignment) {
+		for (Cell c : ndeAlignment) {
 			System.out.println(c.getObject1AsURI().getFragment() + " - " + c.getObject2AsURI().getFragment() + " - " + c.getStrength());
 		}
 

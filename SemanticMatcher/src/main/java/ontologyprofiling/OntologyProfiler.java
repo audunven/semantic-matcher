@@ -167,8 +167,8 @@ public class OntologyProfiler {
 		ontologyProfileScores.put("pf", computePropertyFraction(ontoFile1, ontoFile2));
 		ontologyProfileScores.put("sp", computeStructuralProfile(ontoFile1, ontoFile2));
 		ontologyProfileScores.put("lc", computeLexicalCoverage(ontoFile1, ontoFile2));
-		//ontologyProfileScores.put("sr", computeSynonymRichnessWordNet(ontoFile1, ontoFile2));
-		//ontologyProfileScores.put("hr", computeHyponymRichnessWordNet(ontoFile1, ontoFile2));
+		ontologyProfileScores.put("sr", computeSynonymRichnessWordNet(ontoFile1, ontoFile2));
+		ontologyProfileScores.put("hr", computeHyponymRichnessWordNet(ontoFile1, ontoFile2));
 
 		return ontologyProfileScores;
 

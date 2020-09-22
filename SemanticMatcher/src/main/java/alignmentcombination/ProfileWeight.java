@@ -26,7 +26,7 @@ public class ProfileWeight {
 	
 	public static void main(String[] args) throws AlignmentException, IOException, URISyntaxException {
 		
-		String alignmentFolder = "./files/_PHD_EVALUATION/MATCHERTESTING/ProfileWeightTest/301302";
+		String alignmentFolder = "./files/PW-EQ-TEST";
 		
 		URIAlignment test = computeProfileWeightingEquivalence(alignmentFolder);	
 		
@@ -163,7 +163,7 @@ public class ProfileWeight {
 			}
 		}
 		
-//		System.out.println("The highestCellsAlignment contains the following relations: " );
+//		System.out.println("\nThe highestCellsAlignment contains the following relations: " );
 //		for (Cell c : highestCellsAlignment) {
 //			System.out.println(c.getId() + " " + c.getObject1AsURI().getFragment() + " " + c.getObject2AsURI().getFragment() + " " + c.getStrength());
 //		}

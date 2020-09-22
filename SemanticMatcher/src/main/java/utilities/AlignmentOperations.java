@@ -66,13 +66,25 @@ public class AlignmentOperations {
 	String referenceAlignment = "./files/_PHD_EVALUATION/_EVALUATION_SEMPREC_REC/BIBFRAME-SCHEMAORG/REFALIGN/ReferenceAlignment-BIBFRAME-SCHEMAORG-EQ-SUB.rdf";
 	
 	AlignmentParser aparser = new AlignmentParser(0);
-	Alignment refalign =  aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
-	Alignment candAlign =  aparser.parse(new URI(StringUtilities.convertToFileURL(candidateAlignment)));
-	Alignment extractedAlignment = extractEqualRelations(candAlign, refalign);
+//	Alignment refalign =  aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
+//	Alignment candAlign =  aparser.parse(new URI(StringUtilities.convertToFileURL(candidateAlignment)));
+//	Alignment extractedAlignment = extractEqualRelations(candAlign, refalign);
 	
-	System.out.println("extractedAlignment contains " + extractedAlignment.nbCells());
+//	System.out.println("extractedAlignment contains " + extractedAlignment.nbCells());
+	
+	Alignment refalign = aparser.parse(new URI(StringUtilities.convertToFileURL(referenceAlignment)));
+	
+	//public static double stringEqualityInReferenceAlignment (BasicAlignment referenceAlignment) throws AlignmentException {
+	
+	double stringEqualityRatio = stringEqualityInReferenceAlignment(refalign);
+	
+	System.out.println("The string equality ratio is " + stringEqualityRatio);
+	
+	
 	
 	}
+	
+	
 	
 	/**
 	 * Returns an EvaluationScore object that measures the precision, recall and F-measure of a candidate alignment against a reference alignment. The method considers the type of relation.
@@ -412,6 +424,21 @@ public class AlignmentOperations {
 		
 		return alignmentWithNonZeroRelations;
 
+	}
+	
+	public static double stringEqualityInReferenceAlignment (Alignment refalign) throws AlignmentException {
+
+		int equal = 0;
+		
+		for (Cell c : refalign) {
+			if (c.getObject1AsURI().getFragment().toLowerCase().equals(c.getObject2AsURI().getFragment().toLowerCase())) {
+				equal++;
+			}
+		}
+		
+		double stringEqualityRatio = (double) equal / (double) refalign.nbCells();
+		
+		return stringEqualityRatio;
 	}
 	
 	/**

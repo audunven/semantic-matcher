@@ -12,30 +12,30 @@ import java.util.Map.Entry;
 
 import org.semanticweb.owl.align.AlignmentException;
 import org.semanticweb.owl.align.AlignmentVisitor;
+import org.semanticweb.owl.align.Cell;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 
 import alignmentcombination.AlignmentConflictResolution;
 import alignmentcombination.ProfileWeight;
 import alignmentcombination.ProfileWeightSubsumption;
-import equivalencematching.DefinitionEquivalenceMatcherSigmoid;
-import equivalencematching.GraphEquivalenceMatcherSigmoid;
-import equivalencematching.LexicalEquivalenceMatcherSigmoid;
-import equivalencematching.PropertyEquivalenceMatcherSigmoid;
-import equivalencematching.WordEmbeddingMatcherSigmoid;
+import equivalencematching.DefinitionEquivalenceMatcher;
+import equivalencematching.GraphEquivalenceMatcher;
+import equivalencematching.LexicalEquivalenceMatcher;
+import equivalencematching.PropertyEquivalenceMatcher;
+import equivalencematching.WordEmbeddingMatcher;
 import fr.inrialpes.exmo.align.impl.URIAlignment;
 import fr.inrialpes.exmo.align.impl.renderer.RDFRendererVisitor;
 import mismatchdetection.ConceptScopeMismatch;
 import mismatchdetection.DomainMismatch;
 import ontologyprofiling.OntologyProfiler;
-import subsumptionmatching.CompoundMatcherSigmoid;
-import subsumptionmatching.ContextSubsumptionMatcherSigmoid;
-import subsumptionmatching.DefinitionSubsumptionMatcherSigmoid;
-import subsumptionmatching.LexicalSubsumptionMatcherSigmoid;
+import rita.wordnet.jwnl.JWNLException;
+import subsumptionmatching.CompoundMatcher;
+import subsumptionmatching.ContextSubsumptionMatcher;
+import subsumptionmatching.DefinitionSubsumptionMatcher;
+import subsumptionmatching.LexicalSubsumptionMatcher;
 import utilities.AlignmentOperations;
 
-import rita.wordnet.jwnl.JWNLException;
-
-public class SemanticMatcher {
+public class SemanticMatcherBasicWeight {
 	
 	
 	static File ontoFile1 = new File("./files/_PHD_EVALUATION/ATMONTO-AIRM/ONTOLOGIES/ATMOntoCoreMerged.owl");
@@ -43,11 +43,6 @@ public class SemanticMatcher {
 	static String vectorFile = "./files/_PHD_EVALUATION/EMBEDDINGS/skybrary_embeddings.txt";
 	static String mismatchStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/MISMATCHES";
 	static String finalAlignmentStorePath = "./files/_PHD_EVALUATION/ATMONTO-AIRM/FINAL_ALIGNMENT/";
-
-	//these parameters are used for the sigmoid weight configuration
-	final static int slope = 3;
-	final static double rangeMin = 0.5;
-	final static double rangeMax = 0.7;
 	
 	public static void main(String[] args) throws OWLOntologyCreationException, IOException, AlignmentException, URISyntaxException, JWNLException {
 				
@@ -93,6 +88,12 @@ public class SemanticMatcher {
 	/* combine using ProfileWeight SUB */
 	URIAlignment combinedSUBAlignment = combineSUBAlignments(subAlignments);
 	URIAlignment nonConflictedSUBAlignment = AlignmentConflictResolution.resolveAlignmentConflict(combinedSUBAlignment);
+	
+	
+	//TEST: PRINT RELS IN SUB ALIGNMENT
+	for (Cell c : nonConflictedSUBAlignment) {
+		System.out.println(c.getId() + " : " + c.getObject1AsURI().getFragment() + " : " + c.getObject2AsURI().getFragment() + " : " + c.getRelation().getRelation() + " : " + c.getStrength());
+	}
 	
 	//store the SUB alignment
 	outputAlignment = new File(finalAlignmentStorePath + "SUBAlignment.rdf");
@@ -157,7 +158,7 @@ public class SemanticMatcher {
 		if (cc >= 0.5) {
 		System.out.print("Computing WEM alignment");
 		long startTimeWEM = System.currentTimeMillis();
-		URIAlignment WEMAlignment = WordEmbeddingMatcherSigmoid.returnWEMAlignment(ontoFile1, ontoFile2, vectorFile, ontologyProfilingScores.get("cc"), slope, rangeMin, rangeMax);	
+		URIAlignment WEMAlignment = WordEmbeddingMatcher.returnWEMAlignment(ontoFile1, ontoFile2, vectorFile, ontologyProfilingScores.get("cc"));	
 		eqAlignments.add(WEMAlignment);
 		long endTimeWEM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeWEM - startTimeWEM)  / 1000 + " seconds.\n");
@@ -166,25 +167,25 @@ public class SemanticMatcher {
 		if (dc >= 0.5) {
 		System.out.print("Computing DEM alignment");
 		long startTimeDEM = System.currentTimeMillis();
-		URIAlignment DEMAlignment = DefinitionEquivalenceMatcherSigmoid.returnDEMAlignment(ontoFile1, ontoFile2, vectorFile, ontologyProfilingScores.get("cc"), slope, rangeMin, rangeMax);
+		URIAlignment DEMAlignment = DefinitionEquivalenceMatcher.returnDEMAlignment(ontoFile1, ontoFile2, vectorFile, ontologyProfilingScores.get("cc"));
 		eqAlignments.add(DEMAlignment);
 		long endTimeDEM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeDEM - startTimeDEM)  / 1000 + " seconds.\n");
 		}
 		
-		if (sp >= 0.5) {
-		System.out.print("Computing GEM alignment");
-		long startTimeGEM = System.currentTimeMillis();
-		URIAlignment GEMAlignment = GraphEquivalenceMatcherSigmoid.returnGEMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("sp"), slope, rangeMin, rangeMax);	
-		eqAlignments.add(GEMAlignment);
-		long endTimeGEM = System.currentTimeMillis();
-		System.out.print("..." + (endTimeGEM - startTimeGEM)  / 1000 + " seconds.\n");
-		}
+//		if (sp >= 0.5) {
+//		System.out.print("Computing GEM alignment");
+//		long startTimeGEM = System.currentTimeMillis();
+//		URIAlignment GEMAlignment = GraphEquivalenceMatcher.returnGEMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("sp"));	
+//		eqAlignments.add(GEMAlignment);
+//		long endTimeGEM = System.currentTimeMillis();
+//		System.out.print("..." + (endTimeGEM - startTimeGEM)  / 1000 + " seconds.\n");
+//		}
 
 		if (pf >= 0.5) {
 		System.out.print("Computing PEM alignment");
 		long startTimePEM = System.currentTimeMillis();
-		URIAlignment PEMAlignment = PropertyEquivalenceMatcherSigmoid.returnPEMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("pf"), slope, rangeMin, rangeMax);
+		URIAlignment PEMAlignment = PropertyEquivalenceMatcher.returnPEMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("pf"));
 		eqAlignments.add(PEMAlignment);
 		long endTimePEM = System.currentTimeMillis();
 		System.out.print("..." + (endTimePEM - startTimePEM)  / 1000 + " seconds.\n");
@@ -193,7 +194,7 @@ public class SemanticMatcher {
 		if (lc >= 0.5) {
 		System.out.print("Computing LEM alignment");
 		long startTimeLEM = System.currentTimeMillis();
-		URIAlignment LEMAlignment = LexicalEquivalenceMatcherSigmoid.returnLEMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("lc"), slope, rangeMin, rangeMax);
+		URIAlignment LEMAlignment = LexicalEquivalenceMatcher.returnLEMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc") * ontologyProfilingScores.get("sr")));
 		eqAlignments.add(LEMAlignment);
 		long endTimeLEM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeLEM - startTimeLEM)  / 1000 + " seconds.\n");
@@ -246,7 +247,7 @@ public class SemanticMatcher {
 		if (cf >= 0.5) {
 		System.out.print("Computing CM alignment");
 		long startTimeCM = System.currentTimeMillis();
-		URIAlignment CMAlignment = CompoundMatcherSigmoid.returnCMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("cf"), slope, rangeMin, rangeMax);		
+		URIAlignment CMAlignment = CompoundMatcher.returnCMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("cf"));		
 		subAlignments.add(CMAlignment);
 		long endTimeCM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeCM - startTimeCM)  / 1000 + " seconds.\n");
@@ -255,7 +256,7 @@ public class SemanticMatcher {
 		if (sp >= 0.5) {
 		System.out.print("Computing CSM alignment");
 		long startTimeCSM = System.currentTimeMillis();
-		URIAlignment CSMAlignment = ContextSubsumptionMatcherSigmoid.returnCSMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("sp"), slope, rangeMin, rangeMax);		
+		URIAlignment CSMAlignment = ContextSubsumptionMatcher.returnCSMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("sp"));		
 		subAlignments.add(CSMAlignment);
 		long endTimeCSM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeCSM - startTimeCSM)  / 1000 + " seconds.\n");
@@ -264,16 +265,17 @@ public class SemanticMatcher {
 		if (dc >= 0.5) {
 		System.out.print("Computing DSM alignment");
 		long startTimeDSM = System.currentTimeMillis();
-		URIAlignment DSMAlignment = DefinitionSubsumptionMatcherSigmoid.returnDSMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("dc"), slope, rangeMin, rangeMax);		
+		URIAlignment DSMAlignment = DefinitionSubsumptionMatcher.returnDSMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("dc"));		
 		subAlignments.add(DSMAlignment);
 		long endTimeDSM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeDSM - startTimeDSM)  / 1000 + " seconds.\n");
 		}
 		
 		if (lc >= 0.5) {
+		
 		System.out.print("Computing LSM alignment");
 		long startTimeLSM = System.currentTimeMillis();
-		URIAlignment LSMAlignment = LexicalSubsumptionMatcherSigmoid.returnLSMAlignment(ontoFile1, ontoFile2, ontologyProfilingScores.get("lc"), slope, rangeMin, rangeMax);		
+		URIAlignment LSMAlignment = LexicalSubsumptionMatcher.returnLSMAlignment(ontoFile1, ontoFile2, (ontologyProfilingScores.get("lc") * ontologyProfilingScores.get("hr")));		
 		subAlignments.add(LSMAlignment);
 		long endTimeLSM = System.currentTimeMillis();
 		System.out.print("..." + (endTimeLSM - startTimeLSM)  / 1000 + " seconds.\n");
@@ -348,6 +350,7 @@ private static URIAlignment removeMismatches (URIAlignment combinedEQAlignment, 
 	writer.close();
 
 	URIAlignment conceptScopeMismatchDetection = ConceptScopeMismatch.detectConceptScopeMismatch(combinedEQAlignment);
+	//System.out.println("Concept Scope Mismatch Detection removed " + ( combinedEQAlignment.nbCells() - conceptScopeMismatchDetection.nbCells() ) + " relations");
 	
 	writer = new PrintWriter(
 			new BufferedWriter(
@@ -360,6 +363,7 @@ private static URIAlignment removeMismatches (URIAlignment combinedEQAlignment, 
 	writer.close();
 
 	URIAlignment domainMismatchDetection = DomainMismatch.filterAlignment(conceptScopeMismatchDetection);
+	//System.out.println("Domain Mismatch Detection removed " + ( conceptScopeMismatchDetection.nbCells() - domainMismatchDetection.nbCells() ) + " relations");
 	
 	writer = new PrintWriter(
 			new BufferedWriter(

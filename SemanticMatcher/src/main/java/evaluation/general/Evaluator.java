@@ -66,8 +66,8 @@ public class Evaluator {
 	
 	public static void main(String[] args) throws AlignmentException, URISyntaxException {
 		
-		String referenceAlignmentFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/ALIGNMENTS/PROFILEWEIGHT/SUBSUMPTION_SIGMOID/ALIGNMENTS/PROFILEWEIGHT_SUBSUMPTION_SIGMOID_0.0.rdf";
-		String evaluatedAlignmentFile = "./files/_PHD_EVALUATION/_EVALUATION_SYNPRECREC/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-SUBSUMPTION.rdf";
+		String referenceAlignmentFile = "./files/_PHD_EVALUATION/ATMONTO-AIRM/REFALIGN/ReferenceAlignment-ATMONTO-AIRM-EQ-SUB.rdf";
+		String evaluatedAlignmentFile = "./files/_PHD_EVALUATION/ATMONTO-AIRM/FINAL_ALIGNMENT/finalAlignment.rdf";
 		
 		AlignmentParser evaluatedAlignParser = new AlignmentParser(0);
 		
